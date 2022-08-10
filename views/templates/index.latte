@@ -1,0 +1,27 @@
+{include tr_view_path('/layout/header')}
+
+<section class="content">
+
+{if have_posts()}
+{while have_posts()}
+  {the_post()}
+  {* {the_content()} *}
+  {the_title()}<br >
+  {tr_posted_by()}<br />
+  {tr_posted_on(true)}<br /><br />
+{/while}
+{else}
+  <h2>Nothing Found</h2>
+{/if}
+</section>
+
+CUSTOM POSTS LOOP<br />
+{var $customposts = get_posts(array('numberposts' => 4))}
+{foreach  $customposts as $post}
+  Post ID: {$post->ID}<br />
+  Title: {$post->post_title}<br />
+  {tr_posted_on(true, $post->ID)}<br />
+  Author: {tr_posted_by()}<br />
+{/foreach}
+
+{include tr_view_path('/layout/footer')}

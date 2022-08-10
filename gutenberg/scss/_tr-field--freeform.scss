@@ -1,0 +1,27 @@
+// FREEFORM FIELD
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  .tr-freeform-control {
+    .wp-block {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .block-library-classic__toolbar {
+      display: block;
+
+      &:before {
+        line-height: 28px;
+        padding: 8px;
+      }
+    }
+
+    .wp-block-freeform {
+      border-radius: 2px;
+      border: 1px solid var(--tr-field-border-color);
+      padding: 6px 8px;
+      min-height: 34px;
+    }
+  }
+}
+// END:FREEFORM FIELD

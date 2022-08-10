@@ -1,0 +1,23 @@
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  .tr-text-control {
+    .components-textarea-control__input {
+      height: 48px;
+      min-height: 48px;
+    }
+
+    .block-editor-rich-text__editable {
+      border-radius: 2px;
+      border: 1px solid #a9a5a5;
+      padding: 5px 8px;
+      line-height: 1.4;
+      background: #fff;
+    }
+
+    &__count:is(p) {
+      font-size: 12px;
+      padding-left: 4px;
+      margin-bottom: 0;
+    }
+  }
+}

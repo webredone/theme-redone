@@ -1,0 +1,18 @@
+body {
+  // COLORS
+  --c-brand: #2f3772;
+  --c-sec: #8c2c58;
+  --c-txt: #434f58;
+  --c-silver: #f2edf5;
+  // RGB variations: for hover effects for example
+  --c-brand--rgb: 47, 55, 114;
+  --c-sec--rgb: 140, 44, 88;
+  --c-txt--rgb: 67, 79, 88;
+  --c-silver--rgb: 242, 237, 245;
+
+  --vh100: calc(var(--vh, 1vh) * 100);
+
+  // FONTS
+  --font-titles: 'Montserrat', system-ui;
+  --font-def: 'Poppins', system-ui;
+}

@@ -1,0 +1,19 @@
+<div class="breadcrumbs">
+  {var $tag = 'span'}
+  {foreach $breadcrumbs as $breadcrumb}
+    {if strlen($breadcrumb['link']['url'])}
+      {var $tag = 'a'}
+    {/if}
+    <{$tag}
+      {if strlen($breadcrumb['link']['url'])}
+        href="{$breadcrumb['link']['url']}"
+      {/if}
+      {if $iterator->last}
+        class="active"
+      {/if}
+    >
+      {$breadcrumb['link']['title']|noescape}
+    </{$tag}>
+    <i class="breadcrumb__separator">/</i>
+  {/foreach}
+</div>{* breadcrumbs *}

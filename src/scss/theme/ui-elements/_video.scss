@@ -1,0 +1,31 @@
+.video-wrapper-width {
+  width: 100%;
+
+  .video-wrapper {
+    position: relative;
+    height: 0;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+
+    iframe,
+    video {
+      @include abs-fill;
+    }
+  }
+}
+
+.wp-block-embed-youtube,
+.wp-block-embed-vimeo {
+  width: 100%;
+
+  .wp-block-embed__wrapper {
+    position: relative;
+    height: 0;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+  }
+
+  iframe {
+    @include abs-fill;
+  }
+}

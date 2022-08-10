@@ -1,0 +1,29 @@
+{
+  "presets": [
+    [
+      "@babel/preset-react",
+      {
+        "pragma": "wp.element.createElement"
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-react-jsx",
+    [
+      "transform-react-jsx",
+      {
+        "pragma": "wp.element.createElement"
+      }
+    ],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-spread",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ],
+  "sourceMaps": true
+}

@@ -1,0 +1,27 @@
+{var $video_src = ""}
+{if $inspector_is_self_hosted['checked']}
+	{if $self_hosted_video['src']}
+		{var $video_src = $self_hosted_video['src']}
+	{/if}
+
+{else}
+	{if $yt_or_vimeo_url['text']}
+		{var $video_src = $yt_or_vimeo_url['text']}
+	{/if}
+{/if}
+
+
+
+<figure
+	n:if="$video_src" 
+	class="wp-figure tr-video-outer-wrap"
+>
+	{include tr_part('video'), 
+		video_src: $video_src, 
+		video_type: tr_get_video_type_and_id($video_src)
+	}
+
+	<figcaption class="wp-figcaption caption" n:ifcontent>
+		{$optional_caption['text']|noescape}
+	</figcaption>
+</figure>

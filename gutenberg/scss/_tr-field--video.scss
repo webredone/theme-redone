@@ -1,0 +1,14 @@
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  .tr-video-control {
+    &__thumb {
+      .wp-block-video {
+        margin-bottom: 0;
+      }
+
+      button {
+        margin: 6px;
+      }
+    }
+  }
+}

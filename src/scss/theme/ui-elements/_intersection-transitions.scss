@@ -1,0 +1,40 @@
+.ivtr {
+  --offset: 30px;
+  --delay: 0s;
+  --duration: 0.4s;
+  opacity: 0;
+  transition: transform var(--duration) ease-in-out calc(1s * var(--delay)),
+    opacity var(--duration) ease-in-out calc(1s * var(--delay));
+
+  &.ivtr-custom {
+    opacity: 1;
+  }
+
+  &.ivtr-btm {
+    transform: translateY(var(--offset));
+  }
+
+  &.ivtr-top {
+    transform: translateY(calc(var(--offset) * -1));
+  }
+
+  &.ivtr-left {
+    transform: translateX(calc(var(--offset) * -1));
+  }
+
+  &.ivtr-right {
+    transform: translateX(var(--offset));
+  }
+
+  &.ivtr-btm.inView,
+  &.ivtr-top.inView {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+  }
+
+  &.ivtr-left.inView,
+  &.ivtr-right.inView {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+}

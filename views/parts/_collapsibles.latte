@@ -1,0 +1,438 @@
+<h2>Embed Accordion</h2>
+
+{* //TODO: Remove this file and move all example to todo-remove... *}
+
+
+{var $dummy_collapsible_content = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam
+\nexplicabo nemo necessitatibus nulla, veniam libero minima velit
+\naccusantium. Dignissimos blanditiis temporibus tenetur voluptate,
+\nimpedit odit et quia unde illo ad. Lorem ipsum, dolor sit amet
+\nconsectetur adipisicing elit. Aperiam explicabo nemo necessitatibus
+\nnulla, veniam libero minima velit accusantium. Dignissimos blanditiis
+\ntemporibus tenetur voluptate, impedit odit et quia unde illo ad."}
+
+
+
+
+
+
+
+<div 
+  class="f-row" 
+  style="--i-cols: 3; --i-gap: 15;margin-bottom: 100px;"
+>
+  <div class="col">
+    <h4>1 Level - collapse siblings</h4>
+    {embed 
+      tr_part('_accordion'), 
+      items: $test_acc_items, 
+      initially_open_item: 0,
+      collapse_siblings: true
+    }
+      {block acc_trigger}
+        <h5>
+          <strong>{$item['anchor']}</strong> ✅
+        </h5>
+      {/block}
+
+      {block acc_content}
+        <span>
+          <div class="test-custom-class">
+            <h4 n:if="!empty($item['content']['title'])">{$item['content']['title']}</h4>
+            <p n:ifcontent>{$item['content']['text']}</p>
+          </div>
+        </span>
+      {/block}
+    {/embed}
+  </div>{* col *}
+  <div class="col">
+    <h4>1 Level - custom easing</h4>
+    {embed 
+      tr_part('_accordion'), 
+      items: $test_acc_items, 
+      initially_open_item: 0,
+      duration: 700,
+      collapse_siblings: true,
+      easing: 'cubic-bezier(1,-0.06, 0, 1.56)'
+    }
+      {block acc_trigger}
+        <h5>
+          <strong>{$item['anchor']}</strong> ✅
+        </h5>
+      {/block}
+
+      {block acc_content}
+        <span>
+          <div class="test-custom-class">
+            <h4 n:if="!empty($item['content']['title'])">{$item['content']['title']}</h4>
+            <p n:ifcontent>{$item['content']['text']}</p>
+          </div>
+        </span>
+      {/block}
+    {/embed}
+  </div>{* col *}
+  <div class="col">
+    <h4>1 Level - independed</h4>
+    {embed 
+      tr_part('_accordion'), 
+      items: $test_acc_items, 
+      initially_open_item: 2
+    }
+      {block acc_trigger}
+        <h5>
+          <strong>{$item['anchor']}</strong> ✅
+        </h5>
+      {/block}
+
+      {block acc_content}
+        <span>
+          <div class="test-custom-class">
+            <h4 n:if="!empty($item['content']['title'])">{$item['content']['title']}</h4>
+            <p n:ifcontent>{$item['content']['text']}</p>
+          </div>
+        </span>
+      {/block}
+    {/embed}
+  </div>{* col *}
+</div>{* row *}
+
+
+<hr style="margin-top: 40px; margin-bottom: 40px;" />
+
+
+
+
+<hr style="margin-top: 40px; margin-bottom: 40px;" />
+
+
+
+<h2>Nested Accordions</h2>
+<div class="nested-accordions">
+  {embed 
+    tr_part('_accordion'), 
+    items: $test_acc_items, 
+    initially_open_item: 0,
+    collapse_siblings: true
+  }
+    {block acc_trigger}
+      <h5>
+        <strong>{$item['anchor']} - lvl1</strong> ✅
+      </h5>
+    {/block}
+
+    {block acc_content}
+      {embed 
+        tr_part('_accordion'), 
+        items: $test_acc_items
+      }
+        {block acc_trigger}
+          <h5>
+            <strong>{$item['anchor']} - lvl2</strong> ✅
+          </h5>
+        {/block}
+
+        {block acc_content}
+          {if $index === 0}
+            {embed 
+              tr_part('_accordion'), 
+              items: $test_acc_items,
+              collapse_siblings: true,
+              easing: 'cubic-bezier(1,-0.06, 0, 1.56)'
+            }
+              {block acc_trigger}
+                <h5>
+                  <strong>{if $index === 0}INDEX0{/if}{$item['anchor']} - lvl3</strong> ✅
+                </h5>
+              {/block}
+
+              {block acc_content}
+                <span>
+                  <div class="test-custom-class">
+                    <h4>lvl3</h4>
+                    <h4 n:if="!empty($item['content']['title'])">{$item['content']['title']}</h4>
+                    <p n:ifcontent>{$item['content']['text']}</p>
+                  </div>
+                </span>
+              {/block}
+            {/embed}
+
+          {else}
+            <span>
+            <div class="test-custom-class">
+              <h4>lvl2</h4>
+              <h4 n:if="!empty($item['content']['title'])">{$item['content']['title']}</h4>
+              <p n:ifcontent>{$item['content']['text']}</p>
+            </div>
+          </span>
+          {/if}
+        {/block}
+      {/embed}
+    {/block}
+  {/embed}
+
+</div>{* nested-wrap *}
+
+
+
+<hr style="margin-top: 40px; margin-bottom: 40px;" />
+
+
+{var $dummy_dd_options = [
+  [
+    'value' => 'none',
+    'label' => 'Select Option',
+  ],
+  [
+    'value' => 'option-1',
+    'label' => 'Option 1',
+  ],
+  [
+    'value' => 'option-2',
+    'label' => 'Option 2',
+  ],
+  [
+    'value' => 'option-3',
+    'label' => 'Option 3',
+  ],
+  [
+    'value' => 'option-4',
+    'label' => 'Option 4',
+  ],
+]}
+
+
+<h3>Dropdowns</h3>
+<div 
+  class="f-row"
+  style="--i-cols: 4; --i-gap: 15; margin-bottom: 200px;"
+>
+  <div class="col">
+    <h5>Click</h5>
+    {embed tr_part('_collapsible')}
+      {block collapsible_trigger}
+        Regular Click Dropdown
+      {/block}
+      {block collapsible_content}
+        <h5>Will close on outside click</h5>
+        <p>
+          {substr($dummy_collapsible_content, 0, rand(40, strlen($dummy_collapsible_content) - 1))}
+        </p>
+      {/block}
+    {/embed}
+  </div>{* col *}
+  <div class="col">
+    <h5>Click (close on click outside)</h5>
+    {embed 
+      tr_part('_collapsible'), 
+      close_outside: true
+    }
+      {block collapsible_trigger}
+        Regular Click Dropdown
+      {/block}
+      {block collapsible_content}
+        <h5>Will close on outside click</h5>
+        <p>
+          {substr($dummy_collapsible_content, 0, rand(40, strlen($dummy_collapsible_content) - 1))}
+        </p>
+      {/block}
+    {/embed}
+  </div>{* col *}
+  <div class="col">
+    <h5>Hover</h5>
+    {embed 
+      tr_part('_collapsible'), 
+      on_hover: true
+    }
+      {block collapsible_trigger}
+        Regular Click Dropdown
+      {/block}
+      {block collapsible_content}
+        <h5>Hover</h5>
+        <p>
+          {substr($dummy_collapsible_content, 0, rand(40, strlen($dummy_collapsible_content) - 1))}
+        </p>
+      {/block}
+    {/embed}
+  </div>{* col *}
+  <div class="col">
+    <h5>Hover absolute</h5>
+    {embed 
+      tr_part('_collapsible'), 
+      on_hover: true,
+      is_absolute: true
+    }
+      {block collapsible_trigger}
+        Hover Absolute
+      {/block}
+      {block collapsible_content}
+        <h5>Will close on outside click</h5>
+        <p>
+          {substr($dummy_collapsible_content, 0, rand(40, strlen($dummy_collapsible_content) - 1))}
+        </p>
+      {/block}
+    {/embed}
+  </div>{* col *}
+</div>{* row *}
+
+
+<hr />
+
+<h3>Dropdown Selects</h3>
+<div 
+  class="f-row"
+  style="--i-cols: 4; --i-gap: 15; margin-bottom: 200px;"
+>
+  <div class="col">
+    <h5>Click</h5>
+    {include 
+      tr_part('dropdown-select'), 
+      options: $dummy_dd_options
+    }
+  </div>{* col *}
+  <div class="col">
+    <h5>Close on click outside</h5>
+    {include 
+      tr_part('dropdown-select'), 
+      options: $dummy_dd_options,
+      class: 'custom-class',
+      duration: 200,
+      close_outside: true,
+      default_selected_key: 3
+    }
+
+  </div>{* col *}
+  <div class="col">
+    <h5>Hover</h5>
+    {include 
+      tr_part('dropdown-select'), 
+      options: $dummy_dd_options,
+      on_hover: true,
+      default_selected_key: 0
+    }
+  </div>{* col *}
+  <div class="col">
+    <h5>Hover - absolute</h5>
+    {include 
+      tr_part('dropdown-select'), 
+      options: $dummy_dd_options,
+      is_absolute: true,
+      on_hover: true,
+      default_selected_key: 2
+    }
+  </div>{* col *}
+</div>{* row *}
+
+
+
+
+
+
+
+
+
+
+{var $custom_keyframes = [
+  [
+    "opacity" => 0, 
+    "transform" => "translateY(-10px)", 
+    "pointer-events" => "none"
+  ], 
+  [ 
+    "transform" => "translateY(10px)",
+    "offset" => 0.9
+  ],
+  [
+    "opacity" => "1", 
+    "transform" => "translateY(0)", 
+    "pointer-events" => "all"
+  ]
+]}
+
+
+<div 
+  class="f-row"
+  style="--i-cols: 3; --i-gap: 15; margin-bottom: 200px;"
+>
+  <div class="col">
+    <h5>Custom Easing: TODO: WRITE</h5>
+    {embed 
+      tr_part('_collapsible'), 
+      on_hover: true,
+      is_absolute: true,
+      duration: 500,
+      easing: 'cubic-bezier(1,-0.06, 0, 1.56)'
+    }
+      {block collapsible_trigger}
+        <img 
+          alt="test" 
+          src="https://source.unsplash.com/40x40" 
+          width="40" 
+          height="40" 
+        />
+        <h5 style="margin-left: 10px;">Hover, custom keyframes</h5>
+      {/block}
+      {block collapsible_content}
+        <h5>Hover - custom easing</h5>
+        <p>
+          {substr($dummy_collapsible_content, 0, rand(40, strlen($dummy_collapsible_content) - 1))}
+        </p>
+      {/block}
+    {/embed}
+  </div>{* col *}
+  <div class="col">
+    <h5>Custom Keyframes</h5>
+    {embed 
+      tr_part('_collapsible'), 
+      on_hover: true,
+      is_absolute: true,
+      aria_label: "Toggle Hover Dropdown",
+      custom_keyframes: $custom_keyframes
+    }
+      {block collapsible_trigger}
+        <img 
+          alt="test" 
+          src="https://source.unsplash.com/40x40" 
+          width="40" 
+          height="40" 
+        />
+        <h5 style="margin-left: 10px;">Hover, custom keyframes</h5>
+      {/block}
+      {block collapsible_content}
+        <h5>Trigger on hover, custom keyframes</h5>
+        <p>
+          {substr($dummy_collapsible_content, 0, rand(40, strlen($dummy_collapsible_content) - 1))}
+        </p>
+      {/block}
+    {/embed}
+  </div>{* col *}
+  <div class="col">
+    <h5>Custom Keyframes - custom easing</h5>
+    {embed 
+      tr_part('_collapsible'), 
+      on_hover: true,
+      is_absolute: true,
+      aria_label: "Toggle Hover Dropdown",
+      custom_keyframes: $custom_keyframes,
+      duration: 600,
+      easing: 'cubic-bezier(1,-0.06, 0, 1.56)'
+    }
+      {block collapsible_trigger}
+        <img 
+          alt="test" 
+          src="https://source.unsplash.com/40x40" 
+          width="40" 
+          height="40" 
+        />
+        <h5 style="margin-left: 10px;">Hover, custom keyframes</h5>
+      {/block}
+      {block collapsible_content}
+        <h5>Trigger on hover, custom keyframes</h5>
+        <p>
+          {substr($dummy_collapsible_content, 0, rand(40, strlen($dummy_collapsible_content) - 1))}
+        </p>
+      {/block}
+    {/embed}
+  </div>{* col *}
+</div>{* row *}
+
+

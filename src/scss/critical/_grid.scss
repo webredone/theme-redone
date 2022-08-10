@@ -1,0 +1,20 @@
+// Flex grid
+.f-row {
+  // --i-gap, --i-cols, --i-mb should be passed as inline variables to f-row
+  --cols: var(--i-cols, 2);
+  --gap: var(--i-gap, 0);
+  --mb: var(--i-mb, var(--gap));
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: calc(100% + var(--gap) * 1px);
+  margin-left: calc(var(--gap) * -0.5px);
+  margin-bottom: calc(var(--mb) * -1px);
+
+  .col {
+    width: calc((100% - (var(--gap) * var(--cols)) * 1px) / var(--cols));
+    margin-bottom: calc(var(--mb) * 1px);
+    margin-left: calc(var(--gap) * 0.5px);
+    margin-right: calc(var(--gap) * 0.5px);
+  }
+}

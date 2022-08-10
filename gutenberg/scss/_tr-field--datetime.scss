@@ -1,0 +1,31 @@
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  .tr-datetime-control {
+    .components-datetime {
+      padding: 0 !important;
+
+      &__buttons {
+        display: none !important;
+      }
+    }
+
+    .DayPicker__hidden {
+      visibility: visible !important;
+    }
+    .DayPicker__horizontal {
+      max-width: 100% !important;
+
+      > div > div {
+        max-width: 100% !important;
+      }
+
+      .DayPicker_transitionContainer {
+        max-width: 100% !important;
+      }
+
+      .CalendarMonth_1 {
+        padding: 0 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<section 
+  class="hero-main"
+  n:if="$title['text']"
+>
+  <div class="hero-main__cont">
+    <h1 n:ifcontent>{$title['text']}</h1>
+    <p n:ifcontent>{$text['text']}</p>
+    {tr_a($cta, "btn btn--brand")}
+  </div>{* cont *}
+</section>

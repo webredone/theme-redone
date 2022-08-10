@@ -1,0 +1,23 @@
+// TOGGLE FIELD
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  .tr-toggle-control {
+    .components-toggle-control {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      .components-base-control__field {
+        margin-bottom: 0;
+      }
+
+      .components-base-control__help {
+        width: 40px;
+        text-align: center;
+        margin-left: 10px;
+        background-color: #fff;
+      }
+    }
+  }
+}
+// END:TOGGLE FIELD

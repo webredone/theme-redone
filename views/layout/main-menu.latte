@@ -1,0 +1,37 @@
+<header class="header">
+	<div class="container">
+    <nav class="navbar">
+      <a 
+      	class="navbar-brand" 
+      	href="{esc_url( home_url( '/' ) )}"
+      	itemprop="url" 
+        aria-label="{get_bloginfo('name')} Logo - Go to homepage"
+      >
+        {tr_get_media('logo.svg')}
+      </a>
+      <button 
+        class="navbar-toggler collapsed" 
+        type="button" 
+        data-toggle="collapse" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
+        <span class="span-icon"></span>
+        <span class="span-icon"></span>
+        <span class="span-icon"></span>
+      </button>
+      {wp_nav_menu([
+        'menu'            => 'top',
+        'theme_location'  => 'menu-1',
+        'container'       => 'div',
+        'container_id'    => 'tr-main-menu',
+        'container_class' => 'navbar-collapse',
+        'menu_id'         => 'primary-menu',
+        'menu_class'      => 'navbar-nav',
+        'depth'           => 2,
+        'fallback_cb'     => 'ThemeRedoneWalker::fallback',
+        'walker'          => new ThemeRedoneWalker()
+      ])}
+    </nav> 
+  </div>{* cont *}
+</header>

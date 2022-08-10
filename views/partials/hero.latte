@@ -1,0 +1,10 @@
+{var $bg_color = $background_dark ? '#1d81cc' : '#fff'}
+{var $color = $background_dark ? '#fff' : '#1d81cc'}
+<section style="background-color: {$bg_color|noescape}">
+  <div class="container">
+    <h1 n:ifcontent style="color: {$color|noescape}">
+      {$headline}
+    </h1>
+  </div>
+</section>
+

@@ -1,0 +1,30 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "example-wrapper-block",
+    "BLOCK_TITLE": "Example Wrapper Block",
+    "keywords": ["wrap", "background"],
+    "hasSidebar": false,
+    "hasExample": true,
+    "isJsRendered": true,
+    "deps": {
+      "css": ["shared-css-1", "shared-css-2"],
+      "js": ["shared-js-1", "shared-js-2"]
+    }
+  },
+  "attributes": {
+    "wrapper_bg_color": {
+      "type": "object",
+      "field_meta": {
+        "type": "select",
+        "options": [
+          { "label": "White", "value": "--c-white" },
+          { "label": "Silver", "value": "--c-silver" }
+        ],
+        "label": "Background Color"
+      },
+      "default": {
+        "value": "--c-white"
+      }
+    }
+  }
+}

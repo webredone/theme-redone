@@ -1,0 +1,125 @@
+.editor-styles-wrapper {
+  .wp-block {
+    /* default was 674px */
+    max-width: 1024px !important;
+  }
+
+  .tr-block {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    border: 1px solid #f0f0f0;
+    padding: 5px;
+
+    &__main {
+      font-size: 13px;
+    }
+
+    &__main > div {
+      background: #f2edf5;
+      padding: 10px;
+    }
+
+    &__container {
+      position: relative;
+      width: calc(100% - 100px);
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 10px;
+      margin-top: 0;
+      line-height: 1.1;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .tr-block {
+      h4.block-editor-rich-text__editable {
+        font-size: 16px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      p {
+        line-height: 1.6;
+      }
+
+      &__main {
+        > div {
+          .block-editor-rich-text__editable {
+            border-radius: 2px;
+            border: 1px solid var(--tr-field-border-color);
+            padding: 5px 8px;
+            line-height: 1.4;
+            background: #fff;
+          }
+          > .tr-block__row,
+          > .components-card,
+          > .tr-repeater {
+            // background-color: orange;
+
+            margin-bottom: 10px;
+          }
+
+          > *:last-child {
+            margin-bottom: 0 !important;
+          }
+        }
+      }
+    }
+  }
+
+  // collapseed block
+  .tr-block__collapsed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    padding: 4px 4px 4px 12px;
+    user-select: none;
+
+    h2 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 !important;
+      text-transform: capitalize;
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+      margin: 0 0 0 20px;
+      cursor: pointer;
+      height: 35px;
+
+      .tr-tooltip {
+        display: flex;
+      }
+    }
+  }
+
+  // collapsed/uncollapsed states
+  .tr-block {
+    &.isNotSelected {
+      & > .tr-block__main {
+        display: none;
+      }
+
+      & > .tr-block__collapsed {
+        display: flex;
+      }
+    }
+  }
+}

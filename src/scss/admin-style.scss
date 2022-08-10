@@ -1,0 +1,6 @@
+@import './admin/test';
+
+// XXX: This line hides a few things in the admin and removes
+// some Gutenberg features that might confuse the user. If you think you need them,
+// comment or remove this line (but make sure to inspect the file first)
+@import './admin/disables-and-overwrites';

@@ -1,0 +1,81 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "quote",
+    "BLOCK_TITLE": "Quote",
+    "keywords": ["quote", "feedback"],
+    "hasSidebar": false,
+    "hasExample": true
+  },
+  "attributes": {
+    "image": {
+      "type": "object",
+      "field_meta": {
+        "type": "image",
+        "label": "image",
+        "is_wide": false,
+        "is_sm": false,
+        "is_cover": false
+      },
+      "default": {
+        "src": "",
+        "id": null
+      }
+    },
+
+    "quote": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "long",
+        "label": "Quote",
+        "max_chars": 400
+      },
+      "default": {
+        "text": ""
+      }
+    },
+
+    "name": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "short",
+        "label": "Name (optional)",
+        "max_chars": 50
+      },
+      "default": {
+        "text": ""
+      }
+    },
+
+    "position": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "short",
+        "label": "Position (optional)",
+        "max_chars": 50
+      },
+      "default": {
+        "text": ""
+      }
+    },
+
+    "inspector_bg_is_dark": {
+      "type": "boolean",
+      "default": false
+    },
+    "inspector_section_padding": {
+      "type": "string",
+      "default": "sec-pad-md"
+    },
+    "inspector_section_padding_top": {
+      "type": "boolean",
+      "default": false
+    },
+    "inspector_section_padding_btm": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

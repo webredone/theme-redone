@@ -1,0 +1,46 @@
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  --tr-field-border-color: #a9a5a5;
+
+  // Remove margins from WP components
+  .components-base-control .components-base-control__field {
+    margin-bottom: 0;
+  }
+
+  // Make all custom fields 100% wide
+  .tr-control {
+    width: 100%;
+  }
+
+  // Global styles
+  input {
+    border-color: var(--tr-field-border-color);
+  }
+
+  .rich-text,
+  .wp-block-freeform {
+    &:focus {
+      box-shadow: 0 0 0 1px var(--wp-admin-theme-color-darker-10, #007cba) inset;
+      border-color: var(--wp-admin-theme-color-darker-10, #007cba);
+    }
+  }
+
+  .tr-block-button {
+    display: flex !important;
+    align-items: center;
+    background: #fff;
+    border-radius: 5px;
+
+    &--wide {
+      width: 100%;
+    }
+
+    &--default {
+      background-color: #fff !important;
+    }
+
+    svg {
+      margin-right: 10px;
+    }
+  }
+}

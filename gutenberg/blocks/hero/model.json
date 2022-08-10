@@ -1,0 +1,44 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "hero",
+    "BLOCK_TITLE": "Hero",
+    "keywords": ["Hero", "Main Hero"],
+    "hasSidebar": false,
+    "hasExample": true
+  },
+  "attributes": {
+    "title": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "label": "Title"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "text": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "label": "Text"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "cta": {
+      "type": "object",
+      "field_meta": {
+        "type": "cta",
+        "label": "CTA",
+        "help": "Optional CTA"
+      },
+      "default": {
+        "title": "",
+        "url": "",
+        "target": false
+      }
+    }
+  }
+}

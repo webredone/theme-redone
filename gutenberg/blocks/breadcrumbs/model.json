@@ -1,0 +1,33 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "breadcrumbs",
+    "BLOCK_TITLE": "Breadcrumbs",
+    "keywords": ["blocktag1", "blocktag2"],
+    "hasSidebar": false,
+    "hasExample": true
+  },
+  "attributes": {
+    "breadcrumbs": {
+      "type": "array",
+      "field_meta": {
+        "type": "repeater",
+        "label": "Breadcrumbs",
+        "grid": 4,
+        "subfields": {
+          "link": {
+            "type": "object",
+            "field_meta": {
+              "type": "cta",
+              "label": "Link"
+            },
+            "default": {
+              "title": "",
+              "url": ""
+            }
+          }
+        }
+      },
+      "default": []
+    }
+  }
+}

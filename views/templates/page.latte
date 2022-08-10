@@ -1,0 +1,14 @@
+
+{include tr_view_path('/layout/header')}
+
+<div class="content">
+{while have_posts()}
+  {the_post()}
+  
+  {the_title()}
+  {the_content()}
+
+{/while}
+</div>
+
+{include tr_view_path('/layout/footer')}

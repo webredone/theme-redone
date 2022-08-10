@@ -1,0 +1,97 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "blockquote-slider",
+    "BLOCK_TITLE": "Blockquote Slider",
+    "keywords": ["quote", "blockquote", "slider"],
+    "help": "This block has a help text",
+    "hasSidebar": false,
+    "hasGlobalSettings": false,
+    "hasExample": true
+  },
+  "attributes": {
+    "Quotes": {
+      "type": "array",
+      "field_meta": {
+        "type": "repeater",
+        "label": "List",
+        "min_rep": 3,
+        "max_rep": 4,
+        "add_btn_text": "Quote",
+        "repeater_item_label": "Quote",
+        "disable_reordering": true,
+        "grid": 3,
+        "subfields": {
+          "quote": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "label": "Quote"
+            },
+            "default": {
+              "text": ""
+            }
+          }
+        }
+      },
+      "default": [
+        {
+          "quote": {
+            "text": ""
+          }
+        },
+        {
+          "quote": {
+            "text": ""
+          }
+        },
+        {
+          "quote": {
+            "text": ""
+          }
+        }
+      ]
+    },
+    "Quotes2": {
+      "type": "array",
+      "field_meta": {
+        "type": "repeater",
+        "label": "List",
+        "min_rep": 3,
+        "max_rep": 4,
+        "add_btn_text": "Quote",
+        "repeater_item_label": "Quote",
+        "disable_reordering": true,
+        "grid": 3,
+        "subfields": {
+          "quote": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "label": "Quote"
+            },
+            "default": {
+              "text": ""
+            }
+          }
+        }
+      },
+      "default": [
+        {
+          "quote": {
+            "text": ""
+          }
+        },
+        {
+          "quote": {
+            "text": ""
+          }
+        },
+        {
+          "quote": {
+            "text": ""
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "image",
+    "BLOCK_TITLE": "Image",
+    "keywords": ["image", "photo", "figure"],
+    "hasSidebar": false,
+    "hasExample": true,
+    "deps": {
+      "css": ["shared-css-1", "shared-css-2"],
+      "js": ["shared-js-1", "shared-js-2"]
+    }
+  },
+  "attributes": {
+    "image": {
+      "type": "object",
+      "field_meta": {
+        "type": "image",
+        "label": "image",
+        "is_wide": false,
+        "is_sm": false,
+        "is_cover": false
+      },
+      "default": {
+        "src": "",
+        "alt": "",
+        "subtype": "",
+        "id": null
+      }
+    },
+    "caption": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "short",
+        "label": "Caption (optional)",
+        "max_chars": 200
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "link": {
+      "type": "object",
+      "field_meta": {
+        "type": "cta",
+        "label": "Link",
+        "help": "Optional"
+      },
+      "default": {
+        "url": "",
+        "target": false
+      }
+    },
+
+    "inspector_bg_is_dark": {
+      "type": "boolean",
+      "default": false
+    },
+    "inspector_section_padding": {
+      "type": "string",
+      "default": "sec-pad-md"
+    },
+    "inspector_section_padding_top": {
+      "type": "boolean",
+      "default": false
+    },
+    "inspector_section_padding_btm": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

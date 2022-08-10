@@ -1,0 +1,80 @@
+// Default style for WP-PageNavi plugin
+.wp-pagenavi {
+  clear: both;
+}
+.wp-pagenavi a,
+.wp-pagenavi span {
+  text-decoration: none;
+  border: 1px solid #bfbfbf;
+  padding: 3px 5px;
+  margin: 2px;
+}
+.wp-pagenavi a:hover,
+.wp-pagenavi span.current {
+  border-color: #000;
+}
+.wp-pagenavi span.current {
+  font-weight: bold;
+}
+// end of default styles that are dequeued
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+
+  .wp-pagenavi {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .pages,
+  .last,
+  .first {
+    display: none;
+  }
+
+  .page,
+  span {
+    border: 0;
+    display: inline-flex;
+    align-items: center;
+    color: #afbfc9;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .page:hover,
+  .current {
+    color: #434f58;
+  }
+
+  .previouspostslink,
+  .nextpostslink {
+    position: relative;
+    display: inline-flex;
+    @extend %bgncc;
+    width: 24px;
+    height: 24px;
+    font-size: 0;
+    background-size: 8px;
+    backface-visibility: hidden;
+    background-image: url("data:image/svg+xml,%3Csvg width='8px' height='12px' viewBox='0 0 8 12' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cpolygon fill='%23071c26' transform='translate(4.000000, 6.000000) rotate(-90.000000) translate(-4.000000, -6.000000) ' points='0.437894737 2 4 5.84561404 7.56210526 2 9.14285714 4.45614035 4 10 -1.14285714 4.45614035'%3E%3C/polygon%3E%3C/svg%3E");
+    opacity: 0.3;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .previouspostslink {
+    transform: scaleX(-1);
+  }
+}
+
+@media (max-width: 991px) {
+  .pagination-wrap .wp-pagenavi {
+    margin-top: 24px;
+  }
+}

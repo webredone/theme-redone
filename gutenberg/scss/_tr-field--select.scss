@@ -1,0 +1,16 @@
+// SELECT FIELD
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  .tr-select-control {
+    .components-select-control__input {
+      min-width: 100%;
+
+      &:not(:focus) {
+        ~ .components-input-control__backdrop {
+          border-color: var(--tr-field-border-color);
+        }
+      }
+    }
+  }
+}
+// END:SELECT FIELD

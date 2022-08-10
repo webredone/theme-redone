@@ -1,0 +1,11 @@
+<section class="blockquotes-slider">
+	<div class="container">
+		<h2 n:ifcontent>{$single_text['text']|noescape}</h2>
+		<div n:if="count($items)">
+			<p n:foreach="$items as $item">
+				{$item['item']['text']|noescape}
+			</p>
+		</div>
+		
+	</div>{* container *}
+</section>

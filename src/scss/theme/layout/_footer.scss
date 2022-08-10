@@ -1,0 +1,15 @@
+.footer {
+  background: #222;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  *,
+  a {
+    color: #fff;
+  }
+}
+
+// caused by google extension
+#blockColorblindContent {
+  display: none !important;
+}

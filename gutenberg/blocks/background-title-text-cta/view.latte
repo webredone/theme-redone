@@ -1,0 +1,16 @@
+<section
+  class="sec-bg-img js-img-lazy jsLoading {$classMod}"
+  data-img-src="{tr_get_media_path($image)}"
+>
+  <div class="container">
+    <h2 n:ifcontent class="sec-title ivtr ivtr-btm">{$text['text']}</h2>
+
+    {tr_a($cta, 'btn btn--brand')}
+
+    <br />
+    <br />
+    
+    <h3>Test tr_a attrsOnly</h3>
+    <a {tr_a($cta, "test-class", true)|noescape}>{tr_get_media($image)}</a>
+  </div>{* container *}
+</section>

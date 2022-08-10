@@ -1,0 +1,32 @@
+<section 
+  class="more-blog-posts" 
+  aria-label="Latest Blog Posts Section"
+>
+  <div class="container">
+    <h2 class="text-center mb40">
+      Latest Blog Posts
+    </h2>
+    <div class="f-row row--3 mb40">
+      {var $customPosts = new WP_Query(
+        array(
+        	'post_type' => 'post',
+          'posts_per_page' => 3,
+          'orderby'        => 'DESC',
+        )
+      )}
+      {while $customPosts->have_posts()}
+        {$customPosts->the_post()}
+        {include tr_part('post-card')}
+      {/while}
+      {wp_reset_postdata()}
+    </div><!-- end row -->
+    <div class="text-center">
+      <a 
+        href="{esc_url( home_url( '/' ) )}blog" 
+        class="btn btn--brand"
+      >
+        <span>Go to Blog</span>
+      </a>
+    </div>
+  </div>
+</section>

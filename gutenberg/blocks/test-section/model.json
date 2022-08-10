@@ -1,0 +1,564 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "test-section",
+    "BLOCK_TITLE": "Test Section",
+    "keywords": ["blocktag1", "blocktag2"],
+    "hasSidebar": true,
+    "hasExample": true
+  },
+  "attributes": {
+    "title": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "max_chars": 50
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "title_rich": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "rich"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "title_long": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "long"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "richtext": {
+      "type": "object",
+      "field_meta": {
+        "type": "freeform",
+        "help": "This is a content field"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "cta": {
+      "type": "object",
+      "field_meta": {
+        "type": "cta",
+        "help": "cta help text"
+      },
+      "default": {
+        "title": "",
+        "url": "",
+        "target": false
+      }
+    },
+    "image": {
+      "type": "object",
+      "field_meta": {
+        "type": "image"
+      },
+      "default": {
+        "src": "",
+        "id": null
+      }
+    },
+
+    "video": {
+      "type": "object",
+      "field_meta": {
+        "type": "video",
+        "label": "Self hosted Video"
+      },
+      "default": {
+        "src": "",
+        "id": null
+      }
+    },
+
+    "items": {
+      "type": "array",
+      "field_meta": {
+        "type": "repeater",
+        "help": "Repeater field type help text",
+        "help__item": "Repeater subfield help text",
+        "min_rep": 0,
+        "max_rep": 6,
+        "count_is_fixed": false,
+        "add_btn_text": "Item",
+        "repeater_item_label": "Item",
+        "disable_reordering": true,
+
+        "subfields": {
+          "subitems": {
+            "type": "array",
+            "field_meta": {
+              "type": "repeater",
+              "help": "Repeater field type help text",
+              "help__item": "Repeater subfield help text",
+              "min_rep": 0,
+              "max_rep": 6,
+              "count_is_fixed": false,
+              "add_btn_text": "Item",
+              "repeater_item_label": "Item",
+              "disable_reordering": true,
+
+              "subfields": {
+                "item": {
+                  "type": "object",
+                  "field_meta": {
+                    "type": "text",
+                    "variation": "long",
+                    "max_chars": 1000
+                  },
+                  "default": {
+                    "text": ""
+                  }
+                }
+              }
+            },
+
+            "default": []
+          },
+
+          "item": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "variation": "long",
+              "label": "Item",
+              "max_chars": 1000
+            },
+            "default": {
+              "text": ""
+            }
+          },
+
+          "content": {
+            "type": "object",
+            "field_meta": {
+              "type": "freeform",
+              "label": "freeform editor",
+              "help": "This is a content field"
+            },
+            "default": {
+              "text": ""
+            }
+          },
+
+          "range_test": {
+            "type": "object",
+            "field_meta": {
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "step": 10,
+              "label": "Range",
+              "help": "Range field help text"
+            },
+            "default": {
+              "value": 70
+            }
+          },
+
+          "post": {
+            "type": "object",
+            "field_meta": {
+              "type": "object_selector",
+              "objects": ["posts"],
+              "object_type": "post",
+              "placeholder": "Search for a post",
+              "label": "Post",
+              "help": "Object selector help text",
+              "selected_post_label": "Selected Post"
+            },
+            "default": {
+              "id": null,
+              "title": ""
+            }
+          },
+
+          "checkbox_test": {
+            "type": "object",
+            "field_meta": {
+              "type": "checkbox",
+              "label": "Checkbox",
+              "help": "Checkbox help"
+            },
+            "default": {
+              "checked": true
+            }
+          },
+          "event_date_time": {
+            "type": "object",
+            "field_meta": {
+              "type": "datetime",
+              "label": "Event Date Time"
+            },
+            "default": {
+              "value": null
+            }
+          }
+        }
+      },
+
+      "default": []
+    },
+
+    "inspector_cta": {
+      "type": "object",
+      "field_meta": {
+        "type": "cta",
+        "help": "cta help text"
+      },
+      "default": {
+        "title": "",
+        "url": "",
+        "target": false
+      }
+    },
+
+    "inspector_items": {
+      "type": "array",
+      "field_meta": {
+        "type": "repeater",
+        "help": "Repeater field type help text",
+        "help__item": "Repeater subfield help text",
+        "min_rep": 0,
+        "max_rep": 6,
+        "count_is_fixed": false,
+        "add_btn_text": "Item",
+        "repeater_item_label": "Item",
+        "disable_reordering": true,
+
+        "subfields": {
+          "subitems": {
+            "type": "array",
+            "field_meta": {
+              "type": "repeater",
+              "help": "Repeater field type help text",
+              "help__item": "Repeater subfield help text",
+              "min_rep": 0,
+              "max_rep": 6,
+              "count_is_fixed": false,
+              "add_btn_text": "Item",
+              "repeater_item_label": "Item",
+              "disable_reordering": true,
+
+              "subfields": {
+                "item": {
+                  "type": "object",
+                  "field_meta": {
+                    "type": "text",
+                    "variation": "long",
+                    "max_chars": 1000
+                  },
+                  "default": {
+                    "text": ""
+                  }
+                },
+                "event_date_time": {
+                  "type": "object",
+                  "field_meta": {
+                    "type": "datetime",
+                    "label": "Event Date Time"
+                  },
+                  "default": {
+                    "value": null
+                  }
+                }
+              }
+            },
+
+            "default": []
+          },
+
+          "item": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "variation": "long",
+              "label": "Item",
+              "max_chars": 1000
+            },
+            "default": {
+              "text": ""
+            }
+          },
+          "date_time": {
+            "type": "object",
+            "field_meta": {
+              "type": "datetime",
+              "label": "Event Date Time"
+            },
+            "default": {
+              "value": null
+            }
+          },
+
+          "content": {
+            "type": "object",
+            "field_meta": {
+              "type": "freeform",
+              "label": "freeform editor",
+              "help": "This is a content field"
+            },
+            "default": {
+              "text": ""
+            }
+          },
+
+          "range_test": {
+            "type": "object",
+            "field_meta": {
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "step": 10,
+              "label": "Range",
+              "help": "Range field help text"
+            },
+            "default": {
+              "value": 70
+            }
+          },
+
+          "post": {
+            "type": "object",
+            "field_meta": {
+              "type": "object_selector",
+              "objects": ["posts"],
+              "object_type": "post",
+              "placeholder": "Search for a post",
+              "label": "Post",
+              "help": "Object selector help text",
+              "selected_post_label": "Selected Post"
+            },
+            "default": {
+              "id": null,
+              "title": ""
+            }
+          },
+
+          "checkbox_test": {
+            "type": "object",
+            "field_meta": {
+              "type": "checkbox",
+              "label": "Checkbox",
+              "help": "Checkbox help"
+            },
+            "default": {
+              "checked": true
+            }
+          }
+        }
+      },
+
+      "default": []
+    },
+
+    "inspector_number": {
+      "type": "object",
+      "field_meta": {
+        "type": "number"
+      },
+      "default": {
+        "value": 0
+      }
+    },
+    "inspector_color": {
+      "type": "object",
+      "field_meta": {
+        "type": "color",
+        "options": [
+          { "name": "red", "color": "#f00" },
+          { "name": "blue", "color": "#00f" },
+          { "name": "white", "color": "#fff" }
+        ],
+        "customColors": true
+      },
+      "default": {
+        "value": "#f00"
+      }
+    },
+    "inspector_img": {
+      "type": "object",
+      "field_meta": {
+        "type": "image"
+      },
+      "default": {
+        "src": "",
+        "id": null
+      }
+    },
+    "inspector_video": {
+      "type": "object",
+      "field_meta": {
+        "type": "video",
+        "label": "Inspector Self hosted Video"
+      },
+      "default": {
+        "src": "",
+        "id": null
+      }
+    },
+    "inspector_title": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "max_chars": 50
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "inspector_event_date_time": {
+      "type": "object",
+      "field_meta": {
+        "type": "datetime",
+        "label": "Event Date Time"
+      },
+      "default": {
+        "value": null
+      }
+    },
+    "inspector_title_rich": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "rich",
+        "help": "Single text label"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "inspector_title_long": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "long"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "inspector_richtext": {
+      "type": "object",
+      "field_meta": {
+        "type": "freeform",
+        "help": "This is a content field"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "inspector_toggle": {
+      "type": "object",
+      "field_meta": {
+        "type": "toggle",
+        "help": "Toggle help"
+      },
+      "default": {
+        "checked": true
+      }
+    },
+
+    "inspector_checkbox": {
+      "type": "object",
+      "field_meta": {
+        "type": "checkbox",
+        "help": "Checkbox help"
+      },
+      "default": {
+        "checked": true
+      }
+    },
+
+    "inspector_range": {
+      "type": "object",
+      "field_meta": {
+        "type": "range",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "label": "Range",
+        "help": "Range field help text"
+      },
+      "default": {
+        "value": 70
+      }
+    },
+
+    "inspector_post": {
+      "type": "object",
+      "field_meta": {
+        "type": "object_selector",
+        "objects": ["posts"],
+        "object_type": "post",
+        "placeholder": "Search for a post",
+        "label": "Post",
+        "help": "Object selector help text",
+        "selected_post_label": "Selected Post"
+      },
+      "default": {
+        "id": null,
+        "title": ""
+      }
+    },
+
+    "inspector_bg": {
+      "type": "object",
+      "field_meta": {
+        "type": "select",
+        "options": [
+          { "label": "White", "value": "bg-white" },
+          { "label": "Silver", "value": "bg-silver" }
+        ],
+        "label": "Background Color",
+        "help": "Select Control Help text"
+      },
+      "default": {
+        "value": "bg-white"
+      }
+    },
+    "inspector_padding_top": {
+      "type": "object",
+      "field_meta": {
+        "type": "select",
+        "options": [
+          { "label": "100px", "value": "padd-t-100" },
+          { "label": "50px", "value": "padd-t-50" },
+          { "label": "0px", "value": "padd-t-0" }
+        ],
+        "label": "Padding Top",
+        "help": "Select Control Help text"
+      },
+      "default": {
+        "value": "padd-t-50"
+      }
+    },
+    "inspector_padding_btm": {
+      "type": "object",
+      "field_meta": {
+        "type": "select",
+        "options": [
+          { "label": "100px", "value": "padd-b-100" },
+          { "label": "50px", "value": "padd-b-50" },
+          { "label": "0px", "value": "padd-b-0" }
+        ],
+        "label": "Padding Bottom",
+        "help": "Select Control Help text"
+      },
+      "default": {
+        "value": "padd-b-50"
+      }
+    }
+  }
+}

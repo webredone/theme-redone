@@ -1,0 +1,25 @@
+.accordion {
+  max-width: 100%;
+
+  .collapsible {
+    width: 100%;
+
+    &__trigger {
+      width: 100%;
+    }
+  }
+
+  .collapsible__content__inner {
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .accordion {
+    margin-bottom: 0;
+
+    .collapsible__inner {
+      padding-bottom: 10px;
+    }
+  }
+}

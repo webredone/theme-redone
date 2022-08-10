@@ -1,0 +1,77 @@
+// XXX: Do not remove. "Loader: for lazy loaded imgs and divs
+// .js-img-lazy.jsLoading,
+// .js-async-svg {
+//   background-color: #cecece !important;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   font-size: 0;
+//   background-image: url('../assets/img/lazy-loading-loader.png') !important;
+// }
+
+// XXX: Do not remove. "Loader: for lazy loaded imgs and divs
+
+// Prevents page jumping by implicitly definingthe size that we get from the image
+.tr-img-wrap-outer {
+  position: relative;
+  width: calc(var(--size-w-original) * 1px);
+
+  &.jsLoading {
+    background-color: #cecece;
+    overflow: hidden;
+    &:before,
+    &:after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      transform: translateX(-200%) skewX(35deg);
+      background: #d1f3ff;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        #fff 50%,
+        transparent 100%,
+        #ffff 100%
+      );
+      animation: image-preloader 2s ease-in-out infinite forwards;
+    }
+
+    &:after {
+      animation-delay: 0.4s;
+    }
+  }
+}
+.tr-img-wrap {
+  --image-ratio: calc(var(--size-h-original) / var(--size-w-original));
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(var(--image-ratio) * 100%);
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes image-preloader {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(200%) skewX(35deg);
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.js-async-svg {
+  width: 30px !important;
+  height: 30px !important;
+  background-size: 15px 15px !important;
+}

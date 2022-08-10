@@ -1,0 +1,53 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-titles);
+  color: #111;
+  font-weight: 600;
+}
+
+p {
+  color: var(--c-txt);
+}
+
+h1,
+h2.hero-title {
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.main-content {
+  p,
+  li,
+  blockquote {
+    a:not(.btn) {
+      color: var(--c-brand);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+}

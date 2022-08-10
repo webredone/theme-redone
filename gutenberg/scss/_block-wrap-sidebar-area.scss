@@ -1,0 +1,32 @@
+.interface-complementary-area {
+  @media (min-width: 782px) {
+    width: 318px;
+  }
+  .tr-sidebar-fields {
+    background: #f2edf5;
+
+    > .components-panel__body-title {
+      .components-panel__body-toggle.components-button {
+        background: #fff;
+      }
+    }
+
+    .tr-block__img-thumb {
+      max-width: 100%;
+    }
+
+    .tr-repeater {
+      width: 100%;
+    }
+  }
+}
+
+.interface-complementary-area .tr-sidebar-fields {
+  > .components-panel__row {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+}

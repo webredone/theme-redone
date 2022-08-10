@@ -1,0 +1,22 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "name-same-as-folder-name-here",
+    "BLOCK_TITLE": "block name same as folder name here",
+    "keywords": ["blocktag1", "blocktag2"],
+    "hasSidebar": false,
+    "hasExample": true
+  },
+
+  "attributes": {
+    "title": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "label": "Title"
+      },
+      "default": {
+        "text": ""
+      }
+    }
+  }
+}

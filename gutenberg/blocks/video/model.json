@@ -1,0 +1,59 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "video",
+    "BLOCK_TITLE": "Video",
+    "keywords": ["video", "youtube"],
+    "hasSidebar": true,
+    "hasExample": true
+  },
+  "attributes": {
+    "yt_or_vimeo_url": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "short",
+        "label": "Youtube or Vimeo Video URL",
+        "max_chars": 300
+      },
+      "default": {
+        "text": ""
+      }
+    },
+
+    "self_hosted_video": {
+      "type": "object",
+      "field_meta": {
+        "type": "video",
+        "label": "Self-hosted Video"
+      },
+      "default": {
+        "src": "",
+        "id": null
+      }
+    },
+
+    "optional_caption": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "label": "Optional Caption",
+        "variation": "short",
+        "max_chars": 100
+      },
+      "default": {
+        "text": ""
+      }
+    },
+
+    "inspector_is_self_hosted": {
+      "type": "object",
+      "field_meta": {
+        "type": "toggle",
+        "label": "Is Self-hosted"
+      },
+      "default": {
+        "checked": false
+      }
+    }
+  }
+}

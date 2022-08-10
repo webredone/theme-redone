@@ -1,0 +1,46 @@
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  // CTA FIELD
+  .tr-cta-control {
+    .components-base-control__label {
+      margin-bottom: 0;
+      width: 100%;
+    }
+
+    &__text {
+      width: 100%;
+    }
+
+    &__text,
+    &__link,
+    &__target {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    label {
+      font-size: 12px;
+      opacity: 0.85;
+
+      &:not(.components-toggle-control__label) {
+        margin-bottom: 4px;
+      }
+    }
+
+    input,
+    .block-editor-url-input__input,
+    .components-textarea-control__input {
+      width: 100%;
+      border: 1px solid var(--tr-field-border-color);
+      border-radius: 2px;
+      height: 35px;
+      padding: 8px;
+    }
+
+    &__target {
+      display: flex;
+      align-items: center;
+    }
+  }
+  // END:CTA FIELD
+}

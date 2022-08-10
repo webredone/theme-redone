@@ -1,0 +1,168 @@
+// START: BARE BONES CODE NEEDED TO WORK (Chevron can be replaced)
+// Bare bones
+
+// Prevents jumping (CLS)
+body:not(.js--collapsible-loaded) {
+  .collapsible {
+    &__content {
+      height: 0;
+      overflow: hidden;
+    }
+
+    &[data-initially-open] {
+      > .collapsible__content {
+        height: auto;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.collapsible {
+  max-width: 100%;
+
+  &__content {
+    visibility: hidden;
+    overflow: hidden;
+    height: 0;
+
+    &__inner {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &.active,
+  &.transition,
+  &[data-initially-open] {
+    > .collapsible__content {
+      height: auto;
+      visibility: visible;
+    }
+  }
+}
+
+//
+
+.collapsible {
+  --transition: all var(--collapsible-duration) ease-in-out;
+  --chevronC: #222;
+  --chevronW: 9px;
+  --chevronH: 2px;
+  --chevronT: -3px;
+  --chevronRotate: -40deg;
+
+  &:not(.active),
+  &.transition-backwards {
+    --chevronRotate: 40deg;
+    --chevronT: 2px;
+  }
+
+  &.transition-forwards {
+    --chevronRotate: -40deg;
+    --chevronT: -3px;
+  }
+
+  &:not(.active):not(.transition),
+  &.transition-backwards {
+    .collapsible__content {
+      pointer-events: none;
+    }
+  }
+
+  &.active,
+  &.transition-forwards {
+    .collapsible__content {
+      pointer-events: all;
+    }
+  }
+
+  &__trigger {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    z-index: 1;
+    border: none;
+    cursor: pointer;
+
+    a {
+      display: block;
+
+      .chevron {
+        position: absolute;
+      }
+    }
+
+    .chevron,
+    + .chevron {
+      display: flex;
+      margin-left: auto;
+      position: relative;
+      height: 20px;
+      width: 25px;
+      padding: 0;
+      background: transparent;
+      box-shadow: none !important;
+      border: none !important;
+      outline: none !important;
+      cursor: pointer;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: calc(50% - var(--chevronW) + var(--chevronH) * 0.5 - 0.5px);
+        width: var(--chevronW);
+        height: var(--chevronH);
+        background-color: var(--chevronC);
+        border-radius: 9999px;
+        transform-origin: right;
+        transform: translateY(var(--chevronT)) rotate(var(--chevronRotate));
+        transition: var(--transition);
+      }
+
+      &:after {
+        transform-origin: left;
+        transform: translateY(var(--chevronT))
+          rotate(calc(var(--chevronRotate) * -1));
+        left: calc(
+          50% - var(--chevronW) + var(--chevronW) - var(--chevronH) * 0.5 +
+            0.5px
+        );
+      }
+    }
+  }
+
+  &__inner {
+    padding: 12px;
+  }
+
+  &--absolute {
+    position: relative;
+
+    .collapsible__content {
+      position: absolute;
+      top: 100%;
+    }
+  }
+
+  &[data-select] {
+    .collapsible__inner {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .collapsible__option {
+      height: 60px;
+      cursor: pointer;
+
+      &.picked {
+        background-color: rgba(255, 0, 0, 0.4);
+      }
+    }
+  }
+}

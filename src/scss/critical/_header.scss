@@ -1,0 +1,300 @@
+$mob-mq: 767px;
+$desktop-mq: $mob-mq + 1px;
+
+$mobile-menu-mq: 'max-width: #{$mob-mq}';
+$desktop-menu-mq: 'min-width: #{$desktop-mq}';
+
+// ===================================================
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 0 0 rgba(#000, 0);
+  padding-top: 14px;
+  padding-bottom: 14px;
+  transition: all 0.2s ease-in-out;
+
+  .navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  // logo <a>
+  .navbar-brand {
+    display: inline-block;
+    padding: 0;
+    width: 150px;
+  }
+
+  // menu <ul>
+  .navbar-nav {
+    display: flex;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+  .navbar-collapse {
+    align-items: center;
+  }
+
+  .nav-link {
+    transition: all 0.2s ease-in-out;
+    color: var(--c-brand);
+
+    &:hover,
+    &.active {
+      color: var(--c-brand);
+    }
+
+    &:focus {
+      color: #bababa;
+    }
+  }
+  // TODO: close header dropdown on click outside
+
+  .collapsible {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &__trigger {
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(red, 0.2);
+        z-index: 1;
+      }
+    }
+  }
+} // header
+
+// Desktop
+@media ($desktop-menu-mq) {
+  .header {
+    .navbar-nav {
+      align-items: center;
+    }
+
+    .navbar-toggler {
+      display: none;
+    }
+
+    .nav-item {
+      &:not(:last-of-type) {
+        margin-right: 15px;
+      }
+    }
+
+    .collapsible {
+      position: relative;
+
+      &__trigger {
+        width: auto;
+      }
+    }
+
+    .collapsible__content {
+      position: absolute;
+      top: 100%;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(#000, 0.3);
+
+      &__inner {
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+// Tablets & Mobile
+@media ($mobile-menu-mq) {
+  .header {
+    min-height: 50px;
+
+    .container {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .navbar-nav {
+      flex-direction: column;
+    }
+
+    .navbar {
+      position: relative;
+      padding: 15px;
+
+      &-brand {
+        top: -12px;
+        left: 6px;
+        z-index: 2;
+
+        svg {
+          width: 60px;
+          height: 48px;
+        }
+      }
+    }
+
+    .menu-item {
+      &:not(:last-of-type) {
+        border-bottom: 1px solid #cecece;
+      }
+
+      .nav-link {
+        flex: 1;
+      }
+
+      .collapsible {
+        width: 100%;
+      }
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 10px;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 10px;
+    }
+
+    .navbar-toggler {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28.5px;
+      height: 16px;
+      background: transparent;
+      padding: 0;
+      border: none;
+      z-index: 2;
+
+      &:focus {
+        outline: none !important;
+      }
+
+      &:after {
+        position: absolute;
+        content: '';
+        top: -17px;
+        left: 0;
+        width: 50px;
+        height: 50px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .span-icon {
+        display: block;
+        width: inherit;
+        height: 2px;
+        border-radius: 10px;
+        background-color: var(--c-brand);
+        transition: all 0.2s ease-in-out;
+
+        &:nth-of-type(1) {
+          transform-origin: left;
+        }
+        &:nth-of-type(2) {
+          transform-origin: center;
+        }
+        &:nth-of-type(3) {
+          margin-left: auto;
+          width: 60%;
+          transform-origin: left;
+        }
+      }
+    }
+
+    .navbar-collapse {
+      position: absolute;
+      top: 32px;
+      right: 0;
+      width: calc(100vw - 50px);
+      max-width: 350px;
+      overflow-y: auto;
+      height: var(--vh100);
+      padding: 50px 15px 44px;
+      background-color: #fff;
+      display: block;
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease-in-out;
+    }
+
+    // TODO: Refactor this
+    .collapsible {
+      &__trigger {
+        position: relative;
+        width: calc(100% - 30px);
+      }
+    }
+
+    .collapsible[data-collapsible-dropdown] {
+      .collapsible__content {
+        position: relative;
+      }
+    }
+  }
+
+  body.js-mob-menu-open {
+    overflow: hidden;
+
+    .header {
+      .navbar-collapse {
+        transform: translateX(0);
+        pointer-events: all;
+        opacity: 1;
+      }
+
+      .navbar-toggler {
+        .span-icon:nth-of-type(1) {
+          transform: rotate(45deg) translateY(-5px);
+        }
+        .span-icon:nth-of-type(2) {
+          transform: scaleX(0);
+        }
+        .span-icon:nth-of-type(3) {
+          width: 100%;
+          transform: rotate(-45deg) translateY(5px);
+        }
+      }
+    }
+
+    .backdrop {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+body.jsOnScroll-header {
+  .header {
+    box-shadow: 0 0 10px rgba(#000, 0.3);
+  }
+}

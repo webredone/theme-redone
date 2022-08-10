@@ -1,0 +1,44 @@
+/* helpers */
+
+// margins
+.mb0 {
+  margin-bottom: 0;
+}
+
+.mb40 {
+  margin-bottom: 40px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// bg-color helper classes
+.bg-gray {
+  background-color: #f4f6f9 !important;
+}
+
+// txt-color helper classes
+.c-brand {
+  color: var(--c-brand) !important;
+}
+
+.h-bg-zoom {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  &__img {
+    @extend %bgncc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover .h-bg-zoom__img {
+    transform: scale(1.05);
+  }
+}

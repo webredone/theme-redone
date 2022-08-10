@@ -1,0 +1,36 @@
+{varType string $class} {* optional class to pass to the slider wrap element *}
+{varType array $slides} {* $slides array. Required. *}
+
+<div 
+  n:if="!empty($class) && !empty($slides)" 
+  class="slider-wrap"
+>
+
+  <div class="embla {$class}">
+    <div class="embla__container">
+      <div 
+        class="embla__slide"
+        n:foreach="$slides as $s_key => $s_content"
+      >
+        <div class="embla__slide__inner">
+          {block slide}{/block}
+        </div>{* slinner *}
+      </div>{* slide *}
+    </div>{* cont *}
+  </div>{* embla *}
+
+  <div class="embla__buttons">
+    <button
+      class="embla__btn embla__btn-prev"
+      type="button"
+      aria-label="Go to previous slide"
+    ></button>
+    <div class="embla__dots"></div>
+    <button
+      class="embla__btn embla__btn-next"
+      type="button"
+      aria-label="Go to next slide"
+    ></button>
+  </div>{* embla__buttons *}
+  
+</div>{* wrap *}

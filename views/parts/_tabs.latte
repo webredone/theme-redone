@@ -1,0 +1,36 @@
+{varType string $class} {* optional class to pass to the tabs element *}
+{varType array $tabs} {* $tabs array. Required. *}
+
+<div 
+  class="tabs {$class ?? ''}"
+  n:if="!empty($tabs)"
+>
+
+  <div class="tabs__nav">
+
+    <button 
+      n:foreach="$tabs as $ta_key => $ta_content"
+      type="button" 
+      class="tab-anchor {$ta_key == 0 ? 'activeTab' : ''}" 
+      data-href="panel-{$ta_key}"
+    >
+      {block tab_anchor}{/block}
+    </button>
+
+  </div>{* nav *}
+
+  <div class="tabs__content">
+
+    <div 
+      class="tab-panel {$tp_key == 0 ? 'activeTab enter' : ''}" 
+      data-id="panel-{$tp_key}"
+      n:foreach="$tabs as $tp_key => $tp_content"
+    >
+      <div class="tab-panel__content">
+        {block tab_panel}{/block}
+      </div>{* panel-content *}
+    </div>{* panel *}
+
+  </div>{* content *}
+
+</div>{* tabs *}

@@ -1,0 +1,25 @@
+.editor-styles-wrapper .tr-block,
+.interface-complementary-area .tr-sidebar-fields {
+  .components-card__header,
+  .components-card__footer,
+  .components-card__body {
+    line-height: 1;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .components-card__header {
+    font-weight: 500;
+
+    .tr-tooltip {
+      margin-left: 2px;
+      margin-right: 2px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+}

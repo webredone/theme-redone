@@ -1,0 +1,30 @@
+{var $bq_additional_class = ($image['src'] && $image['id']) ? 'wp-blockquote--with-img' : ''}
+
+
+<blockquote class="wp-blockquote {$bq_additional_class}">
+	{if $image['src'] && $image['id']}
+		<div class="wp-blockquote__img">
+			{tr_get_media($image, true)}
+		</div>
+	{/if}
+	<div class="wp-blockquote__text">
+		<p class="wp-blockquote__quote">
+
+			{$quote['text']}
+		</p>
+		{if strlen($name['text']) || strlen($position['text'])}
+			<p class="wp-blockquote__meta">
+				{if strlen($name['text'])}
+					<span class="wp-blockquote__meta__name">
+						{$name['text']}
+					</span>
+				{/if}
+				{if strlen($position['text'])}
+					<span class="wp-blockquote__meta__position">
+						{$position['text']}
+					</span>
+				{/if}
+			</p>
+		{/if}
+	</div>
+</blockquote>

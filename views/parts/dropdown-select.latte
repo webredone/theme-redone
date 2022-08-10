@@ -1,0 +1,72 @@
+{varType string $class} {* optional class to pass to the dropdown-select element *}
+{varType string $aria_label} {* optional aria label*}
+{varType string $duration} {* optional duration - default is 300 *}
+{varType bool $close_outside} {* if trigger mode is set to click (default), enabling this will make it close on click outside *}
+{varType bool $is_absolute} {* by default, .collapsible__content is relative. This makes it absolute if set to true *}
+{varType bool $on_hover} {* default trigger mode is on click. If this is set to true, hover will be used instead (on devices that support hover, others will fallback to click) *}
+{varType string $easing} {* default easing is 'ease-in-out'. This can be used to overwrite it *}
+
+{varType array $options} 
+{* 
+options associative array. 
+Must be in this format: 
+[
+  [
+    'value' => 'value_here',
+    'label' => 'Label Here'
+  ],
+  ...
+] 
+*}
+
+{varType int $default_selected_key} {* by default, first item (index 0 is selected). This can be used to set a different one *}
+
+
+<div 
+  n:if="!empty($options)"
+  class="collapsible {$class ?? ''} {if !empty($is_absolute)}collapsible--absolute{/if}" 
+  data-select
+  data-duration="{!empty($duration) ? $duration : '300'}"
+  {if $close_outside ?? false}
+    data-close-on-outside-click
+  {/if}
+  {if $on_hover ?? false}
+    data-hover-trigger
+  {/if}
+  {if !empty($easing)}
+    data-easing="{$easing}"
+  {/if}
+>
+  <button
+    class="collapsible__trigger"
+    type="button"
+    aria-label="{!empty($aria_label) ? $aria_label : 'Toggle Options'}"
+  >
+    <span class="collapsible__select-current"></span>
+    <span class="chevron"></span>
+  </button>
+  <div class="collapsible__content">
+    <div class="collapsible__content__inner">
+
+      {spaceless}
+      <button 
+        n:foreach="$options as $option"
+        type="button" 
+        class=
+          "collapsible__option 
+          {if 
+            (isset($default_selected_key) && $default_selected_key === $iterator->counter0) 
+          }
+          picked
+          {elseif !isset($default_selected_key) && $iterator->first}
+          picked
+          {/if}" 
+        data-value="{$option['value']}"
+      >
+        {$option['label']}
+      </button>
+      {/spaceless}
+
+    </div>{* inner *}
+  </div>{* content *}
+</div>{* collapsible *}
