@@ -12,17 +12,17 @@ Theme Redone is a custom WordPress theme starter/framework with its own Gutenber
 
 ### It consists of:
 
-- ✅ Latte templating engine for its beautiful syntax and a more streamlined and manageable workflow
-- ✅ EsBuild/Webpack + Gulp task tasks for compiling SCSS and JS
+- ✅ [Latte templating engine](https://webredone.com/theme-redone/why-latte-as-a-templating-engine/) for its beautiful syntax and a more streamlined and manageable workflow
+- ✅ EsBuild/Webpack + Gulp task tasks for [compiling SCSS and JS](https://webredone.com/theme-redone/scss-and-js-compilation-bundling/)
 - ✅ SCSS (SMACSS folder/files structure)
 - ✅ Javascript (ES8 and React/Svelte/Vue support, thanks to EsBuild and Babel)
-- ✅ In-theme framework for building Gutenberg blocks in a streamlined and standardized way
-- ✅ TRB CLI helper for scaffolding new Gutenberg blocks
-- ✅ Bare-bones grid system coded with Flex and CSS variables (about 15 lines of code)
-- ✅ Helper functions for repetitive tasks such as rendering images, links, SVG code, and more
-- ✅ Just a few well-written UI components to get you started (we don’t like bloat in our code): Modal, Accordion, Tabs, Menu, Dropdowns, Sliders, and simple “in view fade-in transitions”
-- ✅ SVG support
-- ✅ Tracy Debugger to help us make sure we write stable and error-free code
+- ✅ In-theme [framework for building Gutenberg blocks](https://webredone.com/theme-redone/gutenberg-blocks-framework/) in a streamlined and standardized way
+- ✅ [TRB CLI](https://webredone.com/theme-redone/gutenberg-blocks-framework/trb-cli/) helper for scaffolding new Gutenberg blocks
+- ✅ [Bare-bones grid system](https://webredone.com/theme-redone/simple-grid-system/) coded with Flex and CSS variables (about 15 lines of code)
+- ✅ [Helper functions](https://webredone.com/theme-redone/theme-functions/) for repetitive tasks such as rendering images, links, SVG code, and more
+- ✅ Just a few [well-written UI components](https://webredone.com/theme-redone/javascript-ui-elements-classes/) to get you started (we don’t like bloat in our code): Modal, Accordion, Tabs, Menu, Dropdowns, Sliders, and simple “in view fade-in transitions”
+- ✅ [SVG support](https://webredone.com/theme-redone/svg-handling/)
+- ✅ [Tracy Debugger](https://webredone.com/theme-redone/debugging-tracy/) to help us make sure we write stable and error-free code
 - ✅ And much more
 
 ### Visit https://webredone.com/theme-redone/ to learn more from our 50+ pages long docummentation.
