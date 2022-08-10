@@ -1,3 +1,5 @@
+![Theme Redone Gutenberg WordPress Framework](https://raw.githubusercontent.com/webredone/theme-redone/main/assets/svg/theme-redone-logo.svg)
+
 # **Theme Redone**
 
 ## **The Framework for Developing Custom WordPress Themes**
