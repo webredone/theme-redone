@@ -1,4 +1,4 @@
-![Theme Redone Gutenberg WordPress Framework](https://raw.githubusercontent.com/webredone/theme-redone/main/assets/svg/theme-redone-logo.svg)
+[![Theme Redone Gutenberg WordPress Framework](https://raw.githubusercontent.com/webredone/theme-redone/main/assets/svg/theme-redone-logo.svg)](https://webredone.com/theme-redone/)
 
 # **Theme Redone**
 
