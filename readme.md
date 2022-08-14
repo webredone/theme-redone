@@ -8,6 +8,8 @@
 
 ---
 
+[![Custom WordPress Theme Starter (framework) 2022 - Theme Redone | WebRedone ](https://raw.githubusercontent.com/webredone/theme-redone-docs-assets/main/img/theme-redone-by-webredone-youtube-screen.jpg)](https://www.youtube.com/watch?v=co1r5krHsl4)
+
 Theme Redone is a custom WordPress theme starter/framework with its own Gutenberg blocks solution and a CLI that speeds up the block creation process.
 
 ### It consists of:
