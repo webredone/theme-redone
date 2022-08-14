@@ -1,5 +1,8 @@
 const gulp = require('gulp')
 var gulpif = require('gulp-if')
+var plumber = require('gulp-plumber')
+var notify = require('gulp-notify')
+
 const webpack = require('webpack')
 
 const { createGulpEsbuild } = require('gulp-esbuild')
@@ -104,7 +107,10 @@ const OUT_DIR = './prod'
 function compileGlobalThemeSCSS(done) {
   gulp
     .src(SRC.SCSS_THEME)
-    .pipe(sass.sync({ outputStyle: cssOutputStyle }).on('error', sass.logError))
+    .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(sass.sync({ outputStyle: cssOutputStyle }))
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
@@ -116,7 +122,10 @@ function compileGlobalThemeSCSS(done) {
 function compileAdminSCSS(done) {
   gulp
     .src(SRC.SCSS_GLOBAL_ADMIN)
-    .pipe(sass.sync({ outputStyle: cssOutputStyle }).on('error', sass.logError))
+    .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(sass.sync({ outputStyle: cssOutputStyle }))
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
@@ -128,7 +137,10 @@ function compileAdminSCSS(done) {
 function compileBlocksBackendSCSS(done) {
   gulp
     .src(SRC.SCSS_ADMIN_BLOCKS)
-    .pipe(sass.sync({ outputStyle: cssOutputStyle }).on('error', sass.logError))
+    .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(sass.sync({ outputStyle: cssOutputStyle }))
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
@@ -140,7 +152,10 @@ function compileBlocksBackendSCSS(done) {
 function compileCriticalSCSS(done) {
   gulp
     .src(SRC.SCSS_CRITICAL)
-    .pipe(sass.sync({ outputStyle: cssOutputStyle }).on('error', sass.logError))
+    .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(sass.sync({ outputStyle: cssOutputStyle }))
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
@@ -152,7 +167,10 @@ function compileCriticalSCSS(done) {
 function compileBlocksSharedFrontendSCSS(done) {
   gulp
     .src(SRC.SCSS_BLOCKS_SHARED_FRONTEND)
-    .pipe(sass.sync({ outputStyle: cssOutputStyle }).on('error', sass.logError))
+    .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(sass.sync({ outputStyle: cssOutputStyle }))
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
@@ -165,7 +183,10 @@ function compileBlocksSharedFrontendSCSS(done) {
 function compileBlockSpecificFrontendSCSS(done) {
   gulp
     .src(SRC.SCSS_BLOCK_SPECIFIC_FRONTEND)
-    .pipe(sass.sync({ outputStyle: cssOutputStyle }).on('error', sass.logError))
+    .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(sass.sync({ outputStyle: cssOutputStyle }))
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
@@ -196,9 +217,13 @@ function compileThemeLazilyLoadedJS(done) {
   gulp
     .src(SRC.JS_LAZILY_LOADED)
     .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(
       gulpEsbuild({
         bundle: true,
         minify: shouldMinify,
+        logLevel: 'info',
         loader: {
           '.js': 'jsx'
         },
@@ -217,10 +242,14 @@ function compileThemeGlobalJS(done) {
   gulp
     .src(SRC.JS_THEME)
     .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(
       gulpEsbuild({
         bundle: true,
         outfile: 'app.min.js',
         minify: shouldMinify,
+        logLevel: 'info',
         loader: {
           '.js': 'jsx'
         },
@@ -236,9 +265,13 @@ function compileBlocksSharedFrontendJS(done) {
   gulp
     .src(SRC.JS_BLOCKS_SHARED_FRONTEND)
     .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(
       gulpEsbuild({
         bundle: true,
         minify: shouldMinify,
+        logLevel: 'info',
         loader: {
           '.js': 'jsx'
         },
@@ -256,9 +289,13 @@ function compileBlockSpecificJS(done) {
   gulp
     .src(SRC.JS_BLOCK_SPECIFIC_FRONTEND)
     .pipe(
+      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
+    )
+    .pipe(
       gulpEsbuild({
         bundle: true,
         minify: shouldMinify,
+        logLevel: 'info',
         loader: {
           '.js': 'jsx'
         },
