@@ -101,7 +101,6 @@ const watchPaths = {
 
 const OUT_DIR = './prod'
 
-// 1. Compile Global CSS // ✅
 function compileGlobalThemeSCSS(done) {
   gulp
     .src(SRC.SCSS_THEME)
@@ -114,7 +113,6 @@ function compileGlobalThemeSCSS(done) {
   done()
 }
 
-// 2. Compile Global Admin CSS // ✅
 function compileAdminSCSS(done) {
   gulp
     .src(SRC.SCSS_GLOBAL_ADMIN)
@@ -127,7 +125,6 @@ function compileAdminSCSS(done) {
   done()
 }
 
-// 3. Compile blocks backend CSS // ✅
 function compileBlocksBackendSCSS(done) {
   gulp
     .src(SRC.SCSS_ADMIN_BLOCKS)
@@ -140,7 +137,6 @@ function compileBlocksBackendSCSS(done) {
   done()
 }
 
-// 4. Compile blocks backend CSS // ✅
 function compileCriticalSCSS(done) {
   gulp
     .src(SRC.SCSS_CRITICAL)
@@ -236,7 +232,6 @@ function compileThemeGlobalJS(done) {
   done()
 }
 
-// Compile blocks shared JS
 function compileBlocksSharedFrontendJS(done) {
   gulp
     .src(SRC.JS_BLOCKS_SHARED_FRONTEND)
@@ -257,7 +252,6 @@ function compileBlocksSharedFrontendJS(done) {
   done()
 }
 
-// Compile block specific JS with EsBuild ❓
 function compileBlockSpecificJS(done) {
   gulp
     .src(SRC.JS_BLOCK_SPECIFIC_FRONTEND)
@@ -290,25 +284,25 @@ function serve(done) {
 
 function watchFiles(done) {
   // --- CSS ---------------------------------------
-  // 1. GLobal Theme CSS // ✅
+  // GLobal Theme CSS
   gulp.watch(watchPaths.css.theme, gulp.series(compileGlobalThemeSCSS))
 
-  // 2. Admin Global CSS // ✅
+  // Admin Global CSS
   gulp.watch(watchPaths.css.admin, gulp.series(compileAdminSCSS))
 
-  // 3. Blocks Backend CSS // ✅
+  // Blocks Backend CSS
   gulp.watch(watchPaths.css.blocks_admin, gulp.series(compileBlocksBackendSCSS))
 
-  // 4. Critical CSS // ✅
+  // Critical CSS
   gulp.watch(watchPaths.css.critical, gulp.series(compileCriticalSCSS, reload))
 
-  // 5. blocks shared CSS // ✅
+  // Blocks shared CSS
   gulp.watch(
     watchPaths.css.blocks_shared,
     gulp.series(compileBlocksSharedFrontendSCSS)
   )
 
-  // 6. Block-specific frontend.scss CSS // ✅
+  // Block-specific frontend.scss CSS
   gulp.watch(
     watchPaths.css.block_specific,
     gulp.series(compileBlockSpecificFrontendSCSS)
@@ -316,7 +310,7 @@ function watchFiles(done) {
 
   // --- JAVASCRIPT ----------------------------
 
-  // 1. Gutenberg Backend Blocks JS // ✅
+  // Gutenberg Backend Blocks JS
   gulp.watch(
     watchPaths.js.blocks_admin,
     gulp.series(compileGutenbergBackendJS, reload)
@@ -331,18 +325,18 @@ function watchFiles(done) {
     gulp.series(compileThemeLazilyLoadedJS, reload)
   )
 
-  // 2. Blocks-shared js // ❓
+  // Blocks-shared js
   gulp.watch(
     watchPaths.js.blocks_shared,
     gulp.series(compileBlocksSharedFrontendJS, reload)
   )
-  // 3. Block-Specific frontend.js // ❓
+  // Block-Specific frontend.js
   gulp.watch(
     watchPaths.js.block_specific,
     gulp.series(compileBlockSpecificJS, reload)
   )
 
-  // 4. Watch for latte templates updates
+  // Watch for latte templates updates
   gulp.watch(watchPaths.latte, reload)
 }
 
@@ -370,7 +364,6 @@ gulp.task(
   )
 )
 
-// default includes all
 gulp.task(
   'default',
   gulp.series(
