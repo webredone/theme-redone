@@ -240,9 +240,6 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 	</section>
 
 
-	TODO: add more accordion examples
-
-
 <section class="sliders">
 	<style>
 		.sliders {
@@ -284,18 +281,18 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 				'src' => 'https://images.unsplash.com/photo-1655552360649-9871415760b6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTgyMA&ixlib=rb-1.2.1&q=80&w=353',
 				'alt' => 'Slide Image 6',
 			]
-		] /* line 286 */;
+		] /* line 283 */;
 		echo '
 
 ';
-		$this->enterBlockLayer(5, get_defined_vars()) /* line 314 */;
+		$this->enterBlockLayer(5, get_defined_vars()) /* line 311 */;
 		if (false) {
-			$this->renderBlock('slide', get_defined_vars()) /* line 319 */;
+			$this->renderBlock('slide', get_defined_vars()) /* line 316 */;
 			echo "\n";
 		}
 		try {
 			$this->createTemplate(tr_part('_slider'), ['class' => 'slider--test',
-				'slides' => $test_slides], "embed")->renderToContentType('html') /* line 314 */;
+				'slides' => $test_slides], "embed")->renderToContentType('html') /* line 311 */;
 		} finally {
 			$this->leaveBlockLayer();
 		}
@@ -307,14 +304,14 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
   <div class="container"><h3>LOOPED SLIDER</h3></div>
 	<div>
 ';
-		$this->enterBlockLayer(6, get_defined_vars()) /* line 335 */;
+		$this->enterBlockLayer(6, get_defined_vars()) /* line 332 */;
 		if (false) {
-			$this->renderBlock('slide', get_defined_vars()) /* line 340 */;
+			$this->renderBlock('slide', get_defined_vars()) /* line 337 */;
 			echo "\n";
 		}
 		try {
 			$this->createTemplate(tr_part('_slider'), ['class' => 'slider--test2',
-				'slides' => $test_slides], "embed")->renderToContentType('html') /* line 335 */;
+				'slides' => $test_slides], "embed")->renderToContentType('html') /* line 332 */;
 		} finally {
 			$this->leaveBlockLayer();
 		}
@@ -339,7 +336,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 12;
-		$i++) /* line 367 */ {
+		$i++) /* line 364 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -357,7 +354,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 4;
-		$i++) /* line 381 */ {
+		$i++) /* line 378 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -375,7 +372,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 6;
-		$i++) /* line 395 */ {
+		$i++) /* line 392 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -393,7 +390,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 10;
-		$i++) /* line 409 */ {
+		$i++) /* line 406 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -411,7 +408,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 8;
-		$i++) /* line 423 */ {
+		$i++) /* line 420 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -429,7 +426,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 9;
-		$i++) /* line 437 */ {
+		$i++) /* line 434 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -448,7 +445,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 2;
-		$i++) /* line 452 */ {
+		$i++) /* line 449 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -467,7 +464,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 2;
-		$i++) /* line 467 */ {
+		$i++) /* line 464 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -487,7 +484,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 ';
 		for ($i = 0;
 		$i < 10;
-		$i++) /* line 483 */ {
+		$i++) /* line 480 */ {
 			echo '				<div class="col" style="box-shadow: inset 0 0 0 1px red;">
 					<div class="col-content">Column</div>
 				</div>
@@ -510,11 +507,6 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 
 
 
-
-
-
-
-
 <section>
 	<div class="container">
 		<h2>SVG IMPORTING</h2>
@@ -525,14 +517,14 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 					<h4>Import SVG code from theme assets synchronously example</h4>
 					<br><br>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media('svg-1.svg')) /* line 601 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media('svg-1.svg')) /* line 511 */;
 		echo '
 
 					<br><br><br>
 					<h4>Get the SVG path only without outputting its code</h4>
 					<br><br>
 					<img src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(tr_get_media_path('logo.svg'))) /* line 606 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(tr_get_media_path('logo.svg'))) /* line 516 */;
 		echo '" alt="yo">
 				</div>
 			</div>
@@ -541,7 +533,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 					<h4>Import SVG code from theme assets asynchronously example</h4>
 					<br><br>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media('svg-1.svg', true)) /* line 613 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media('svg-1.svg', true)) /* line 523 */;
 		echo '
 				</div>
 			</div>
@@ -550,7 +542,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 					<h4>Import SVG code from uploads (media) synchronously example</h4>
 					<br><br>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg')) /* line 620 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg')) /* line 530 */;
 		echo '
 				</div>
 			</div>
@@ -560,7 +552,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 					<h4>Import SVG code from uploads (media) asynchronously example</h4>
 					<br><br>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg', true)) /* line 628 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg', true)) /* line 538 */;
 		echo '
 				</div>
 			</div>
@@ -594,9 +586,9 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 ';
-		$img_1_data_string = 'people/photo-1517299151253-d0449b733f57.jpg' /* line 660 */;
+		$img_1_data_string = 'people/photo-1517299151253-d0449b733f57.jpg' /* line 570 */;
 		echo '					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string)) /* line 661 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string)) /* line 571 */;
 		echo '
 
 					<br><br>
@@ -607,7 +599,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, false, true)) /* line 670 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, false, true)) /* line 580 */;
 		echo '
 
 					<br><br>
@@ -619,9 +611,9 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 ';
-		$img_2_data_array = ['src' => 'people/photo-1517299151253-d0449b733f57.jpg', 'alt' => 'manually added alt text'] /* line 680 */;
+		$img_2_data_array = ['src' => 'people/photo-1517299151253-d0449b733f57.jpg', 'alt' => 'manually added alt text'] /* line 590 */;
 		echo '					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array)) /* line 681 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array)) /* line 591 */;
 		echo '
 
 					<br><br>
@@ -634,10 +626,10 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 ';
-		$img_2_data_array_with_class = $img_2_data_array /* line 692 */;
-		$img_2_data_array_with_class['class'] = 'custom-class' /* line 693 */;
+		$img_2_data_array_with_class = $img_2_data_array /* line 602 */;
+		$img_2_data_array_with_class['class'] = 'custom-class' /* line 603 */;
 		echo '					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class)) /* line 694 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class)) /* line 604 */;
 		echo '
 				</div>
 			</div>
@@ -653,7 +645,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, true)) /* line 708 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, true)) /* line 618 */;
 		echo '
 
 					<h5>No ALT Array</h5>
@@ -663,7 +655,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)) /* line 716 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)) /* line 626 */;
 		echo '
 
 					<h5>With manually wrritten ALT Array</h5>
@@ -673,7 +665,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array, true)) /* line 724 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array, true)) /* line 634 */;
 		echo '
 
 					<br><br>
@@ -684,7 +676,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class, true)) /* line 733 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class, true)) /* line 643 */;
 		echo '
 				</div>
 			</div>
@@ -703,7 +695,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 						style="height: 333px; width: 100%; background-repeat: no-repeat; background-position: center; background-size: cover;"
 						class="js-img-lazy jsLoading"
 						data-img-src="';
-		echo LR\Filters::escapeHtmlAttr(tr_get_media_path($img_1_data_string)) /* line 750 */;
+		echo LR\Filters::escapeHtmlAttr(tr_get_media_path($img_1_data_string)) /* line 660 */;
 		echo '"
 					>
 					</div>
@@ -716,7 +708,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 </code>
 </pre>
 					<img src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(tr_get_media_path($img_1_data_string))) /* line 761 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(tr_get_media_path($img_1_data_string))) /* line 671 */;
 		echo '">
 				</div>
 			</div>
@@ -733,14 +725,14 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 	<div class="container">
 		<h2>BUTTONS</h2>
 ';
-		$btn_vars = ['brand', 'brand-outline', 'sec', 'sec-outline', 'ghost', 'ghost--brand', 'ghost--sec'] /* line 776 */;
+		$btn_vars = ['brand', 'brand-outline', 'sec', 'sec-outline', 'ghost', 'ghost--brand', 'ghost--sec'] /* line 686 */;
 		echo "\n";
 		$iterations = 0;
-		foreach ($btn_vars as $btn_var) /* line 778 */ {
+		foreach ($btn_vars as $btn_var) /* line 688 */ {
 			echo '		<a href="#" class="btn btn--';
-			echo LR\Filters::escapeHtmlAttr($btn_var) /* line 778 */;
+			echo LR\Filters::escapeHtmlAttr($btn_var) /* line 688 */;
 			echo '">Btn ';
-			echo LR\Filters::escapeHtmlText($btn_var) /* line 778 */;
+			echo LR\Filters::escapeHtmlText($btn_var) /* line 688 */;
 			echo '</a>
 ';
 			$iterations++;
@@ -757,7 +749,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 		<a href="#modal-example" class="btn btn--brand modalTrigger">Open Modal</a>
 
 		';
-		echo LR\Filters::escapeHtmlText(tr_modal_start('modal-example', 'Modal Title here', 'modal-additional-class')) /* line 790 */;
+		echo LR\Filters::escapeHtmlText(tr_modal_start('modal-example', 'Modal Title here', 'modal-additional-class')) /* line 700 */;
 		echo '
 			<h3>Modal</h3>
 			<p>
@@ -769,7 +761,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
 		';
-		echo LR\Filters::escapeHtmlText(tr_modal_end()) /* line 800 */;
+		echo LR\Filters::escapeHtmlText(tr_modal_end()) /* line 710 */;
 		echo '
 
 	</div>
@@ -782,7 +774,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 	{
 		extract($this->params);
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === "extends") {
-			foreach (array_intersect_key(['btn_var' => '778'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['btn_var' => '688'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}
@@ -1048,7 +1040,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 	}
 
 
-	/** {block slide} on line 319 */
+	/** {block slide} on line 316 */
 	public function blockSlide(array $ʟ_args): void
 	{
 		extract(end($this->varStack));
@@ -1061,9 +1053,9 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 			echo '					<h5>';
 			ob_start();
 			try {
-				echo LR\Filters::escapeHtmlText($s_key) /* line 321 */;
+				echo LR\Filters::escapeHtmlText($s_key) /* line 318 */;
 				echo ' - ';
-				echo LR\Filters::escapeHtmlText($s_content['alt']) /* line 321 */;
+				echo LR\Filters::escapeHtmlText($s_content['alt']) /* line 318 */;
 			} finally {
 				$ʟ_ifc[5] = rtrim(ob_get_flush()) === '';
 			}
@@ -1078,10 +1070,10 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 		}
 		echo '					<img 
 						src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($s_content['src'])) /* line 323 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($s_content['src'])) /* line 320 */;
 		echo '"
 						alt="';
-		echo LR\Filters::escapeHtmlAttr($s_content['alt']) /* line 324 */;
+		echo LR\Filters::escapeHtmlAttr($s_content['alt']) /* line 321 */;
 		echo '"
 				>
 				</div>
@@ -1089,7 +1081,7 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 	}
 
 
-	/** {block slide} on line 340 */
+	/** {block slide} on line 337 */
 	public function blockSlide1(array $ʟ_args): void
 	{
 		extract(end($this->varStack));
@@ -1102,9 +1094,9 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 			echo '					<h5>';
 			ob_start();
 			try {
-				echo LR\Filters::escapeHtmlText($s_key) /* line 342 */;
+				echo LR\Filters::escapeHtmlText($s_key) /* line 339 */;
 				echo ' - ';
-				echo LR\Filters::escapeHtmlText($s_content['alt']) /* line 342 */;
+				echo LR\Filters::escapeHtmlText($s_content['alt']) /* line 339 */;
 			} finally {
 				$ʟ_ifc[6] = rtrim(ob_get_flush()) === '';
 			}
@@ -1119,10 +1111,10 @@ final class Template203ed5b4c3 extends Latte\Runtime\Template
 		}
 		echo '					<img 
 						src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($s_content['src'])) /* line 344 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($s_content['src'])) /* line 341 */;
 		echo '"
 						alt="';
-		echo LR\Filters::escapeHtmlAttr($s_content['alt']) /* line 345 */;
+		echo LR\Filters::escapeHtmlAttr($s_content['alt']) /* line 342 */;
 		echo '"
 				>
 				</div>

@@ -161,7 +161,6 @@ class TrSlider {
       this.finalOptions.draggable === false ? 'add' : 'remove'
     ]('no-transform')
 
-    // TODO: Figure proper way to handle drag when there are not enough slides to scroll
     this.embla.reInit({
       align: this.finalOptions.align,
       slidesToScroll: this.finalOptions.slidesToScroll,

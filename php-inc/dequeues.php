@@ -1,6 +1,5 @@
 <?php 
 //remove stylesheets: Gutenberg, wp-pagenavi
-// TODO: Maybe remove this file and dequeues and overwrites from other files
 function tr_dequeues() {
   wp_dequeue_style('wp-block-library' );
   wp_dequeue_style('wp-block-library-theme');

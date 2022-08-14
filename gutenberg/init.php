@@ -2,7 +2,6 @@
 
 
 
-// TODO: clean this file
 
 // REGISTER THE DYNAMIC BLOCKS ------------------------------
 $block_prefix = json_decode(file_get_contents(get_template_directory() . "/theme_redone_global_config.json"), true)['BLOCK_NAME_PREFIX'];
@@ -47,13 +46,10 @@ function tr_blocks_assets() { // phpcs:ignore
 		'tr_blocks-js',
 		'trBlocksGlobal', // Array containing dynamic data for a JS Global.
 		[
-			'pluginDirPath' => get_stylesheet_directory_uri() . '/gutenberg/',
-			'pluginDirUrl'  => get_stylesheet_directory_uri() . '/gutenberg/',
-			// Add more data here that you want to access from `trBlocksGlobal` object.
+			'themeDirPath' => get_stylesheet_directory_uri() . '/gutenberg/',
+			'themeDirUrl'  => get_stylesheet_directory_uri() . '/gutenberg/',
 		]
 	);
-// TODO: rename pluginDir variables
-// TODO: rename guten blocks into tr-blocks
 
 	register_block_type(
 		'tr/gutenberg-blocks', array(
@@ -66,5 +62,4 @@ function tr_blocks_assets() { // phpcs:ignore
 }
 
 // Hook: Block assets.
-// add_action( 'init', 'tr_blocks_assets' );
 add_action( 'enqueue_block_editor_assets', 'tr_blocks_assets' );

@@ -62,7 +62,6 @@ if ( ! function_exists( 'tr_setup' ) ) :
 		 *
 		 * @link https://codex.wordpress.org/Theme_Logo
 		 */
-		// TODO: how to use this
 		add_theme_support( 'custom-logo', array(
 			'height'      => 250,
 			'width'       => 250,

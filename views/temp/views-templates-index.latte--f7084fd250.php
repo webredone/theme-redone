@@ -22,25 +22,15 @@ final class Templatef7084fd250 extends Latte\Runtime\Template
   ';
 				echo LR\Filters::escapeHtmlText(the_title()) /* line 9 */;
 				echo '<br>
-  <a href="';
-				echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(the_permalink())) /* line 10 */;
-				echo '">Read More</a>
   ';
-				echo LR\Filters::escapeHtmlText(tr_posted_by()) /* line 11 */;
+				echo LR\Filters::escapeHtmlText(tr_posted_by()) /* line 10 */;
 				echo '<br>
   ';
-				echo LR\Filters::escapeHtmlText(tr_posted_on(true)) /* line 12 */;
+				echo LR\Filters::escapeHtmlText(tr_posted_on(true)) /* line 11 */;
 				echo '<br><br>
-
-  Excerpt: ';
-				echo LR\Filters::escapeHtmlText(tr_get_excerpt(20)) /* line 14 */;
-				echo '
-
-  <hr>
-
 ';
 			}
-		} else /* line 19 */ {
+		} else /* line 13 */ {
 			echo '  <h2>Nothing Found</h2>
 ';
 		}
@@ -48,26 +38,26 @@ final class Templatef7084fd250 extends Latte\Runtime\Template
 
 CUSTOM POSTS LOOP<br>
 ';
-		$customposts = get_posts(array('numberposts' => 4)) /* line 25 */;
+		$customposts = get_posts(array('numberposts' => 4)) /* line 19 */;
 		$iterations = 0;
-		foreach ($customposts as $post) /* line 26 */ {
+		foreach ($customposts as $post) /* line 20 */ {
 			echo '  Post ID: ';
-			echo LR\Filters::escapeHtmlText($post->ID) /* line 27 */;
+			echo LR\Filters::escapeHtmlText($post->ID) /* line 21 */;
 			echo '<br>
   Title: ';
-			echo LR\Filters::escapeHtmlText($post->post_title) /* line 28 */;
+			echo LR\Filters::escapeHtmlText($post->post_title) /* line 22 */;
 			echo '<br>
   ';
-			echo LR\Filters::escapeHtmlText(tr_posted_on(true, $post->ID)) /* line 29 */;
+			echo LR\Filters::escapeHtmlText(tr_posted_on(true, $post->ID)) /* line 23 */;
 			echo '<br>
   Author: ';
-			echo LR\Filters::escapeHtmlText(tr_posted_by()) /* line 30 */;
+			echo LR\Filters::escapeHtmlText(tr_posted_by()) /* line 24 */;
 			echo '<br>
 ';
 			$iterations++;
 		}
 		echo "\n";
-		$this->createTemplate(tr_view_path('/layout/footer'), $this->params, 'include')->renderToContentType('html') /* line 33 */;
+		$this->createTemplate(tr_view_path('/layout/footer'), $this->params, 'include')->renderToContentType('html') /* line 27 */;
 		return get_defined_vars();
 	}
 
@@ -76,7 +66,7 @@ CUSTOM POSTS LOOP<br>
 	{
 		extract($this->params);
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === "extends") {
-			foreach (array_intersect_key(['post' => '26'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['post' => '20'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}

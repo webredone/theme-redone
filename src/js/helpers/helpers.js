@@ -1,5 +1,3 @@
-// TODO: create VS Code snippets for all of these
-
 const tr_body_has_class = className =>
   document.body.classList.contains(className)
 
@@ -17,7 +15,6 @@ const tr_siblings = el => {
 /**
  * @returns {number} - CrossBrowser compatible scrollTop
  */
-// TODO: is this used?
 
 const tr_get_scrolled_pos_y = () => {
   const scroll =

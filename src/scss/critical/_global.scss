@@ -9,7 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga', 'dlig';
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   min-height: 100vh;
   max-width: 100vw;

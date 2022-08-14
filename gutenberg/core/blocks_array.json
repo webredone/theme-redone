@@ -1,17 +1,7 @@
 {
   "blocks_array": [
-    "background-title-text-cta",
-    "main-cta",
-    "title-subtitle",
     "image",
-    "quote",
-    "blockquote-slider",
     "video",
-    "reordering",
-    "simple-text-block",
-    "test-section",
-    "example-section-block",
-    "example-wrapper-block",
     "breadcrumbs",
     "hero"
   ]

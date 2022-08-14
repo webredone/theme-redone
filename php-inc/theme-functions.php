@@ -33,7 +33,6 @@ function tr_get_media_path($media) {
 }
 
 // MAIN FUNCTION THAT DEALS WITH IMAGES AND SVGs from theme assets or wp-media.
-// TODO: Maybe add a conditional logic that will return null if it doesn't find and image or SVG (check all scenarios)
 function tr_get_media(
 	$media,
 	$async = false,
@@ -331,7 +330,6 @@ function tr_posted_on($post_id = null, $with_last_updated = false) {
 }
 
 
-// TODO: add option to pass ID
 /*
  * Displays last updated date for a post.
  */
@@ -560,21 +558,3 @@ function tr_modal_end() {
 }
 
 
-// TODO: Maybe remove this
-function tr_block_padd_bg_class(
-	$inspector_section_padding,
-	$inspector_section_padding_top,
-	$inspector_section_padding_btm,
-	$inspector_bg_is_dark,
-	$dark_class = 'bg-dark'
-)
-{
-	$paddingSizeClass = $inspector_section_padding;
-	$paddingTopClass = $inspector_section_padding_top ? ' no-pad-top' : '';
-	$paddingBtmClass = $inspector_section_padding_btm ? ' no-pad-btm' : '';
-	$secModsClass = $paddingSizeClass . $paddingTopClass . $paddingBtmClass;
-	if ($inspector_bg_is_dark) {
-		$secModsClass .= " $dark_class";
-	}
-	return $secModsClass;
-}

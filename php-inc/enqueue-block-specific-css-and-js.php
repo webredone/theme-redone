@@ -56,9 +56,6 @@ function tr_enqueue_block_specific_css_and_js() {
 
 
 
-    // flatten the array to do this
-    // TODO: Maybe also handle defer and async if possible
-
     function tr_should_consider_dep($deps_name, $deps_arr) {
       return (
         array_key_exists($deps_name, $deps_arr) 
@@ -134,8 +131,6 @@ function tr_enqueue_block_specific_css_and_js() {
         // if directory contains specified shared JS file and it is not empty
         $custom_block_shared_js_path = "$shared_css_and_js_system_dir_path/$shared_js_filename.min.js";
         if (tr_contains_valid_file($custom_block_shared_js_path)) {
-          // TODO: maybe based on a property in model.json, 
-          // load in head, by default in footer
           wp_enqueue_script(
             "tr-block-shared-js--$shared_js_filename",
             "$shared_css_and_js_theme_dir_path/$shared_js_filename.min.js",
@@ -164,7 +159,6 @@ function tr_enqueue_block_specific_css_and_js() {
       );
 
 
-      // TODO: Maybe also reado model.json and if property for not enqueuing CSS or JS is defined, ignore
       $custom_block_dir_path = TR_THEME_DIR . "/prod/block-specific/$block_name_without_prefix";
       $gutenberg_blocks_dir_path = get_stylesheet_directory_uri() . "/prod/block-specific";
 
@@ -184,8 +178,6 @@ function tr_enqueue_block_specific_css_and_js() {
       // if directory contains frontend.js and it is not empty
       $custom_block_js_path = "$custom_block_dir_path/$block_js_filename";
       if (tr_contains_valid_file($custom_block_js_path)) {
-        // TODO: maybe based on a property in model.json, 
-        // load in head, by default in footer
         wp_enqueue_script(
           "tr-block-js--$block_prefix-$block_name_without_prefix", 
           "$gutenberg_blocks_dir_path/$block_name_without_prefix/$block_js_filename",

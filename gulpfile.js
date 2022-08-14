@@ -10,8 +10,6 @@ const gulpEsbuild = createGulpEsbuild({
 const sveltePlugin = require('esbuild-svelte')
 const vue3Plugin = require('esbuild-plugin-vue-iii').vue3Plugin
 
-// TODO: Properly document what each task does
-
 const sass = require('gulp-sass')
 var rename = require('gulp-rename')
 const autoprefixer = require('gulp-autoprefixer')

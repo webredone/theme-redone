@@ -63,7 +63,6 @@ $desktop-menu-mq: 'min-width: #{$desktop-mq}';
       color: #bababa;
     }
   }
-  // TODO: close header dropdown on click outside
 
   .collapsible {
     display: flex;
@@ -247,7 +246,6 @@ $desktop-menu-mq: 'min-width: #{$desktop-mq}';
       transition: all 0.2s ease-in-out;
     }
 
-    // TODO: Refactor this
     .collapsible {
       &__trigger {
         position: relative;

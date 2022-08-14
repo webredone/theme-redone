@@ -325,7 +325,7 @@ final class Template7b10b89549 extends Latte\Runtime\Template
   style="--i-cols: 3; --i-gap: 15; margin-bottom: 200px;"
 >
   <div class="col">
-    <h5>Custom Easing: TODO: WRITE</h5>
+    <h5>Custom Easing:</h5>
 ';
 		$this->enterBlockLayer(11, get_defined_vars()) /* line 358 */;
 		if (false) {

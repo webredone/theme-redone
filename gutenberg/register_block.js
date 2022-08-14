@@ -1,6 +1,5 @@
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
-const { Fragment } = wp.element
 const { InspectorControls } = wp.blockEditor
 
 const clearAndUpper = text => text.replace(/_/, ' ').toUpperCase()
@@ -34,9 +33,6 @@ const register_block = ({
     const block_meta = block_model.block_meta
     let block_attributes = block_model.attributes
 
-    // TODO: refactor to a better recursive function
-    // Create field_name property that we need later for finding and updating things
-    // and also add a default label if not set in model.json
     const FORMATTED_RAW_ATTRS = { ...block_attributes }
     Object.entries(FORMATTED_RAW_ATTRS).forEach(([key, val]) => {
       if (val.hasOwnProperty('field_meta')) {
@@ -101,8 +97,6 @@ const register_block = ({
     })
     // end fn for field_name and label fallback if not set in model.json
 
-    // console.log(`Formatted raw attrs for: ${block_folder_name}`, FORMATTED_RAW_ATTRS);
-
     let grid = block_meta?.grid || false
 
     let block_keywords = []
@@ -117,7 +111,6 @@ const register_block = ({
     const EditMain = await require(`${BLOCK_PATH}/EditMain`).default
     const View = await require(`${BLOCK_PATH}/View`).default
     let EditSidebar = null
-    let AsideLayoutControls = <Fragment></Fragment>
     if (block_meta?.hasSidebar) {
       EditSidebar = await require(`${BLOCK_PATH}/EditSidebar`).default
     }
@@ -126,15 +119,9 @@ const register_block = ({
       ? null
       : {
           attributes: {
-            cover: `${trBlocksGlobal.pluginDirUrl}blocks/${block_folder_name}/example.jpg`
+            cover: `${trBlocksGlobal.themeDirUrl}blocks/${block_folder_name}/example.jpg`
           }
         }
-
-    // TODO: Remove this, and the associated files
-    if (block_meta.hasGlobalSettings) {
-      AsideLayoutControls = await require('./components/sidebar-components/trAsideBgPaddControls')
-        .default
-    }
 
     registerBlockType(
       `${BLOCK_NAME_PREFIX}/${block_meta.BLOCK_REGISTER_NAME}`,
@@ -151,30 +138,9 @@ const register_block = ({
         edit: props => [
           (() => {
             if (block_meta?.hasSidebar) {
-              if (block_meta.hasGlobalSettings) {
-                return (
-                  <InspectorControls>
-                    <AsideLayoutControls
-                      {...props}
-                      trRawAttrs={FORMATTED_RAW_ATTRS}
-                    />
-                    <EditSidebar {...props} trRawAttrs={FORMATTED_RAW_ATTRS} />
-                  </InspectorControls>
-                )
-              } else {
-                return (
-                  <InspectorControls>
-                    <EditSidebar {...props} trRawAttrs={FORMATTED_RAW_ATTRS} />
-                  </InspectorControls>
-                )
-              }
-            } else if (block_meta.hasGlobalSettings) {
               return (
                 <InspectorControls>
-                  <AsideLayoutControls
-                    {...props}
-                    trRawAttrs={FORMATTED_RAW_ATTRS}
-                  />
+                  <EditSidebar {...props} trRawAttrs={FORMATTED_RAW_ATTRS} />
                 </InspectorControls>
               )
             } else {
@@ -187,14 +153,13 @@ const register_block = ({
             help={block_meta.help || false}
             exampleSrc={
               block_meta.hasExample
-                ? `${trBlocksGlobal.pluginDirUrl}blocks/${block_folder_name}/example.jpg`
+                ? `${trBlocksGlobal.themeDirUrl}blocks/${block_folder_name}/example.jpg`
                 : null
             }
           >
             <EditMain
               {...props}
               blockTitle={PREFIXED_NAME}
-              // trRawAttrs={block_attributes}
               trRawAttrs={FORMATTED_RAW_ATTRS}
               grid={grid}
             />

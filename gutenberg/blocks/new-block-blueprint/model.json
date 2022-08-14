@@ -3,12 +3,12 @@
     "BLOCK_REGISTER_NAME": "name-same-as-folder-name-here",
     "BLOCK_TITLE": "block name same as folder name here",
     "keywords": ["blocktag1", "blocktag2"],
-    "hasSidebar": false,
+    "hasSidebar": true,
     "hasExample": true
   },
 
   "attributes": {
-    "title": {
+    "example_title": {
       "type": "object",
       "field_meta": {
         "type": "text",
@@ -16,6 +16,96 @@
       },
       "default": {
         "text": ""
+      }
+    },
+    "example_title_rich": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "rich"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "example_title_long": {
+      "type": "object",
+      "field_meta": {
+        "type": "text",
+        "variation": "long"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "example_richtext": {
+      "type": "object",
+      "field_meta": {
+        "type": "freeform",
+        "help": "This is a content field"
+      },
+      "default": {
+        "text": ""
+      }
+    },
+    "example_cta": {
+      "type": "object",
+      "field_meta": {
+        "type": "cta",
+        "help": "cta help text"
+      },
+      "default": {
+        "title": "",
+        "url": "",
+        "target": false
+      }
+    },
+    "example_image": {
+      "type": "object",
+      "field_meta": {
+        "type": "image"
+      },
+      "default": {
+        "src": "",
+        "id": null
+      }
+    },
+    "example_links": {
+      "type": "array",
+      "field_meta": {
+        "type": "repeater",
+        "label": "Links",
+        "subfields": {
+          "link": {
+            "type": "object",
+            "field_meta": {
+              "type": "cta",
+              "label": "Link"
+            },
+            "default": {
+              "title": "",
+              "url": "",
+              "target": false
+            }
+          }
+        }
+      },
+      "default": []
+    },
+
+    "inspector_example_color": {
+      "type": "object",
+      "field_meta": {
+        "type": "color",
+        "options": [
+          { "name": "red", "color": "#f00" },
+          { "name": "blue", "color": "#00f" },
+          { "name": "white", "color": "#fff" }
+        ],
+        "customColors": true
+      },
+      "default": {
+        "value": "#f00"
       }
     }
   }

@@ -21,12 +21,9 @@ class Main {
     new IntersectionTransitions()
     new LazyScriptsImporter()
 
-    // TODO Maybe move modals to lazy loaded
     new Modals()
     new SmoothScroll()
-    window.addEventListener('load', () => {
-      new LazyLoadImages()
-    })
+    window.addEventListener('load', () => new LazyLoadImages())
   }
 
   init() {

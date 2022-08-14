@@ -1,4 +1,3 @@
-// TODO: Maybe remove this. Test first
 .editor-styles-wrapper,
 .interface-complementary-area {
   [aria-label='Change block type or style'],
@@ -8,9 +7,7 @@
 }
 
 // SOME BLOCKS WE NEED, BECAUSE WE DEPEND ON THEM.
-// BUT WE ARE HIDING THEM WITH CSS NOT TO CONFUSE THE CLIENT
-// TODO: Maybe remove this before publishing,
-// or explain why we did it, and that it can be removed
+// BUT WE ARE HIDING THEM WITH CSS NOT TO CONFUSE THE ADMIN
 [id*='-block-core/preformatted'],
 [id*='-block-core/code'],
 .editor-block-list-item-code,
@@ -47,9 +44,6 @@ body.wp-editor {
 
 // XXX: Hide in between blocks inserted button,
 // because it causes bugs below blocks that use freeform elements
-// inner component (wysiwyg)
-// TODO: Test this, maybe not needed anymore
-
 body:not(.is-dragging-components-draggable) {
   .block-editor-block-list__insertion-point-popover {
     display: none !important;

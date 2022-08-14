@@ -74,7 +74,6 @@ class LazyLoadImages {
     }
   }
 
-  // TODO: Adjust offset to load before becoming visible
   lazyLoadAll() {
     const allTargets = document.querySelectorAll('.js-img-lazy') || false
     if (allTargets) {

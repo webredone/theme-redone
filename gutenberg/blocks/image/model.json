@@ -15,10 +15,7 @@
       "type": "object",
       "field_meta": {
         "type": "image",
-        "label": "image",
-        "is_wide": false,
-        "is_sm": false,
-        "is_cover": false
+        "label": "image"
       },
       "default": {
         "src": "",

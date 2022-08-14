@@ -8,7 +8,7 @@ const {
   Spinner,
   TextHighlight,
   NavigableMenu,
-  Dashicon,
+  Dashicon
 } = wp.components
 const { __ } = wp.i18n
 const { useState, useEffect } = wp.element
@@ -18,7 +18,6 @@ const { decodeEntities } = wp.htmlEntities
 import trUpdateField from '../../core/trUpdateField'
 import TrTooltip from '../TrTooltip'
 
-// TODO: Maybe use this everywhere and set the namespace to "tr" in a json file
 const NAMESPACE = 'tr_guten_blocks'
 
 // XXX: meta.object_type can be either "post" or "term"
@@ -39,12 +38,12 @@ const TrObjectSelector = ({ fieldData }) => {
     setIsLoading(true)
 
     Promise.all(
-      meta.objects.map((postType) =>
+      meta.objects.map(postType =>
         apiFetch({
-          path: `/wp/v2/${postType}`,
+          path: `/wp/v2/${postType}`
         })
       )
-    ).then((results) => {
+    ).then(results => {
       setSearchResults(
         results.reduce((result, final) => [...final, ...result], [])
       )
@@ -86,10 +85,10 @@ const TrObjectSelector = ({ fieldData }) => {
   }
 
   const handleToggleShowResults = () => {
-    setShowResults((prevState) => !prevState)
+    setShowResults(prevState => !prevState)
   }
 
-  const handleSetShowResults = (showOrHide) => {
+  const handleSetShowResults = showOrHide => {
     setShowResults(showOrHide)
   }
 
@@ -99,17 +98,17 @@ const TrObjectSelector = ({ fieldData }) => {
    *
    * @param {string} keyword search query string
    */
-  const handleSearchStringChange = (keyword) => {
+  const handleSearchStringChange = keyword => {
     setSearchString(keyword)
     setIsLoading(true)
 
     Promise.all(
-      meta.objects.map((postType) =>
+      meta.objects.map(postType =>
         apiFetch({
-          path: `/wp/v2/${postType}?search=${keyword}`,
+          path: `/wp/v2/${postType}?search=${keyword}`
         })
       )
-    ).then((results) => {
+    ).then(results => {
       setSearchResults(
         results.reduce((result, final) => [...final, ...result], [])
       )
@@ -165,7 +164,7 @@ const TrObjectSelector = ({ fieldData }) => {
                 marginBottom: '0',
                 marginLeft: '0',
                 paddingLeft: '0',
-                listStyle: 'none',
+                listStyle: 'none'
               }}
             >
               {isLoading && <Spinner />}
@@ -196,7 +195,7 @@ const TrObjectSelector = ({ fieldData }) => {
                       result.id === field_object.id ? 'active' : ''
                     }`}
                     style={{
-                      marginBottom: '0',
+                      marginBottom: '0'
                     }}
                   >
                     <SearchItem
@@ -248,18 +247,17 @@ function SearchItem(props) {
     onClick,
     searchTerm = '',
     isSelected = false,
-    id = '',
+    id = ''
   } = props
 
   return (
     <Button
       id={id}
       onClick={onClick}
-      className={`block-editor-link-control__search-item is-entity ${
-        isSelected && 'is-selected'
-      }`}
+      className={`block-editor-link-control__search-item is-entity ${isSelected &&
+        'is-selected'}`}
       style={{
-        borderRadius: '0',
+        borderRadius: '0'
       }}
     >
       <span className="block-editor-link-control__search-item-header">

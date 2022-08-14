@@ -64,7 +64,7 @@ const unregisterWpCoreBlocks = () => {
   if (wp.data.select('core/blocks').getBlockType('core/nextpage')) {
     unregisterBlockType('core/nextpage')
   }
-  // XXX: separator is needed for wysywyg blocks TODO: remove (or don't for using as a root block)
+  // XXX: separator is needed for wysywyg blocks
   // unregisterBlockType("core/separator");
   unregisterBlockType('core/tag-cloud')
   unregisterBlockType('core/spacer')

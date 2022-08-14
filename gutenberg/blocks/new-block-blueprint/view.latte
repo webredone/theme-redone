@@ -1,3 +1,25 @@
-<section>
-  <h3 n:ifcontent>{$title['text']}</h3>
-</section>
+<h2>Main Fields</h2>
+
+<h3 n:ifcontent>{$example_title['text']}</h3>
+<h3 n:ifcontent>{$example_title_rich['text']|noescape}</h3>
+<h3 n:ifcontent>{$example_title_long['text']}</h3>
+<div n:ifcontent>{$example_richtext['text']|noescape}</div>
+{tr_a($example_cta)}
+{tr_get_media($example_image)}
+<ul n:if="!empty($example_links)">
+  <li 
+    n:foreach="$example_links as $el"
+    n:ifcontent
+  >
+    {tr_a($el['link'])}
+  </li>
+</ul>
+
+<hr />
+
+<h2>Sidebar Fields</h2>
+<h3
+  style="color: {$inspector_example_color['value']|noescape}"
+>
+  {$inspector_example_color['value']}
+</h3>

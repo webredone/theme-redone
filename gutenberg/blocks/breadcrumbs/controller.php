@@ -5,12 +5,6 @@ $block_name = basename(__DIR__);
 register_block_type("$block_prefix/$block_name", array(
   'render_callback' => function($attrs, $content) {
     global $latte;
-    // $attrs['classMod'] = tr_block_padd_bg_class(
-    //   $inspector_section_padding,
-    //   $inspector_section_padding_top,
-    //   $inspector_section_padding_btm,
-    //   $inspector_bg_is_dark
-    // );
     // START:Add or modify $attrs[] params here
     // ...
     // END:Add or modify $attrs[] params here
