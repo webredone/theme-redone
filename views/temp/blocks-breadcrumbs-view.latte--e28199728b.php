@@ -9,40 +9,49 @@ final class Templatee28199728b extends Latte\Runtime\Template
 	public function main(): array
 	{
 		extract($this->params);
-		echo '<div class="breadcrumbs">
+		if (!empty($breadcrumbs)) /* line 1 */ {
+			echo '<ol
+  class="breadcrumbs"
+  itemscope itemtype="https://schema.org/BreadcrumbList"
+>
 ';
-		$tag = 'span' /* line 2 */;
-		$iterations = 0;
-		foreach ($iterator = $ʟ_it = new LR\CachingIterator($breadcrumbs, $ʟ_it ?? null) as $breadcrumb) /* line 3 */ {
-			if (strlen($breadcrumb['link']['url'])) /* line 4 */ {
-				$tag = 'a' /* line 5 */;
+			$iterations = 0;
+			foreach ($iterator = $ʟ_it = new LR\CachingIterator($breadcrumbs, $ʟ_it ?? null) as $breadcrumb) /* line 6 */ {
+				echo '
+  <li 
+    itemprop="itemListElement" 
+    itemscope
+    itemtype="https://schema.org/ListItem"
+  >
+    <a 
+      itemprop="item" 
+      href="';
+				echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($breadcrumb['link']['url'])) /* line 14 */;
+				echo '" 
+    >
+      <span itemprop="name">
+        ';
+				echo $breadcrumb['link']['title'] /* line 17 */;
+				echo '
+      </span>
+    </a>
+    <meta itemprop="position" content="';
+				echo LR\Filters::escapeHtmlAttr($iterator->counter) /* line 20 */;
+				echo '">
+  </li>
+
+';
+				if (!$iterator->last) /* line 23 */ {
+					echo '  <li
+    class="separator"
+  >/</li>
+';
+				}
+				$iterations++;
 			}
-			echo '    <';
-			echo LR\Filters::escapeHtmlText($tag) /* line 7 */;
-			echo "\n";
-			if (strlen($breadcrumb['link']['url'])) /* line 8 */ {
-				echo '        href="';
-				echo LR\Filters::escapeHtmlText($breadcrumb['link']['url']) /* line 9 */;
-				echo '"
-';
-			}
-			if ($iterator->last) /* line 11 */ {
-				echo '        class="active"
-';
-			}
-			echo '    >
-      ';
-			echo $breadcrumb['link']['title'] /* line 15 */;
-			echo '
-    </';
-			echo LR\Filters::escapeHtmlText($tag) /* line 16 */;
-			echo '>
-    <i class="breadcrumb__separator">/</i>
-';
-			$iterations++;
+			$iterator = $ʟ_it = $ʟ_it->getParent();
+			echo '</ol>';
 		}
-		$iterator = $ʟ_it = $ʟ_it->getParent();
-		echo '</div>';
 		return get_defined_vars();
 	}
 
@@ -51,7 +60,7 @@ final class Templatee28199728b extends Latte\Runtime\Template
 	{
 		extract($this->params);
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === "extends") {
-			foreach (array_intersect_key(['breadcrumb' => '3'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['breadcrumb' => '6'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}

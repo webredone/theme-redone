@@ -1,19 +1,28 @@
-<div class="breadcrumbs">
-  {var $tag = 'span'}
-  {foreach $breadcrumbs as $breadcrumb}
-    {if strlen($breadcrumb['link']['url'])}
-      {var $tag = 'a'}
-    {/if}
-    <{$tag}
-      {if strlen($breadcrumb['link']['url'])}
-        href="{$breadcrumb['link']['url']}"
-      {/if}
-      {if $iterator->last}
-        class="active"
-      {/if}
+<ol 
+  n:if="!empty($breadcrumbs)"
+  class="breadcrumbs"
+  itemscope itemtype="https://schema.org/BreadcrumbList"
+>
+{foreach $breadcrumbs as $breadcrumb}
+  <li 
+    itemprop="itemListElement" 
+    itemscope
+    itemtype="https://schema.org/ListItem"
+  >
+    <a 
+      itemprop="item" 
+      href="{$breadcrumb['link']['url']}" 
     >
-      {$breadcrumb['link']['title']|noescape}
-    </{$tag}>
-    <i class="breadcrumb__separator">/</i>
-  {/foreach}
-</div>{* breadcrumbs *}
+      <span itemprop="name">
+        {$breadcrumb['link']['title']|noescape}
+      </span>
+    </a>
+    <meta itemprop="position" content="{$iterator->counter}" />
+  </li>
+
+  <li 
+    n:if="!$iterator->last"
+    class="separator"
+  >/</li>
+{/foreach}
+</ol>

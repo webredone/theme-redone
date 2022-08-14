@@ -19,11 +19,12 @@ final class Template757a98589a extends Latte\Runtime\Template
 			echo LR\Filters::escapeHtmlText(the_post()) /* line 6 */;
 			echo '
   
-  ';
+  <h1>';
 			echo LR\Filters::escapeHtmlText(the_title()) /* line 8 */;
-			echo '
+			echo '</h1>
+  <hr>
   ';
-			echo LR\Filters::escapeHtmlText(the_content()) /* line 9 */;
+			echo LR\Filters::escapeHtmlText(the_content()) /* line 10 */;
 			echo '
 
 ';
@@ -31,7 +32,7 @@ final class Template757a98589a extends Latte\Runtime\Template
 		echo '</div>
 
 ';
-		$this->createTemplate(tr_view_path('/layout/footer'), $this->params, 'include')->renderToContentType('html') /* line 14 */;
+		$this->createTemplate(tr_view_path('/layout/footer'), $this->params, 'include')->renderToContentType('html') /* line 15 */;
 		return get_defined_vars();
 	}
 
