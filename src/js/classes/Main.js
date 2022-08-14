@@ -7,6 +7,7 @@ import { LazyLoadImages } from './global/core/LazyLoadImages'
 import { TransformSvgImgsToSvgCode } from './global/core/TransformSvgImgsToSvgCode'
 import { IntersectionTransitions } from './global/UI/IntersectionTransitions'
 import { LazyScriptsImporter } from './global/core/LazyScriptsImporter'
+
 class Main {
   constructor() {
     this.init()
