@@ -14,6 +14,7 @@ const sveltePlugin = require('esbuild-svelte')
 const vue3Plugin = require('esbuild-plugin-vue-iii').vue3Plugin
 
 const sass = require('gulp-sass')
+const sourcemaps = require('gulp-sourcemaps')
 var rename = require('gulp-rename')
 const autoprefixer = require('gulp-autoprefixer')
 var browserSync = require('browser-sync').create()
@@ -107,6 +108,7 @@ const OUT_DIR = './prod'
 function compileGlobalThemeSCSS(done) {
   gulp
     .src(SRC.SCSS_THEME)
+    .pipe(sourcemaps.init())
     .pipe(
       plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
     )
@@ -114,6 +116,7 @@ function compileGlobalThemeSCSS(done) {
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
+    .pipe(sourcemaps.write('./css-maps'))
     .pipe(gulp.dest(OUT_DIR + '/global'))
     .pipe(browserSync.stream())
   done()
@@ -122,6 +125,7 @@ function compileGlobalThemeSCSS(done) {
 function compileAdminSCSS(done) {
   gulp
     .src(SRC.SCSS_GLOBAL_ADMIN)
+    .pipe(sourcemaps.init())
     .pipe(
       plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
     )
@@ -129,6 +133,7 @@ function compileAdminSCSS(done) {
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
+    .pipe(sourcemaps.write('./css-maps'))
     .pipe(gulp.dest(OUT_DIR + '/global'))
     .pipe(browserSync.stream())
   done()
@@ -137,6 +142,7 @@ function compileAdminSCSS(done) {
 function compileBlocksBackendSCSS(done) {
   gulp
     .src(SRC.SCSS_ADMIN_BLOCKS)
+    .pipe(sourcemaps.init())
     .pipe(
       plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
     )
@@ -144,6 +150,7 @@ function compileBlocksBackendSCSS(done) {
     .pipe(autoprefixer())
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
+    .pipe(sourcemaps.write('./css-maps'))
     .pipe(gulp.dest(OUT_DIR + '/global'))
     .pipe(browserSync.stream())
   done()
@@ -167,6 +174,7 @@ function compileCriticalSCSS(done) {
 function compileBlocksSharedFrontendSCSS(done) {
   gulp
     .src(SRC.SCSS_BLOCKS_SHARED_FRONTEND)
+    .pipe(sourcemaps.init())
     .pipe(
       plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
     )
@@ -175,6 +183,7 @@ function compileBlocksSharedFrontendSCSS(done) {
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
     .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./css-maps'))
     .pipe(gulp.dest('./prod/blocks-shared'))
     .pipe(browserSync.stream())
   done()
@@ -183,6 +192,7 @@ function compileBlocksSharedFrontendSCSS(done) {
 function compileBlockSpecificFrontendSCSS(done) {
   gulp
     .src(SRC.SCSS_BLOCK_SPECIFIC_FRONTEND)
+    .pipe(sourcemaps.init())
     .pipe(
       plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
     )
@@ -191,6 +201,7 @@ function compileBlockSpecificFrontendSCSS(done) {
     .pipe(gulpif(shouldMinify, gcmq()))
     .pipe(gulpif(shouldMinify, minifycss()))
     .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./css-maps'))
     .pipe(gulp.dest('./prod/block-specific'))
     .pipe(browserSync.stream())
   done()
