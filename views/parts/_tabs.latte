@@ -1,18 +1,36 @@
 {varType string $class} {* optional class to pass to the tabs element *}
 {varType array $tabs} {* $tabs array. Required. *}
 
+
+{* tabs ids - required for a11y purposes *}
+{var $tabs_ids = []}
+{var $random_string = uniqid()}
+{foreach $tabs as $tab_index => $tab_content}
+  {var $index = $tab_index + 1}
+  {$tabs_ids[] = "{$random_string}_{$index}"}
+{/foreach}
+
+{do dump($tabs_ids)}
+
 <div 
   class="tabs {$class ?? ''}"
   n:if="!empty($tabs)"
 >
 
-  <div class="tabs__nav">
+  <div 
+    class="tabs__nav"
+    role="tablist"
+  >
 
     <button 
       n:foreach="$tabs as $ta_key => $ta_content"
       type="button" 
-      class="tab-anchor {$ta_key == 0 ? 'activeTab' : ''}" 
       data-href="panel-{$ta_key}"
+      class="tab-anchor {$ta_key == 0 ? 'activeTab' : ''}"
+      id="tab_{$tabs_ids[$ta_key]}"
+      aria-selected="{$ta_key == 0 ? 'true' : 'false'}" 
+      aria-controls="panel-{$tabs_ids[$ta_key]}"
+      role="tab"
     >
       {block tab_anchor}{/block}
     </button>
@@ -24,7 +42,11 @@
     <div 
       class="tab-panel {$tp_key == 0 ? 'activeTab enter' : ''}" 
       data-id="panel-{$tp_key}"
+      id="panel-{$tabs_ids[$tp_key]}"
       n:foreach="$tabs as $tp_key => $tp_content"
+      aria-labelledby="tab_{$tabs_ids[$tp_key]}"
+      role="tabpanel"
+      aria-hidden="{$tp_key == 0 ? 'false' : 'true'}"
     >
       <div class="tab-panel__content">
         {block tab_panel}{/block}

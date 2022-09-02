@@ -10,6 +10,12 @@ class Tabs {
   removeAllActiveTabs(activeTabs) {
     for (let i = 0; i < activeTabs.length; i++) {
       const prevActiveTab = activeTabs[i]
+      console.log(prevActiveTab)
+      if (prevActiveTab.classList.contains('tab-anchor')) {
+        prevActiveTab.setAttribute('aria-selected', 'false')
+      } else {
+        prevActiveTab.setAttribute('aria-hidden', 'true')
+      }
       prevActiveTab.classList.remove('activeTab')
     }
   }
@@ -23,11 +29,14 @@ class Tabs {
     this.removeAllActiveTabs(activeTabs)
 
     anchor.classList.add('activeTab')
+    anchor.setAttribute('aria-selected', 'true')
+
     const panelID = anchor.dataset.href
     const panel = parent.querySelector(
       `:scope > .tabs__content > [data-id="${panelID}"]`
     )
     panel.classList.add('activeTab')
+    panel.setAttribute('aria-hidden', 'false')
   }
 
   init() {
