@@ -41,10 +41,11 @@ Theme Redone is a custom WordPress theme starter/framework with its own Gutenber
 
 ## **Installation:**
 
-1. Download and install/activate the latest version of the theme
-2. At the root of the theme, there is a “theme_redone_global_config.json” file. Replace “localhost:3000/theme-redone” with the name of your project from htdocs “localhost/[PROJECT-FOLDER-NAME]” (This makes sure browser-sync connects to the correct project)
+1. Download and install the latest version of the theme
+2. At the root of the theme, there is a “theme_redone_global_config.json” file. Replace “localhost/theme-redone” with the name of your project from htdocs “localhost/[PROJECT-FOLDER-NAME]” (This makes sure browser-sync connects to the correct project)
 3. From the terminal (from inside the root directory of the theme) run composer install and afterward npm install to install the PHP and JS dependencies. (Make sure Node version 14.19.1 is used. We suggest using NVM to manage Node versions)
-4. Install the TRB CLI package globally ( npm i -g @webredone/trb-cli ) to scaffold blocks faster.
+   Install the TRB CLI package globally ( npm i -g @webredone/trb-cli ) to scaffold blocks faster.
+4. In WordPress, activate the theme
 
 ---
 
