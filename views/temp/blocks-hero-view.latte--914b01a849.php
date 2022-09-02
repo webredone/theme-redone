@@ -55,7 +55,8 @@ final class Template914b01a849 extends Latte\Runtime\Template
 			echo LR\Filters::escapeHtmlText(tr_a($cta, "btn btn--brand")) /* line 8 */;
 			echo '
   </div>
-</section>';
+</section>
+';
 		}
 		return get_defined_vars();
 	}
