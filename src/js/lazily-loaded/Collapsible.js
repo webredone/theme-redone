@@ -224,12 +224,12 @@ class Collapsible {
 
     if (event.target.playbackRate * (reverse ? 1 : -1) > 0) {
       this.node.classList.remove(this.constructor.classes.active)
-      this.node.setAttribute('aria-expanded', false)
+      this.trigger.setAttribute('aria-expanded', false)
       this.setStartState()
       return
     }
     this.node.classList.add(this.constructor.classes.active)
-    this.node.setAttribute('aria-expanded', true)
+    this.trigger.setAttribute('aria-expanded', true)
     this.setEndState()
   }
 
@@ -260,9 +260,11 @@ class Collapsible {
 
     if (this.initiallyOpen) {
       this.node.classList.add(this.constructor.classes.active)
-      this.node.setAttribute('aria-expanded', true)
+      this.trigger.setAttribute('aria-expanded', true)
       this.setEndState()
       return
+    } else {
+      this.trigger.setAttribute('aria-expanded', false)
     }
     this.setStartState()
   }
