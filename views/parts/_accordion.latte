@@ -6,6 +6,16 @@
 {varType bool $collapse_siblings} {* Whether or not opening one accordion items should close siblings. Default is falses *}
 {varType int $initially_open_item} {* By default all accordion items are closed. This can be used, and index passed to make one open by default *}
 
+
+
+{* panels ids - required for a11y purposes *}
+{var $panels_ids = []}
+{var $random_string = uniqid()}
+{foreach $items as $acc_index => $tab_content}
+  {var $index = $acc_index + 1}
+  {var $panels_ids[] = "{$random_string}_{$index}"}
+{/foreach}
+
 <div 
   class="accordion {$class ?? ''}"
   {if $collapse_siblings ?? false}
@@ -31,13 +41,18 @@
       <button
         class="collapsible__trigger"
         type="button"
+        id="acc_panel_{$panels_ids[$index]}"
         aria-label="{$aria_label_text}"
       >
         {block acc_trigger}{/block}
         <span class="chevron"></span>
       </button>
 
-      <div class="collapsible__content">
+      <div 
+        class="collapsible__content"
+        role="region"
+        aria-labelledby="acc_panel_{$panels_ids[$index]}"
+      >
         <div class="collapsible__content__inner">
           {block acc_content}{/block}
         </div>{* inner *}

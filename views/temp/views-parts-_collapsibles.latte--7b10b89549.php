@@ -92,7 +92,7 @@ final class Template7b10b89549 extends Latte\Runtime\Template
 		echo '
   </div>
   <div class="col">
-    <h4>1 Level - independed</h4>
+    <h4>1 Level - independent</h4>
 ';
 		$this->enterBlockLayer(3, get_defined_vars()) /* line 76 */;
 		if (false) {
@@ -325,7 +325,7 @@ final class Template7b10b89549 extends Latte\Runtime\Template
   style="--i-cols: 3; --i-gap: 15; margin-bottom: 200px;"
 >
   <div class="col">
-    <h5>Custom Easing:</h5>
+    <h5>Custom Easing</h5>
 ';
 		$this->enterBlockLayer(11, get_defined_vars()) /* line 358 */;
 		if (false) {

@@ -7,10 +7,8 @@
 {var $random_string = uniqid()}
 {foreach $tabs as $tab_index => $tab_content}
   {var $index = $tab_index + 1}
-  {$tabs_ids[] = "{$random_string}_{$index}"}
+  {var $tabs_ids[] = "{$random_string}_{$index}"}
 {/foreach}
-
-{do dump($tabs_ids)}
 
 <div 
   class="tabs {$class ?? ''}"

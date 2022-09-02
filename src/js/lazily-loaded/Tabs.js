@@ -10,7 +10,6 @@ class Tabs {
   removeAllActiveTabs(activeTabs) {
     for (let i = 0; i < activeTabs.length; i++) {
       const prevActiveTab = activeTabs[i]
-      console.log(prevActiveTab)
       if (prevActiveTab.classList.contains('tab-anchor')) {
         prevActiveTab.setAttribute('aria-selected', 'false')
       } else {
