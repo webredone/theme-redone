@@ -1,36 +1,69 @@
 {varType string $class} {* optional class to pass to the slider wrap element *}
-{varType array $slides} {* $slides array. Required. *}
+{varType array|WP_Query $slides} {* $slides array or instance of WP_Query. Required. *}
 
-<div 
-  n:if="!empty($class) && !empty($slides)" 
-  class="slider-wrap"
->
+{var $mode = 'array'} {* array or query *}
+{if gettype($slides) === 'object' && $slides instanceof WP_Query}
+  {var $mode = 'query'}
+{/if}
 
-  <div class="embla {$class}">
-    <div class="embla__container">
-      <div 
-        class="embla__slide"
-        n:foreach="$slides as $s_key => $s_content"
-      >
-        <div class="embla__slide__inner">
-          {block slide}{/block}
-        </div>{* slinner *}
-      </div>{* slide *}
-    </div>{* cont *}
-  </div>{* embla *}
 
-  <div class="embla__buttons">
-    <button
-      class="embla__btn embla__btn-prev"
-      type="button"
-      aria-label="Go to previous slide"
-    ></button>
-    <div class="embla__dots"></div>
-    <button
-      class="embla__btn embla__btn-next"
-      type="button"
-      aria-label="Go to next slide"
-    ></button>
-  </div>{* embla__buttons *}
-  
-</div>{* wrap *}
+{if 
+  !empty($class)
+  &&
+  (
+    ( $mode === 'array' && !empty($slides) )
+    ||
+    ( $mode === 'query' && $slides->have_posts() )
+  )
+}
+  <div class="slider-wrap">
+
+    <div class="embla {$class}">
+      <div class="embla__container">
+
+        {if $mode === 'query'}
+          {while $slides->have_posts()}
+            {$slides->the_post()}
+            <div 
+              class="embla__slide"
+            >
+              <div class="embla__slide__inner">
+                {block slide_q}{/block}
+              </div>{* slinner *}
+            </div>{* slide *}
+          {/while}
+        {else}
+          <div 
+            class="embla__slide"
+            n:foreach="$slides as $s_key => $s_content"
+          >
+            <div class="embla__slide__inner">
+              {block slide}{/block}
+            </div>{* slinner *}
+          </div>{* slide *}
+        {/if}
+
+      </div>{* cont *}
+    </div>{* embla *}
+
+    <div class="embla__buttons">
+      <button
+        class="embla__btn embla__btn-prev"
+        type="button"
+        aria-label="Go to previous slide"
+      ></button>
+      <div class="embla__dots"></div>
+      <button
+        class="embla__btn embla__btn-next"
+        type="button"
+        aria-label="Go to next slide"
+      ></button>
+    </div>{* embla__buttons *}
+
+    {block after_loop}{/block}
+    
+    {if $mode === 'query'}
+      {wp_reset_postdata()}  
+    {/if}
+  </div>{* wrap *}
+{/if}
