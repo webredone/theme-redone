@@ -277,7 +277,7 @@
 		class="container"
 		style="margin-bottom: 100px;"
 	>
-  <h2>SLIDERS (init in slidersInit.js file)</h2>
+  <h2>SLIDERS (init in InitSliders class)</h2>
 
   <h3>GRID THAT TURNS INTO A SLIDER FOR MOBILE</h3>
 		{var $test_slides = [
@@ -320,6 +320,36 @@
 						src="{$s_content['src']}"
 						alt="{$s_content['alt']}"
 					/>
+				</div>
+			{/block}
+		{/embed}
+
+		<hr />
+
+		<h3 style="margin-top: 100px;">(WP_Query) GRID THAT TURNS INTO A SLIDER FOR MOBILE</h3>
+
+		{var $posts_query = (new WP_Query(
+			array(
+				'post_type' => 'post',
+				'posts_per_page' => 6,
+				'orderby'        => 'DESC',
+			)
+		))}
+
+		{embed 
+			tr_part('_slider'), 
+			class: 'slider--test', 
+			slides: $posts_query
+		}
+			{block slide_q}
+				<div style="box-shadow: 0 0 0 1px blue">
+					<h5>{the_title()}</h5>
+				</div>
+			{/block}
+
+			{block after_loop}
+				<div style="padding: 10px; box-shadow: 0 0 0 1px orange;">
+					<strong>pagination can be added here</strong>
 				</div>
 			{/block}
 		{/embed}
