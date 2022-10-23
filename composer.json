@@ -1,6 +1,6 @@
 {
   "require": {
-    "latte/latte": "^2.9",
-    "tracy/tracy": "^2.8"
+    "latte/latte": "^3.0.3",
+    "tracy/tracy": "^2.9.4"
   }
 }

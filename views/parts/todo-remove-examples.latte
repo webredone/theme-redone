@@ -543,7 +543,7 @@
 					<br /><br /><br />
 					<h4>Get the SVG path only without outputting its code</h4>
 					<br /><br />
-					<img src="{tr_get_media_path('logo.svg')}" alt="yo" />
+					{* <img src="{tr_get_media_path('logo.svg')}" alt="yo" /> *}
 				</div>
 			</div>
 			<div class="col" style="box-shadow: 0 0 0 1px red;">
@@ -557,7 +557,11 @@
 				<div  style="padding: 20px">
 					<h4>Import SVG code from uploads (media) synchronously example</h4>
 					<br /><br />
-					{tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg')}
+					<pre n:syntax="off" style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
+						<code>
+{tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg')}
+						</code>
+					</pre>
 				</div>
 			</div>
 
@@ -565,7 +569,11 @@
 				<div  style="padding: 20px">
 					<h4>Import SVG code from uploads (media) asynchronously example</h4>
 					<br /><br />
-					{tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg', true)}
+					<pre n:syntax="off" style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
+						<code>
+{tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg', true)}
+						</code>
+					</pre>
 				</div>
 			</div>
 		</div>
@@ -698,7 +706,11 @@
 &lt;img src="{tr_get_media_path($img_1_data_string)}" /&gt;
 </code>
 </pre>
-					<img src="{tr_get_media_path($img_1_data_string)}" />
+
+					{do bdump($img_1_data_string)}
+					{var $img_string_from_tr_get_media_path = tr_get_media_path($img_1_data_string)}
+					{do bdump(tr_get_media_path($img_1_data_string))}
+					{* <img src="{tr_get_media_path($img_1_data_string)}" /> *}
 				</div>
 			</div>
 		</div>{* row *}
