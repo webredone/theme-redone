@@ -29,7 +29,8 @@ function tr_part($part_name) {
 // WRAPPER FN FOR TR_GET_MEDIA THAT ONLY PRINTS THE PATH STRING 
 // INSTEAD OF PRINTING THE ELEMENT
 function tr_get_media_path($media) {
-	tr_get_media($media, false, false, true);
+	$full_path = tr_get_media($media, false, true, true);
+	return $full_path;
 }
 
 // MAIN FUNCTION THAT DEALS WITH IMAGES AND SVGs from theme assets or wp-media.
@@ -81,7 +82,7 @@ function tr_get_media(
 
 	if (tr_str_ends_with($media_src, '.svg')) {
 		if ($dont_print) {
-			return tr_get_svg($media_src, $from_uploads, $async);
+			return tr_get_svg($media_src, $from_uploads, $async, $get_path_only);
 		} else {
 			echo tr_get_svg($media_src, $from_uploads, $async, $get_path_only);
 		}

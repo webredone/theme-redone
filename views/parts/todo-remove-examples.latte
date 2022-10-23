@@ -543,7 +543,7 @@
 					<br /><br /><br />
 					<h4>Get the SVG path only without outputting its code</h4>
 					<br /><br />
-					{* <img src="{tr_get_media_path('logo.svg')}" alt="yo" /> *}
+					<img src="{tr_get_media_path('logo.svg')}" alt="yo" />
 				</div>
 			</div>
 			<div class="col" style="box-shadow: 0 0 0 1px red;">
@@ -614,7 +614,7 @@
 <code>
 {tr_get_media($img_1_data_string, false, true)}
 </code>
-</pre>
+</pre>		
 					{tr_get_media($img_1_data_string, false, true)}
 
 					<br /><br />
@@ -626,6 +626,7 @@
 </code>
 </pre>
           {var $img_2_data_array = ['src' => 'people/photo-1517299151253-d0449b733f57.jpg', 'alt' => 'manually added alt text']}
+					
 					{tr_get_media($img_2_data_array)}
 
 					<br /><br />
@@ -634,11 +635,13 @@
 <code>
 {var $img_2_data_array_with_class = $img_2_data_array}
 {var $img_2_data_array_with_class['class'] = 'custom-class'}
+
 {tr_get_media($img_2_data_array_with_class)}
 </code>
 </pre>
           {var $img_2_data_array_with_class = $img_2_data_array}
           {var $img_2_data_array_with_class['class'] = 'custom-class'}
+
 					{tr_get_media($img_2_data_array_with_class)}
 				</div>
 			</div>
@@ -652,7 +655,7 @@
 <code>
 {tr_get_media($img_1_data_string, true)}
 </code>
-</pre>
+</pre>		
 					{tr_get_media($img_1_data_string, true)}
 
 					<h5>No ALT Array</h5>
@@ -660,7 +663,7 @@
 <code>
 {tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)}
 </code>
-</pre>
+</pre>		
 					{tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)}
 
 					<h5>With manually wrritten ALT Array</h5>
@@ -668,16 +671,18 @@
 <code>
 {tr_get_media($img_2_data_array, true)}
 </code>
-</pre>
+</pre>		
 					{tr_get_media($img_2_data_array, true)}
 
 					<br /><br />
 					<h5>With ALT and class</h5>
 <pre n:syntax="off" style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
 <code>
+
 {tr_get_media($img_2_data_array_with_class, true)}
 </code>
-</pre>
+</pre>		
+
 					{tr_get_media($img_2_data_array_with_class, true)}
 				</div>
 			</div>
@@ -705,12 +710,8 @@
 <code>
 &lt;img src="{tr_get_media_path($img_1_data_string)}" /&gt;
 </code>
-</pre>
-
-					{do bdump($img_1_data_string)}
-					{var $img_string_from_tr_get_media_path = tr_get_media_path($img_1_data_string)}
-					{do bdump(tr_get_media_path($img_1_data_string))}
-					{* <img src="{tr_get_media_path($img_1_data_string)}" /> *}
+</pre>	
+					<img src="{tr_get_media_path($img_1_data_string)}" />
 				</div>
 			</div>
 		</div>{* row *}
