@@ -205,7 +205,7 @@ function tr_get_img_sync(
 	$image_size,
 	$img_alt = "", 
 	$img_class = "", 
-	$path_only = false,
+	$path_only = false
 ) {
 
 	// Only print the media path and don't add the img element
@@ -213,13 +213,7 @@ function tr_get_img_sync(
 		return $img_path;
 	}
 
-	$img_html = '<div class="tr-img-wrap-outer"';
-	$img_html .=   ' style="--size-w-original:' . $image_size['w'] . ';--size-h-original: ' . $image_size['h'] . ';"';
-	$img_html .= '>';
-	$img_html .= '<div';
-	$img_html .= ' class="tr-img-wrap"';
-	$img_html .= '>';
-	$img_html  .=  '<img';
+	$img_html  =  '<img';
 	if ($img_class) {
 		$img_html .=   ' class="'. $img_class .'"';
 	}
@@ -228,8 +222,6 @@ function tr_get_img_sync(
 		$img_html .=   ' alt="'. $img_alt .'"';
 	}
   $img_html .=  ' />';
-  $img_html .= '</div>';
-  $img_html .= '</div>';
 
 	return $img_html;
 }
@@ -239,7 +231,7 @@ function tr_get_img_async(
 	$image_size,
 	$img_alt = "", 
 	$img_class = "",
-	$path_only = false,
+	$path_only = false
 ) {
 	$img_html = '<div class="tr-img-wrap-outer jsLoading"';
 	$img_html .=   ' style="--size-w-original:' . $image_size['w'] . ';--size-h-original: ' . $image_size['h'] . ';"';
