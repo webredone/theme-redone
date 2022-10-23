@@ -131,9 +131,9 @@ function tr_get_media(
 
 		if ($dont_print) {
 			// "don't" print is not really useful, and may only come in handy for debugging
-			return $get_img_func($img_path, $alt_txt, $class, $get_path_only, $image_size);
+			return $get_img_func($img_path, $image_size, $alt_txt, $class, $get_path_only);
 		} else {
-			echo $get_img_func($img_path, $alt_txt, $class, $get_path_only, $image_size);
+			echo $get_img_func($img_path, $image_size, $alt_txt, $class, $get_path_only);
 		}
 
 	}
@@ -181,10 +181,10 @@ function tr_get_img_path($img_path) {
 // (Previously used on its own, now it gets called from tr_get_media fn)
 function tr_get_img_sync(
 	$img_path, 
+	$image_size,
 	$img_alt = "", 
 	$img_class = "", 
 	$get_path_only = false,
-	$image_size
 ) {
 
 	// Only print the media path and don't add the img element
@@ -215,10 +215,10 @@ function tr_get_img_sync(
 
 function tr_get_img_async(
 	$img_path, 
+	$image_size,
 	$img_alt = "", 
 	$img_class = "",
 	$get_path_only = false,
-	$image_size
 ) {
 	$img_html = '<div class="tr-img-wrap-outer jsLoading"';
 	$img_html .=   ' style="--size-w-original:' . $image_size['w'] . ';--size-h-original: ' . $image_size['h'] . ';"';
