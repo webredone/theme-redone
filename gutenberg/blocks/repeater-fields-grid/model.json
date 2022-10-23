@@ -1,0 +1,145 @@
+{
+  "block_meta": {
+    "BLOCK_REGISTER_NAME": "repeater-fields-grid",
+    "BLOCK_TITLE": "Repeater Fields Grid",
+    "keywords": ["blocktag1", "blocktag2"],
+    "hasSidebar": false,
+    "hasExample": true
+  },
+  "attributes": {
+    "breadcrumbs": {
+      "type": "array",
+      "field_meta": {
+        "type": "repeater",
+        "label": "Breadcrumbs",
+        "fields_grid": "2-1",
+        "subfields": {
+          "nested_breadcrumbs_before": {
+            "type": "array",
+            "field_meta": {
+              "type": "repeater",
+              "label": "nested Breadcrumbs_before",
+              "grid": 4,
+              "subfields": {
+                "link": {
+                  "type": "object",
+                  "field_meta": {
+                    "type": "cta",
+                    "label": "Link"
+                  },
+                  "default": {
+                    "title": "",
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "default": []
+          },
+          "title": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "label": "Title",
+              "col": "after"
+            },
+            "default": {
+              "text": ""
+            }
+          },
+          "text": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "label": "Text",
+              "col": "1"
+            },
+            "default": {
+              "text": ""
+            }
+          },
+          "text_two": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "label": "Text Two",
+              "col": "2"
+            },
+            "default": {
+              "text": ""
+            }
+          },
+          "text_three": {
+            "type": "object",
+            "field_meta": {
+              "type": "text",
+              "label": "Text Three",
+              "col": "1"
+            },
+            "default": {
+              "text": ""
+            }
+          },
+          "nested_breadcrumbs_one": {
+            "type": "array",
+            "field_meta": {
+              "type": "repeater",
+              "label": "nested Breadcrumbs_one",
+              "grid": 4,
+              "col": "1",
+              "subfields": {
+                "link": {
+                  "type": "object",
+                  "field_meta": {
+                    "type": "cta",
+                    "label": "Link"
+                  },
+                  "default": {
+                    "title": "",
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "default": []
+          },
+          "link": {
+            "type": "object",
+            "field_meta": {
+              "type": "cta",
+              "label": "Link"
+            },
+            "default": {
+              "title": "",
+              "url": ""
+            }
+          },
+          "nested_breadcrumbs_after": {
+            "type": "array",
+            "field_meta": {
+              "type": "repeater",
+              "label": "nested Breadcrumbs_after",
+              "grid": 4,
+              "col": "after",
+              "subfields": {
+                "link": {
+                  "type": "object",
+                  "field_meta": {
+                    "type": "cta",
+                    "label": "Link"
+                  },
+                  "default": {
+                    "title": "",
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "default": []
+          }
+        }
+      },
+      "default": []
+    }
+  }
+}

@@ -3,6 +3,7 @@
     "image",
     "video",
     "breadcrumbs",
-    "hero"
+    "hero",
+    "repeater-fields-grid"
   ]
 }

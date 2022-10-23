@@ -576,7 +576,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 					<h5>No ALT String</h5>
 <pre style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
 <code>
-{tr_get_media($img_1_data_string, true)}
+{tr_get_media($img_1_data_string, async: true)}
 </code>
 </pre>		
 					';

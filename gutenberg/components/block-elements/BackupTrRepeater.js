@@ -1,4 +1,5 @@
-const { useState, Fragment } = wp.element
+// TODO: Delete when finished implementing fields_grid logic
+const { useState } = wp.element
 const { Button, Dashicon, Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
 
@@ -6,43 +7,6 @@ import TrField from './TrField'
 import TrTooltip from '../TrTooltip'
 import { reorderItems } from '../../helpers/reorderItems'
 import TrRepeaterRepeater from './TrRepeaterRepeater'
-
-const two_cols_variations = ['2', '2-1', '1-2']
-
-// TODO: helper component (maybe it can be moved to its own file)
-const RenderRepeaterSubField = ({
-  field,
-  fieldData,
-  field_object,
-  meta,
-  fieldIndex,
-  subField
-}) => {
-  const subFieldType = subField.field_meta.type
-
-  if (subFieldType !== 'repeater') {
-    const fieldRepeaterData = {
-      ...fieldData,
-      field_object: field[subField.field_meta.field_name],
-      meta: subField.field_meta,
-      repeater_object: field_object,
-      repeater_name: meta.field_name,
-      repeater_index: fieldIndex
-    }
-    return <TrField fieldData={{ ...fieldRepeaterData }} />
-  } else {
-    // SECOND LEVEL REPEATER
-    const fieldRepeaterRepeaterData = {
-      ...fieldData,
-      field_object: field[subField.field_meta.field_name],
-      meta: subField.field_meta,
-      repeater_parent_object: field_object,
-      repeater_parent_name: meta.field_name,
-      repeater_parent_index: fieldIndex
-    }
-    return <TrRepeaterRepeater fieldData={{ ...fieldRepeaterRepeaterData }} />
-  }
-}
 
 const TrRepeater = ({
   fieldData
@@ -59,18 +23,6 @@ const TrRepeater = ({
       isBeingTriedToDelete: false
     }))
   )
-
-  let fields_grid = null
-  if (meta.hasOwnProperty('fields_grid')) {
-    fields_grid = meta.fields_grid
-  }
-
-  let columns = null
-  if (fields_grid) {
-    columns = two_cols_variations.includes(fields_grid)
-      ? new Array(2).fill('_')
-      : new Array(+fields_grid).fill('_')
-  }
 
   let minRep = 0
   if (meta.hasOwnProperty('min_rep')) {
@@ -222,7 +174,7 @@ const TrRepeater = ({
 
   const TryDeleteActionHTML = fieldIndex => {
     return (
-      <Fragment>
+      <>
         <span>Are you sure?</span>
         <div>
           <TrTooltip tooltip="Yes. Delete." custom>
@@ -242,115 +194,8 @@ const TrRepeater = ({
             </button>
           </TrTooltip>
         </div>
-      </Fragment>
+      </>
     )
-  }
-
-  const getSubFieldsHTML = (field, fieldIndex) => {
-    let subFieldsHTML = <Fragment></Fragment>
-    if (!fields_grid) {
-      subFieldsHTML = (
-        <Fragment>
-          {Object.keys(subfields).map((subFieldName, subFieldIndex) => {
-            const subField = subfields[subFieldName]
-
-            return (
-              <RenderRepeaterSubField
-                field={field}
-                fieldData={fieldData}
-                field_object={field_object}
-                meta={meta}
-                fieldIndex={fieldIndex}
-                subField={subField}
-                key={subFieldIndex}
-              />
-            )
-          })}
-        </Fragment>
-      )
-    } else {
-      // TODO: Maybe use useCallback or useMemo to improve performance
-      const allFields = Object.keys(subfields)
-
-      console.log('allFields: ', allFields)
-      console.log('subFields: ', subfields)
-
-      const defaultFieldObjects = allFields.filter(
-        objName => !subfields[objName].field_meta.hasOwnProperty('col')
-      )
-
-      console.log('defaultFieldObjects: ', defaultFieldObjects)
-
-      const colFieldObjects = colVar =>
-        Object.keys(subfields).filter(
-          objName => subfields[objName].field_meta?.col === colVar
-        )
-
-      subFieldsHTML = (
-        <Fragment>
-          {defaultFieldObjects.map((objectName, index) => {
-            console.log('IN_MAP_OBJECT_NAME: ', objectName)
-            const subField = subfields[objectName]
-
-            return (
-              <RenderRepeaterSubField
-                field={field}
-                fieldData={fieldData}
-                field_object={field_object}
-                meta={meta}
-                fieldIndex={fieldIndex}
-                subField={subField}
-                key={index}
-              />
-            )
-          })}
-
-          <div className={`tr-block__row tr-block__row--${fields_grid}`}>
-            {columns.map((_, index) => {
-              return (
-                <div key={index + 1} className="tr-block__col">
-                  {colFieldObjects('' + (index + 1)).map(
-                    (objectName, colIndex) => {
-                      const subField = subfields[objectName]
-
-                      return (
-                        <RenderRepeaterSubField
-                          field={field}
-                          fieldData={fieldData}
-                          field_object={field_object}
-                          meta={meta}
-                          fieldIndex={fieldIndex}
-                          subField={subField}
-                          key={`col_${colIndex}`}
-                        />
-                      )
-                    }
-                  )}
-                </div>
-              )
-            })}
-          </div>
-
-          {colFieldObjects('after').map((objectName, index) => {
-            const subField = subfields[objectName]
-
-            return (
-              <RenderRepeaterSubField
-                field={field}
-                fieldData={fieldData}
-                field_object={field_object}
-                meta={meta}
-                fieldIndex={fieldIndex}
-                subField={subField}
-                key={`after_${index}`}
-              />
-            )
-          })}
-        </Fragment>
-      )
-    }
-
-    return subFieldsHTML
   }
 
   const SiblingItemBlockedActionsHTML = () => {
@@ -467,7 +312,43 @@ const TrRepeater = ({
                       : ''
                   }`}
                 >
-                  {getSubFieldsHTML(field, fieldIndex)}
+                  {Object.keys(subfields).map((subFieldName, subFieldIndex) => {
+                    const subField = subfields[subFieldName]
+                    const subFieldType = subField.field_meta.type
+                    if (subFieldType !== 'repeater') {
+                      // REGULAR NON-CHILD-REPEATER FIELD
+                      const fieldRepeaterData = {
+                        ...fieldData,
+                        field_object: field[subField.field_meta.field_name],
+                        meta: subField.field_meta,
+                        repeater_object: field_object,
+                        repeater_name: meta.field_name,
+                        repeater_index: fieldIndex
+                      }
+                      return (
+                        <TrField
+                          key={subFieldIndex}
+                          fieldData={{ ...fieldRepeaterData }}
+                        />
+                      )
+                    } else {
+                      // SECOND LEVEL REPEATER
+                      const fieldRepeaterRepeaterData = {
+                        ...fieldData,
+                        field_object: field[subField.field_meta.field_name],
+                        meta: subField.field_meta,
+                        repeater_parent_object: field_object,
+                        repeater_parent_name: meta.field_name,
+                        repeater_parent_index: fieldIndex
+                      }
+                      return (
+                        <TrRepeaterRepeater
+                          key={subFieldIndex}
+                          fieldData={{ ...fieldRepeaterRepeaterData }}
+                        />
+                      )
+                    }
+                  })}
                 </CardBody>
               </Card>
             )

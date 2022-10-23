@@ -1,0 +1,12 @@
+<ol 
+  n:if="!empty($breadcrumbs)"
+  class="breadcrumbs"
+  itemscope itemtype="https://schema.org/BreadcrumbList"
+>
+{foreach $breadcrumbs as $breadcrumb}
+  {do dump($breadcrumb)}
+{/foreach}
+</ol>
+
+
+{* TODO: Remove this block once implemented fields_grid for the repeater lvl1 component *}
