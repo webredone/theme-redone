@@ -526,11 +526,12 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 					<h5>Don\'t Print (Only useful for debugging and showing how it will look like for some reason)</h5><br />
 <pre style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
 <code>
-{tr_get_media($img_1_data_string, false, true)}
+{tr_get_media($img_1_data_string, dont_print: true)}
 </code>
 </pre>		
+
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, false, true)) /* line 618 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, dont_print: true)) /* line 619 */;
 		echo '
 
 					<br /><br />
@@ -542,10 +543,10 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 </code>
 </pre>
 ';
-		$img_2_data_array = ['src' => 'people/photo-1517299151253-d0449b733f57.jpg', 'alt' => 'manually added alt text'] /* line 628 */;
+		$img_2_data_array = ['src' => 'people/photo-1517299151253-d0449b733f57.jpg', 'alt' => 'manually added alt text'] /* line 629 */;
 		echo '					
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array)) /* line 630 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array)) /* line 631 */;
 		echo '
 
 					<br /><br />
@@ -559,11 +560,11 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 </code>
 </pre>
 ';
-		$img_2_data_array_with_class = $img_2_data_array /* line 642 */;
-		$img_2_data_array_with_class['class'] = 'custom-class' /* line 643 */;
+		$img_2_data_array_with_class = $img_2_data_array /* line 643 */;
+		$img_2_data_array_with_class['class'] = 'custom-class' /* line 644 */;
 		echo '
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class)) /* line 645 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class)) /* line 646 */;
 		echo '
 				</div>
 			</div>
@@ -579,7 +580,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 </code>
 </pre>		
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, true)) /* line 659 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_1_data_string, async: true)) /* line 660 */;
 		echo '
 
 					<h5>No ALT Array</h5>
@@ -589,7 +590,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 </code>
 </pre>		
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)) /* line 667 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)) /* line 668 */;
 		echo '
 
 					<h5>With manually wrritten ALT Array</h5>
@@ -599,7 +600,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 </code>
 </pre>		
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array, true)) /* line 675 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array, true)) /* line 676 */;
 		echo '
 
 					<br /><br />
@@ -609,10 +610,9 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 
 {tr_get_media($img_2_data_array_with_class, true)}
 </code>
-</pre>		
-
+</pre>			
 					';
-		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class, true)) /* line 686 */;
+		echo LR\Filters::escapeHtmlText(tr_get_media($img_2_data_array_with_class, true)) /* line 688 */;
 		echo '
 				</div>
 			</div>
@@ -631,7 +631,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 						style="height: 333px; width: 100%; background-repeat: no-repeat; background-position: center; background-size: cover;"
 						class="js-img-lazy jsLoading"
 						data-img-src="';
-		echo LR\Filters::escapeHtmlAttr(tr_get_media_path($img_1_data_string)) /* line 703 */;
+		echo LR\Filters::escapeHtmlAttr(tr_get_media_path($img_1_data_string)) /* line 705 */;
 		echo '"
 					>
 					</div>
@@ -644,7 +644,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 </code>
 </pre>	
 					<img src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(tr_get_media_path($img_1_data_string))) /* line 714 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(tr_get_media_path($img_1_data_string))) /* line 716 */;
 		echo '" />
 				</div>
 			</div>
@@ -661,13 +661,13 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 	<div class="container">
 		<h2>BUTTONS</h2>
 ';
-		$btn_vars = ['brand', 'brand-outline', 'sec', 'sec-outline', 'ghost', 'ghost--brand', 'ghost--sec'] /* line 729 */;
+		$btn_vars = ['brand', 'brand-outline', 'sec', 'sec-outline', 'ghost', 'ghost--brand', 'ghost--sec'] /* line 731 */;
 		echo "\n";
-		foreach ($btn_vars as $btn_var) /* line 731 */ {
+		foreach ($btn_vars as $btn_var) /* line 733 */ {
 			echo '		<a href="#" class="btn btn--';
-			echo LR\Filters::escapeHtmlAttr($btn_var) /* line 731 */;
+			echo LR\Filters::escapeHtmlAttr($btn_var) /* line 733 */;
 			echo '">Btn ';
-			echo LR\Filters::escapeHtmlText($btn_var) /* line 731 */;
+			echo LR\Filters::escapeHtmlText($btn_var) /* line 733 */;
 			echo '</a>
 ';
 
@@ -685,7 +685,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 		<a href="#modal-example" class="btn btn--brand modalTrigger">Open Modal</a>
 
 		';
-		echo LR\Filters::escapeHtmlText(tr_modal_start('modal-example', 'Modal Title here', 'modal-additional-class')) /* line 743 */;
+		echo LR\Filters::escapeHtmlText(tr_modal_start('modal-example', 'Modal Title here', 'modal-additional-class')) /* line 745 */;
 		echo '
 			<h3>Modal</h3>
 			<p>
@@ -697,7 +697,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
 		';
-		echo LR\Filters::escapeHtmlText(tr_modal_end()) /* line 753 */;
+		echo LR\Filters::escapeHtmlText(tr_modal_end()) /* line 755 */;
 		echo '
 
 	</div>
@@ -710,7 +710,7 @@ final class Templatefed8b8b6bb extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['btn_var' => '731'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['btn_var' => '733'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}

@@ -11,8 +11,13 @@ function tr_pingback_header() {
 add_action( 'wp_head', 'tr_pingback_header' );
 
 
-// Used for page controllers. For example in 404.php, it would be:
-// $latte->render(tr_view_path('templates/404'));
+
+/** 
+ * Used for page controllers. For example in 404.php, it would be:
+ * $latte->render(tr_view_path('templates/404'));
+ * @param string $template_name Name of the latte template living inside the /views/ dir
+ * @return string Full path to the view file
+ */
 function tr_view_path($template_name) {
 	return get_template_directory() . "/views/$template_name.latte";
 }
@@ -28,17 +33,32 @@ function tr_part($part_name) {
 
 // WRAPPER FN FOR TR_GET_MEDIA THAT ONLY PRINTS THE PATH STRING 
 // INSTEAD OF PRINTING THE ELEMENT
+
+
+
+/** 
+ * @param string|array{title:string,src:string, id?:int, alt?:string} $media
+ * @return string Returns the full path to the media
+ */
 function tr_get_media_path($media) {
-	$full_path = tr_get_media($media, false, true, true);
+	$full_path = tr_get_media($media, dont_print: true, path_only: true);
 	return $full_path;
 }
 
 // MAIN FUNCTION THAT DEALS WITH IMAGES AND SVGs from theme assets or wp-media.
+/** 
+ * @param string|array{title:string,src:string, id?:int, alt?:string, class?:string} $media
+ * @param bool $async render media async or sync
+ * @param bool $dont_print print (render) result HTML, or just echo it for debugging purposes
+ * @param bool $path_only if true, it doesn't render, but returns the media full path 
+ * @return void|string Prints result HTML or returns it, or returns the full path to the media
+ * @see(https://webredone.com/theme-redone/theme-functions/tr_get_media/)
+ */
 function tr_get_media(
 	$media,
 	$async = false,
 	$dont_print = false,
-	$get_path_only = false
+	$path_only = false
 ) {
 
 	if ($media === NULL) {
@@ -82,9 +102,9 @@ function tr_get_media(
 
 	if (tr_str_ends_with($media_src, '.svg')) {
 		if ($dont_print) {
-			return tr_get_svg($media_src, $from_uploads, $async, $get_path_only);
+			return tr_get_svg($media_src, $from_uploads, $async, $path_only);
 		} else {
-			echo tr_get_svg($media_src, $from_uploads, $async, $get_path_only);
+			echo tr_get_svg($media_src, $from_uploads, $async, $path_only);
 		}
 	} else {
 
@@ -132,9 +152,9 @@ function tr_get_media(
 
 		if ($dont_print) {
 			// "don't" print is not really useful, and may only come in handy for debugging
-			return $get_img_func($img_path, $image_size, $alt_txt, $class, $get_path_only);
+			return $get_img_func($img_path, $image_size, $alt_txt, $class, $path_only);
 		} else {
-			echo $get_img_func($img_path, $image_size, $alt_txt, $class, $get_path_only);
+			echo $get_img_func($img_path, $image_size, $alt_txt, $class, $path_only);
 		}
 
 	}
@@ -148,7 +168,7 @@ function tr_get_svg(
 	$file_name_or_uploads_path, 
 	$from_media = false, 
 	$async = false, 
-	$get_path_only = false
+	$path_only = false
 ) {
 	$html = '';
 
@@ -157,7 +177,7 @@ function tr_get_svg(
 		: get_template_directory_uri() . '/assets/svg/' . $file_name_or_uploads_path;
 
 	// Only print the svg path and don't output its code
-	if ($get_path_only) {
+	if ($path_only) {
 		return $correct_svg_file_path;
 	}
 
@@ -185,11 +205,11 @@ function tr_get_img_sync(
 	$image_size,
 	$img_alt = "", 
 	$img_class = "", 
-	$get_path_only = false,
+	$path_only = false,
 ) {
 
 	// Only print the media path and don't add the img element
-	if ($get_path_only) {
+	if ($path_only) {
 		return $img_path;
 	}
 
@@ -219,7 +239,7 @@ function tr_get_img_async(
 	$image_size,
 	$img_alt = "", 
 	$img_class = "",
-	$get_path_only = false,
+	$path_only = false,
 ) {
 	$img_html = '<div class="tr-img-wrap-outer jsLoading"';
 	$img_html .=   ' style="--size-w-original:' . $image_size['w'] . ';--size-h-original: ' . $image_size['h'] . ';"';
@@ -244,6 +264,13 @@ function tr_get_img_async(
 
 // Speeds up buttons or other links html creation
 
+/** 
+ * @param array{title:string, url:string, target:bool} $a
+ * @param string $class Optional class name
+ * @param bool $attrs_only If true, will print only <a> attrs instead of the whole <a> element
+ * @return void
+ * @see(https://webredone.com/theme-redone/theme-functions/tr_a-link-helper/)
+ */
 function tr_a(
 	$a, 
 	$class = "", 

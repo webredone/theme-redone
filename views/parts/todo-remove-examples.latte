@@ -612,10 +612,11 @@
 					<h5>Don't Print (Only useful for debugging and showing how it will look like for some reason)</h5><br />
 <pre n:syntax="off" style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
 <code>
-{tr_get_media($img_1_data_string, false, true)}
+{tr_get_media($img_1_data_string, dont_print: true)}
 </code>
 </pre>		
-					{tr_get_media($img_1_data_string, false, true)}
+
+					{tr_get_media($img_1_data_string, dont_print: true)}
 
 					<br /><br />
 					<h5>With ALT</h5>
@@ -656,7 +657,7 @@
 {tr_get_media($img_1_data_string, true)}
 </code>
 </pre>		
-					{tr_get_media($img_1_data_string, true)}
+					{tr_get_media($img_1_data_string, async: true)}
 
 					<h5>No ALT Array</h5>
 <pre n:syntax="off" style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
@@ -681,7 +682,8 @@
 
 {tr_get_media($img_2_data_array_with_class, true)}
 </code>
-</pre>		
+</pre>			
+{* TODO: Fix this not rendering *}
 
 					{tr_get_media($img_2_data_array_with_class, true)}
 				</div>
