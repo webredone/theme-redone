@@ -59,7 +59,6 @@ function tr_disable_emojis_remove_dns_prefetch($urls, $relation_type)
 // Disable embed script
 function tr_deregister_embed_and_bodhi()
 {
-  wp_deregister_script('wp-embed');
   // XXX remove svg inline's plugin script as it pulls whole jQuery with it 
   // code for the replacement is recreated in Vanilla JS class: TransformSvgImgsToSvgCode
   wp_deregister_script('bodhi_svg_inline');
