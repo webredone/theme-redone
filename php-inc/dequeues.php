@@ -1,8 +1,6 @@
 <?php 
 //remove stylesheets: Gutenberg, wp-pagenavi
 function tr_dequeues() {
-  wp_dequeue_style('wp-block-library' );
-  wp_dequeue_style('wp-block-library-theme');
   wp_dequeue_style('wp-pagenavi');
 }
 add_action( 'wp_print_styles', 'tr_dequeues', 100 );
@@ -74,8 +72,7 @@ add_filter('wp_default_scripts', 'tr_remove_scripts');
 function tr_remove_scripts(&$scripts)
 {
   if (!is_admin()) {
-    $scripts->remove('jquery');
-    $scripts->remove('wp-embed');
+    // $scripts->remove('jquery');
   }
 }
 
