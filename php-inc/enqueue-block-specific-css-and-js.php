@@ -25,10 +25,12 @@ function tr_enqueue_block_specific_css_and_js() {
     function tr_parse_blocks($blocks, $block_prefix, &$tr_custom_blocks_names) {
 
       foreach ($blocks as $block) {
-        if (str_starts_with($block['blockName'], "$block_prefix/")) {
+        $block_name = $block['blockName'];
+
+        if (!is_null($block_name) && str_starts_with($block_name, "$block_prefix/")) {
           
-          if (!in_array($block['blockName'], $tr_custom_blocks_names)) {
-            $tr_custom_blocks_names[] = $block['blockName'];
+          if (!in_array($block_name, $tr_custom_blocks_names)) {
+            $tr_custom_blocks_names[] = $block_name;
 
             // if nested blocks, parse them as well
             if (!empty($block['innerBlocks'])) {

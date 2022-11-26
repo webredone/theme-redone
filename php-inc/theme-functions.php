@@ -61,7 +61,7 @@ function tr_get_media(
 	$path_only = false
 ) {
 
-	if ($media === NULL) {
+	if ($media === NULL || (is_array($media) && empty($media['src']))) {
 		return false;
 	}
 
