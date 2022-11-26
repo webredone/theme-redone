@@ -1,8 +1,3 @@
-const domReady = wp.domReady
-// const { unregisterBlockType } = wp.blocks
-// const { getEditedPostAttribute } = wp.data.select('core/editor')
-import unregisterWpCoreBlocks from './core/unregisterWpCoreBlocks'
-
 import register_block from './register_block'
 import setupBlockPreviewImage from './core/setupBlockPreviewImage'
 
@@ -44,27 +39,3 @@ setupBlockPreviewImage()
 blocks_array.forEach(block_folder_name => {
   register_block({ block_folder_name })
 })
-
-// BLACKLIST BLOCKS ------------------------------------------------------
-
-window.addEventListener('load', event => {
-  // XXX: This unregisters core WP blocks.
-  // Comment it if you plan to use default WP blocks
-  unregisterWpCoreBlocks()
-
-  window._wpLoadBlockEditor.then(function() {
-    let CURRENT_POST_TYPE = wp.data.select('core/editor').getCurrentPostType()
-
-    // unregister only on post-type === 'page'
-    if (CURRENT_POST_TYPE === 'page') {
-      // Unregister blocks for text template page
-      // const CURRENT_PAGE_TEMPLATE = getEditedPostAttribute('template')
-      // if (
-      //   CURRENT_PAGE_TEMPLATE &&
-      //   CURRENT_PAGE_TEMPLATE === "page-templates/t-generic.php"
-      // ) {
-      //   unregisterBlockType(`${BLOCK_NAME_PREFIX}/background-title-text-cta`);
-      // }
-    }
-  }) // end:editor loaded
-}) // window onLoad
