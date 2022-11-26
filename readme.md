@@ -33,7 +33,7 @@ Theme Redone is a custom WordPress theme starter/framework with its own Gutenber
 
 ## **Environment Requirements:**
 
-- PHP 7.4.29^
+- PHP ^8.0 (^7.4.29 for releases prior to v1.1.0)
 - Composer 2.0.2^
 - Node 14.19.1
 
