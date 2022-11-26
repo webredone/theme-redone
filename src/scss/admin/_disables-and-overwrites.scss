@@ -1,51 +1,6 @@
-.editor-styles-wrapper,
-.interface-complementary-area {
-  [aria-label='Change block type or style'],
-  [aria-label='More rich text controls'] {
-    display: none !important;
-  }
-}
-
-// SOME BLOCKS WE NEED, BECAUSE WE DEPEND ON THEM.
-// BUT WE ARE HIDING THEM WITH CSS NOT TO CONFUSE THE ADMIN
-[id*='-block-core/preformatted'],
-[id*='-block-core/code'],
-.editor-block-list-item-code,
-.components-toolbar-group [aria-label='Heading 1'],
-.components-toolbar-group [aria-label='Change text alignment'],
-.components-toolbar-group [aria-label='Crop'],
-.components-font-size-picker__controls,
-.block-editor-panel-color-gradient-settings,
-.block-editor-image-size-control__width,
-.block-editor-image-size-control__width,
-.block-editor-image-size-control__height,
-.components-resizable-box__handle,
-.components-resizable-box__handle
-  .block-editor-format-toolbar
-  .components-dropdown-menu {
-  display: none !important;
-}
-
-.block-editor-inserter__quick-inserter-patterns,
-.block-directory-downloadable-blocks-panel__description,
-.block-directory-downloadable-blocks-list,
-.block-editor-inserter__tabs .components-tab-panel__tabs button:last-of-type,
-.tab-panel-0-patterns {
-  display: none !important;
-  pointer-events: none !important;
-}
-
 body.wp-editor {
   // SVGs hovering bugs preview image so we disable hover on them
   .block-editor-block-icon svg {
     pointer-events: none !important;
-  }
-}
-
-// XXX: Hide in between blocks inserted button,
-// because it causes bugs below blocks that use freeform elements
-body:not(.is-dragging-components-draggable) {
-  .block-editor-block-list__insertion-point-popover {
-    display: none !important;
   }
 }
