@@ -27,7 +27,7 @@ Theme Redone is a custom WordPress theme starter/framework with its own Gutenber
 - ✅ [Tracy Debugger](https://webredone.com/theme-redone/debugging-tracy/) to help us make sure we write stable and error-free code
 - ✅ And much more
 
-### Visit https://webredone.com/theme-redone/ to learn more from our 50+ pages long docummentation.
+### Visit https://webredone.com/theme-redone/ to learn more from our 50+ pages long documentation.
 
 ---
 
