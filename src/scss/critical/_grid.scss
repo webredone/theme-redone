@@ -18,3 +18,13 @@
     margin-right: calc(var(--gap) * 0.5px);
   }
 }
+
+// Grid Grid
+.g-row {
+  --cols: var(--i-cols, 2);
+  --gap: var(--i-gap, 0);
+  --gap-y: var(--i-gap-y, var(--gap));
+  display: grid;
+  grid-gap: var(--gap-y) var(--gap);
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
