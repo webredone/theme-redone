@@ -1,113 +1,51 @@
-const swapAllWithPreloaded = (dSrc, resUrl) => {
-  for (let el of [
-    ...document.querySelectorAll(`.main-content [data-img-src="${dSrc}"]`)
-  ]) {
-    if (el.nodeName === 'IMG') {
-      if (!el.closest('.tr-img-wrap-outer').classList.contains('jsLoading')) {
-        continue
-      }
-    } else {
-      if (!el.classList.contains('jsLoading')) {
-        continue
-      }
-    }
-    swapLoadedSrc(el, resUrl)
-  }
-}
-
-const swapLoadedSrc = (imgToLoad, loadedSrc) => {
-  if (imgToLoad.nodeName === 'IMG') {
-    imgToLoad.setAttribute('src', loadedSrc)
-    imgToLoad.closest('.tr-img-wrap-outer').classList.remove('jsLoading')
-  } else {
-    imgToLoad.style.backgroundImage = `url('${loadedSrc}')`
-    imgToLoad.classList.remove('jsLoading')
-  }
-}
-
-class PreloadHelper {
-  constructor(dSrc) {
-    this.handlePromise(dSrc)
-  }
-
-  async handlePromise(dSrc) {
-    try {
-      const res = await fetch(dSrc)
-      if (res.ok) {
-        swapAllWithPreloaded(dSrc, res.url)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
-}
-
 class LazyLoadImages {
+  offset = 200
+
   constructor() {
-    this.preloadImagesPromises = new Map()
-    this.preloadAllImages()
-    this.lazyLoadSingle = this.lazyLoadSingle.bind(this)
-    this.lazyLoadAll = this.lazyLoadAll.bind(this)
+    this.imagesToLoad = document.querySelectorAll(
+      '.main-content [data-img-src]'
+    )
     this.init()
   }
 
-  preloadAllImages() {
-    const boundThis = this
-    const allImagesOnPage = [
-      ...document.querySelectorAll('.main-content [data-img-src]')
-    ]
+  async loadAndSwap(imgToLoad) {
+    const src = imgToLoad.dataset.imgSrc
+    const wait = parseInt(imgToLoad.dataset.wait) || 0
 
-    // Fill Promises array
-    for (const el of allImagesOnPage) {
-      const dSrc = el.dataset.imgSrc
-      if (!boundThis.preloadImagesPromises.has(dSrc)) {
-        boundThis.preloadImagesPromises.set(dSrc, new PreloadHelper(dSrc))
-      }
-    }
-  }
+    await new Promise(resolve => setTimeout(resolve, wait * 1000))
 
-  lazyLoadSingle(imgToLoad) {
-    let toLoadSrc = imgToLoad.dataset.imgSrc
-    // If not preloaded and swapped
-    if (imgToLoad.classList.contains('jsLoading')) {
-      swapLoadedSrc(imgToLoad, toLoadSrc)
-    }
-  }
+    const res = await fetch(src)
+    if (!res.ok) return
 
-  lazyLoadAll() {
-    const allTargets = document.querySelectorAll('.js-img-lazy') || false
-    if (allTargets) {
-      const imagesToLazyLoad = Array.from(allTargets)
-      // const imagesToLazyLoad = [].slice.call(allTargets);
-      if (!!window.IntersectionObserver) {
-        let observer = new IntersectionObserver(
-          (imagesToLazyLoad, observer) => {
-            imagesToLazyLoad.forEach(imgToLoad => {
-              if (imgToLoad.isIntersecting) {
-                this.lazyLoadSingle(imgToLoad.target)
-                observer.unobserve(imgToLoad.target)
-              }
-            })
-          },
-          { rootMargin: '0px 0px 200px 0px' }
-        )
-        imagesToLazyLoad.forEach(img => {
-          observer.observe(img)
-        })
-      } else {
-        setTimeout(() => {
-          imagesToLazyLoad.forEach(imgToLoad => {
-            this.lazyLoadSingle(imgToLoad)
-          })
-        }, 2000)
-      }
+    console.log('Finished resolving image: ', src)
+
+    if (imgToLoad.nodeName === 'IMG') {
+      imgToLoad.setAttribute('src', src)
+      imgToLoad.closest('.tr-img-wrap-outer').classList.remove('jsLoading')
     } else {
-      return false
+      imgToLoad.style.backgroundImage = `url('${src}')`
+      imgToLoad.classList.remove('jsLoading')
     }
   }
 
   init() {
-    this.lazyLoadAll()
+    if (!this.imagesToLoad) return
+
+    let observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.loadAndSwap(entry.target)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { rootMargin: `0px 0px ${this.offset}px 0px` }
+    )
+
+    this.imagesToLoad.forEach(img => {
+      observer.observe(img)
+    })
   }
 }
 

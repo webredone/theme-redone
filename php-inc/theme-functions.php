@@ -54,112 +54,85 @@ function tr_get_media_path($media) {
  * @return void|string Prints result HTML or returns it, or returns the full path to the media
  * @see(https://webredone.com/theme-redone/theme-functions/tr_get_media/)
  */
-function tr_get_media(
+
+
+ function tr_get_media(
 	$media,
 	$async = false,
 	$dont_print = false,
-	$path_only = false
+	$path_only = false,
+	$async_wait = null,
 ) {
 
-	if ($media === NULL || (is_array($media) && empty($media['src']))) {
+	// Check if media is valid
+	if (empty($media) || (is_array($media) && empty($media['src']))) {
 		return false;
 	}
 
-
-	$media_src = false;
+	$media_src = $media;
 	$media_id = false;
+	$value_type = gettype( $media );
 
-	$value_type = gettype($media);
-
-	if ($value_type === 'string') {
-		$media_src = $media;
-	} else {
-		if (array_key_exists('src', $media) || array_key_exists('url', $media)) {
-			if (array_key_exists('src', $media)) {
-				$media_src = $media['src'];
-			} else {
-				$media_src = $media['url'];
-			}
-			if (
-				array_key_exists('size', $media) &&
-				array_key_exists($media['size'], $media['sizes'])
-			) {
-				$media_src = $media['sizes'][$media['size']];
-			}
+	if ($value_type === 'array') {
+		$media_src = $media['src'] ?? $media['url'] ?? false;
+		// If we are getting it from custom blocks and sizes is provided
+		if (array_key_exists('sizes', $media) && array_key_exists('size', $media) && array_key_exists($media['size'], $media['sizes'])) {
+			$media_src = $media['sizes'][$media['size']];
 		}
-
-		if (array_key_exists('id', $media)) {
-			$media_id = $media['id'];
-		}
+		$media_id = $media['id'] ?? false;
 	}
 
+	// Check if media source is an uploaded file or from the theme assets
+	$from_uploads = strpos($media_src, "/wp-content/uploads/") !== false;
 
-	// checks if image is from uploads or from theme assets
-	$from_uploads = strpos($media_src, "/wp-content/uploads/")
-	? true
-	: false;
+	// Fallback if sizes is not provided via custom blocks controls
+	if ( $from_uploads && !empty( $media[ 'size' ] ) && !empty( $media[ 'id' ] )) {
+		// XXX: get wp image object from media with the correct size, and fallback to original if size is not found
+		$media_src = wp_get_attachment_image_src( $media[ 'id' ], $media[ 'size' ] )[ 0 ];
 
+	}
 
+	// Check if media is an SVG file
 	if (tr_str_ends_with($media_src, '.svg')) {
 		if ($dont_print) {
 			return tr_get_svg($media_src, $from_uploads, $async, $path_only);
-		} else {
-			echo tr_get_svg($media_src, $from_uploads, $async, $path_only);
 		}
+		echo tr_get_svg($media_src, $from_uploads, $async, $path_only);
+		return;
+	}
+
+	// Get the correct image path based on whether it's uploaded or from theme assets, or external
+	$img_path = $from_uploads || strpos($media_src, 'http://') !== false || strpos($media_src, 'https://') !== false
+		? $media_src
+		: tr_get_img_path($media_src);
+	
+	// Get image size
+	$image_size_obj = wp_getimagesize($img_path);
+	$image_size = ['w' => $image_size_obj[0], 'h' => $image_size_obj[1]];
+
+	// Get alt text
+	$alt_txt = $from_uploads ? get_post_meta($media_id , '_wp_attachment_image_alt', true) : false;
+	if ($value_type === 'array') {
+		$alt_txt = $media['alt'] ?? $alt_txt;
+	}
+
+	// Get class name
+	$class = false;
+	if ($value_type === 'array') {
+		$class = $media['class'] ?? false;
+	}
+
+
+	if ($dont_print) {
+		return tr_get_img_sync($img_path, $image_size, $alt_txt, $class, $path_only);
+	}
+
+	if ( $async ) {
+		echo tr_get_img_async($img_path, $image_size, $alt_txt, $class, $path_only, $async_wait);
 	} else {
-
-		// gets the correct image path based on whether it's uploaded or from theme assets, or external
-		$img_path = $media_src;
-
-		if ($from_uploads) {
-			$img_path = $media_src;
-			// Not from uploads not assets/img
-		} else if (strpos($media_src, 'http://') !== false || strpos($media_src, 'https://') !== false) {
-			$img_path = $media_src;
-		} else {
-			// From assets
-			$img_path = tr_get_img_path($media_src);
-		}
-
-		$image_size_obj = wp_getimagesize($img_path);
-		$image_size = [
-			'w' => $image_size_obj[0],
-			'h' => $image_size_obj[1],
-		];
-		
-
-
-		$alt_txt = false;
-		$class = false;
-
-
-		if ($from_uploads) {
-			$alt_txt = get_post_meta($media_id , '_wp_attachment_image_alt', true);
-		}
-
-		if ("array" === $value_type) {
-			(array_key_exists('alt', $media)) && $alt_txt = $media['alt'];
-			(array_key_exists('class', $media)) && $class = $media['class'];
-		}
-
-
-		// dynamic function name
-		$get_img_func = $async
-			? 'tr_get_img_async'
-			: 'tr_get_img_sync';
-
-
-
-		if ($dont_print) {
-			// "don't" print is not really useful, and may only come in handy for debugging
-			return $get_img_func($img_path, $image_size, $alt_txt, $class, $path_only);
-		} else {
-			echo $get_img_func($img_path, $image_size, $alt_txt, $class, $path_only);
-		}
-
+		echo tr_get_img_sync($img_path, $image_size, $alt_txt, $class, $path_only);
 	}
 }
-
 
 
 
@@ -231,23 +204,24 @@ function tr_get_img_async(
 	$image_size,
 	$img_alt = "", 
 	$img_class = "",
-	$path_only = false
+	$path_only = false,
+	$async_wait = null
 ) {
-	$img_html = '<div class="tr-img-wrap-outer jsLoading"';
-	$img_html .=   ' style="--size-w-original:' . $image_size['w'] . ';--size-h-original: ' . $image_size['h'] . ';"';
-	$img_html .= '>';
-	$img_html .= '<div';
-	$img_html .= ' class="tr-img-wrap"';
-	$img_html .= '>';
-	$img_html .=  '<img';
-  $img_html .=   ' class="js-img-lazy '. $img_class .'"';
-  $img_html .=   ' src="' . tr_get_img_path('lazy-loading-transparent.png') . '"';
-  $img_html .=   ' data-img-src="'. $img_path .'"';
+
+	$optionalWait = !is_null( $async_wait ) ? 'data-wait="' . $async_wait . '"' : '';
+
+	$img_html  = '<div class="tr-img-wrap-outer jsLoading" style="--size-w-original:' . $image_size['w'] . ';--size-h-original: ' . $image_size['h'] . ';">';
+	$img_html .=   '<div class="tr-img-wrap">';
+	$img_html .=    '<img';
+  $img_html .=     ' class="js-img-lazy '. $img_class .'"';
+  $img_html .=     ' src="' . tr_get_img_path('lazy-loading-transparent.png') . '"';
+  $img_html .=     ' data-img-src="'. $img_path .'"';
+  $img_html .=     ' ' . $optionalWait;
 	if ($img_alt) {
-		$img_html .= ' alt="'. $img_alt .'"';
+		$img_html .=   ' alt="'. $img_alt .'"';
 	}
-  $img_html .=  ' />';
-	$img_html .= '</div>';
+  $img_html .=    ' />';
+	$img_html .=   '</div>';
 	$img_html .= '</div>';
 
 	return $img_html;
@@ -305,6 +279,7 @@ function tr_a(
  * SHARE LINKS TO SOCIAL MEDIA
  */
 //  Usage: <a href="{tr_social_share('twitter')}"></a>
+// https://stackoverflow.com/questions/33426752/linkedin-share-post-url
 function tr_social_share( $soc_name ) {
 	$share_options = [
 		'facebook'  => 'https://www.facebook.com/sharer/sharer.php?u=' . get_the_permalink(),
@@ -314,15 +289,18 @@ function tr_social_share( $soc_name ) {
 		'email'     => 'mailto:?subject=I wanted you to see this: ' . get_the_title() . '&amp;body=' . get_the_permalink()
 	];
 
-	echo $share_options[$soc_name];
+	return $share_options[$soc_name];
 }
 
 
 /**
  * Prints HTML with meta information for the current post-date/time.
  */
-function tr_posted_on($post_id = null, $with_last_updated = false) {
-	$time_string = '<time class="entry-date published" datetime="%1$s">%1$s</time>';
+function tr_posted_on(
+		$post_id = null, 
+		$with_last_updated = false
+	) {
+	$time_string = '<strong><time class="entry-date published" datetime="%1$s">%1$s</time></strong>';
 	$date_format = get_option('date_format');
 
 	$published_at = $post_id === null 
@@ -336,15 +314,13 @@ function tr_posted_on($post_id = null, $with_last_updated = false) {
 	$posted_on = sprintf(
 		/* translators: %s: post date. */
 		esc_html_x( '%s', 'post date', 'tr' ),
-		'<span class="posted-on" rel="bookmark">' . $time_string . '</span>'
+		$time_string
 	);
 
-	$posted_on_html  = '<span class="entry-date-wrap">';
-	$posted_on_html .=   $posted_on;
+	$posted_on_html =   $posted_on;
 	if ($with_last_updated) {
 		$posted_on_html .= $post_id === null ? tr_last_updated_on() : tr_last_updated_on($post_id);
 	}
-	$posted_on_html .= '</span>';
 
 	echo $posted_on_html;
 }
@@ -377,15 +353,29 @@ function tr_last_updated_on($post_id = null) {
 /**
  * Prints HTML with meta information for the current author.
  */
-function tr_posted_by($author_id = false) {
-	$byline  = '<i>By:</i> ';
-	$byline .= '<a ';
-	if ($author_id === false) {
-		$byline .=   'href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '"';
-	} else {
-		$byline .=   'href="' . esc_url(get_author_posts_url($author_id)) . '"';
+function tr_posted_by(
+	$author_id = false, 
+	$no_html = false, 
+	$no_by = false,
+	$link_only = false
+) {
+	$byline  = '<span>by</span> ';
+	if ($no_by) {
+		$byline = '';
 	}
-	$byline .=  '>';
+
+	$author_link = '';
+
+	$byline .= '<a ';
+	if (empty($author_id)) {
+		$author_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
+	} else {
+		$author_link = esc_url(get_author_posts_url($author_id));
+	}
+
+	$byline .=   'href="' . $author_link . '"';
+
+	$byline .=  '><strong>';
 	$f_name = get_the_author_meta( 'first_name', $author_id );
 	$l_name = get_the_author_meta( 'last_name', $author_id );
 	$print_name = $f_name . ' ' . $l_name;
@@ -393,8 +383,16 @@ function tr_posted_by($author_id = false) {
 		$print_name = get_the_author_meta( 'display_name', $author_id );
 	}
 	$byline .=    $print_name;
-	$byline .= '</a>';
-	echo '<span class="byline"> ' . $byline . '</span>';
+	$byline .= '</strong></a>';
+
+	if ($no_html) {
+		return $print_name;
+	}
+
+	if ($link_only) {
+		return $author_link;
+	}
+	echo $byline;
 }
 
 
@@ -405,7 +403,11 @@ if ( ! function_exists( 'tr_get_excerpt' ) ) :
 			$excerpt = $source;
 		} else {
 			if (!$post_id) {
-				$excerpt = get_the_content();
+				if (has_excerpt()) {
+					$excerpt = get_the_excerpt();
+				} else {
+					$excerpt = get_the_content(false, false);
+				}
 			} else {
 				if (has_excerpt($post_id)) {
 					$excerpt = get_the_excerpt($post_id);
@@ -418,10 +420,11 @@ if ( ! function_exists( 'tr_get_excerpt' ) ) :
     $excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
     $excerpt = strip_shortcodes($excerpt);
     $excerpt = strip_tags($excerpt);
+		$excerpt_original_length = strlen($excerpt);
     $excerpt = substr($excerpt, 0, $limit);
     $excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
-    if (strlen($excerpt) > $limit) {
-			$excerpt = $excerpt.'...';
+    if ($excerpt_original_length > $limit) {
+			$excerpt = $excerpt.' ...';
 		}
     return $excerpt;
 	}
@@ -576,5 +579,3 @@ function tr_modal_start($id, $title = false, $class = '') {
 function tr_modal_end() {
   echo '</div></div></div>';
 }
-
-
