@@ -12,10 +12,6 @@
 
 	{wp_head()}
 
-	<style id="critical-css" type="text/css">
-		{file_get_contents(get_template_directory() . '/prod/global/critical.css')|noescape}
-	</style>
-
 	<link rel="preload" href="{get_template_directory_uri()}/prod/global/style.css" as="style">
 	<link rel="stylesheet" href="{get_template_directory_uri()}/prod/global/style.css">
 

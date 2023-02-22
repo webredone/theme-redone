@@ -1,6 +1,7 @@
 <?php
 
 
+
 function tr_enqueue_block_specific_css_and_js() {
   if (!is_single() && !is_page()) return;
 
@@ -52,7 +53,23 @@ function tr_enqueue_block_specific_css_and_js() {
     $blocks_shared_js = [];
 
     function tr_contains_valid_file($file_path) {
-      return (file_exists($file_path) && filesize($file_path));
+      $file_size = false;
+      if ( file_exists($file_path) ) {
+        $file_size = filesize($file_path);
+      }
+      $is_empty = false;
+
+      $is_js_file = str_ends_with($file_path, ".js");
+
+      if ( $is_js_file && is_numeric( $file_size ) && $file_size === 15 ) {
+        // file size 15 means that it is an "empty" file tnat compiler created
+        // The contents are, and should not be enqueued: 
+        // '(() => {
+        // })();'
+        $is_empty = true;
+      }
+
+      return (file_exists($file_path) && !$is_empty && is_numeric( $file_size ) && $file_size > 0);
     }
 
 
@@ -78,6 +95,8 @@ function tr_enqueue_block_specific_css_and_js() {
       // Check if block has deps (CSS/JS) defined in model.json
       $block_model = json_decode(file_get_contents(TR_BLOCKS_DIR . "/$block_name_without_prefix/model.json"), true);
       $block_meta = $block_model['block_meta'];
+
+
       // START:block_meta contains deps property
       if (array_key_exists("deps", $block_meta)) {
         $deps = $block_meta['deps'];
@@ -153,13 +172,18 @@ function tr_enqueue_block_specific_css_and_js() {
     $block_css_filename = "frontend.min.css";
     $block_js_filename = "frontend.min.js";
 
+    $additional_critical_css = '';
+
     foreach ($tr_custom_blocks_names as $custom_block_name) {
 
       $block_name_without_prefix = substr(
         $custom_block_name, 
         strlen($block_prefix) + 1
       );
+      
+      $block_meta = json_decode(file_get_contents(TR_BLOCKS_DIR . "/$block_name_without_prefix/model.json"), true)['block_meta'];
 
+      $critical = !empty( $block_meta['critical'] );
 
       $custom_block_dir_path = TR_THEME_DIR . "/prod/block-specific/$block_name_without_prefix";
       $gutenberg_blocks_dir_path = get_stylesheet_directory_uri() . "/prod/block-specific";
@@ -167,10 +191,14 @@ function tr_enqueue_block_specific_css_and_js() {
       // if directory contains frontend.css and it is not empty
       $custom_block_css_path = "$custom_block_dir_path/$block_css_filename";
       if (tr_contains_valid_file($custom_block_css_path)) {
-        wp_enqueue_style(
-          "tr-block-css--$block_prefix-$block_name_without_prefix", 
-          "$gutenberg_blocks_dir_path/$block_name_without_prefix/$block_css_filename"
-        );
+        if ( !$critical ) {
+          wp_enqueue_style(
+            "tr-block-css--$block_prefix-$block_name_without_prefix", 
+            "$gutenberg_blocks_dir_path/$block_name_without_prefix/$block_css_filename"
+          );
+        } else {
+          $additional_critical_css .= file_get_contents($custom_block_css_path);
+        }
       }
       //end:enqueue block specific CSS
 
@@ -189,7 +217,20 @@ function tr_enqueue_block_specific_css_and_js() {
         );
       }
       //end:enqueue block specific JS
-
+      
+    }
+    
+    
+    if ( !empty( $additional_critical_css ) ) {
+      $print_additional_critical_css = function() use ( $additional_critical_css ) {
+        $critical_block_style  = '<style ';
+        $critical_block_style .=   'id=id="tr-block-css--critical"';
+        $critical_block_style .= '>';
+        $critical_block_style .=   $additional_critical_css;
+        $critical_block_style .= '</style>';
+        echo $critical_block_style;
+      };
+      add_action( 'wp_head', $print_additional_critical_css, 200 );
     }
     // END:CHECK FOR AND ENQUEUE BLOCK SPECIFIC CSS AND JS
 

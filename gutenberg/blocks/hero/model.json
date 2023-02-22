@@ -4,7 +4,8 @@
     "BLOCK_TITLE": "Hero",
     "keywords": ["Hero", "Main Hero"],
     "hasSidebar": false,
-    "hasExample": true
+    "hasExample": true,
+    "critical": true
   },
   "attributes": {
     "title": {

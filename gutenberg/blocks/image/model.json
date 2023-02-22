@@ -8,7 +8,8 @@
     "deps": {
       "css": ["shared-css-1", "shared-css-2"],
       "js": ["shared-js-1", "shared-js-2"]
-    }
+    },
+    "critical": true
   },
   "attributes": {
     "image": {
