@@ -39,6 +39,7 @@
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.1.0",
+    "gulp-size": "^4.0.1",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglifycss": "^1.1.0",
     "hash-sum": "^2.0.0",
