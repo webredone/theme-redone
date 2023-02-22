@@ -224,7 +224,7 @@ function tr_enqueue_block_specific_css_and_js() {
     if ( !empty( $additional_critical_css ) ) {
       $print_additional_critical_css = function() use ( $additional_critical_css ) {
         $critical_block_style  = '<style ';
-        $critical_block_style .=   'id=id="tr-block-css--critical"';
+        $critical_block_style .=   'id="tr-block-css--critical"';
         $critical_block_style .= '>';
         $critical_block_style .=   $additional_critical_css;
         $critical_block_style .= '</style>';
