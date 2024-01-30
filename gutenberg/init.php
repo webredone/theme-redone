@@ -25,19 +25,19 @@ function tr_blocks_assets() { // phpcs:ignore
 	// Register block editor script for backend.
 	wp_register_script(
 		'tr_blocks-js', // Handle.
-		// get_template_directory_uri() . '/gutenberg/prod/blocks.build.js', // Block.build.js: We register the block here. Built with Webpack.
-		get_template_directory_uri() . '/prod/global/blocks.min.js', // Block.build.js: We register the block here. Built with Webpack.
+		// get_template_directory_uri() . '/gutenberg/dist/blocks.build.js', // Block.build.js: We register the block here. Built with Webpack.
+		get_template_directory_uri() . '/dist/global_admin/blocks.min.js', // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
-		null, // filemtime( plugin_dir_path( __DIR__ ) . 'prod/blocks.build.js' ), // Version: filemtime — Gets file modification time.
+		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
 	);
 
 	// Register block editor styles for backend.
 	wp_register_style(
 		'tr_blocks-editor-css', // Handle
-		get_template_directory_uri() . '/prod/global/blocks-backend.css', // Block editor CSS.,
+		get_template_directory_uri() . '/dist/global_admin/blocks-backend.css', // Block editor CSS.,
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'prod/blocks-admin.css' ) // Version: File modification time.
+		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks-admin.css' ) // Version: File modification time.
 	);
 
 

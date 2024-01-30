@@ -1,6 +1,7 @@
 {
   "require": {
     "latte/latte": "^3.0.3",
-    "tracy/tracy": "^2.9.4"
+    "tracy/tracy": "^2.9.4",
+    "vlucas/phpdotenv": "^5.5"
   }
 }

@@ -110,8 +110,8 @@ function tr_enqueue_block_specific_css_and_js() {
 
 
 
-    $shared_css_and_js_system_dir_path = TR_THEME_DIR . "/prod/blocks-shared";
-    $shared_css_and_js_theme_dir_path = get_stylesheet_directory_uri() . "/prod/blocks-shared";
+    $shared_css_and_js_system_dir_path = TR_THEME_DIR . "/dist/blocks-shared";
+    $shared_css_and_js_theme_dir_path = get_stylesheet_directory_uri() . "/dist/blocks-shared";
     //start:enqueue each shared CSS file
     if (!empty($blocks_shared_css)) {
       foreach ($blocks_shared_css as $shared_css_filename) {
@@ -161,8 +161,8 @@ function tr_enqueue_block_specific_css_and_js() {
       );
 
 
-      $custom_block_dir_path = TR_THEME_DIR . "/prod/block-specific/$block_name_without_prefix";
-      $gutenberg_blocks_dir_path = get_stylesheet_directory_uri() . "/prod/block-specific";
+      $custom_block_dir_path = TR_THEME_DIR . "/dist/block-specific/$block_name_without_prefix";
+      $gutenberg_blocks_dir_path = get_stylesheet_directory_uri() . "/dist/block-specific";
 
       // if directory contains frontend.css and it is not empty
       $custom_block_css_path = "$custom_block_dir_path/$block_css_filename";

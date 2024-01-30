@@ -33,16 +33,16 @@ final class Template0b324d01cd extends Latte\Runtime\Template
 
 	<style id="critical-css" type="text/css">
 		';
-		echo file_get_contents(get_template_directory() . '/prod/global/critical.css') /* line 16 */;
+		echo file_get_contents(get_template_directory() . '/dist/global/critical.css') /* line 16 */;
 		echo '
 	</style>
 
 	<link rel="preload" href="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(get_template_directory_uri())) /* line 19 */;
-		echo '/prod/global/style.css" as="style">
+		echo '/dist/global/style.css" as="style">
 	<link rel="stylesheet" href="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(get_template_directory_uri())) /* line 20 */;
-		echo '/prod/global/style.css">
+		echo '/dist/global/style.css">
 
 	<script type="text/javascript">
 		var tr_theme_url = ';

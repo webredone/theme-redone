@@ -54,7 +54,7 @@ class LazyScriptsImporter {
 
       const scriptEL = document.createElement('script')
       scriptEL.id = `tr-js-ll--${script.scriptTagId}`
-      scriptEL.src = `${window.tr_theme_url}/prod/lazily-loaded/${script.matchingScriptName}.min.js`
+      scriptEL.src = `${window.tr_theme_url}/dist/lazily-loaded/${script.matchingScriptName}.min.js`
 
       this.themeScriptEl.after(scriptEL)
 
