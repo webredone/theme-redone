@@ -1,1 +1,0 @@
-{"version":3,"sources":["shared-css-1.scss","shared-css-1.css"],"names":[],"mappings":"AAEA;EACE,8BAAA;ACDF","file":"../shared-css-1.min.css","sourcesContent":["// todo: Remove. This is only an example\n\nbody {\n  background: #ededf6 !important;\n}\n","body {\n  background: #ededf6 !important;\n}"]}
