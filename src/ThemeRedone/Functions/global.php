@@ -73,7 +73,7 @@ function tr_get_media_path($media)
 // TODO: COpy from dhblog2 -> add here and in plugin
 // MAIN FUNCTION THAT DEALS WITH IMAGES AND SVGs from theme assets or wp-media.
 /**
- * @param string|array{title:string,src:string, id?:int, alt?:string, class?:string} $media
+ * @param string|array{title:string,src?:string, id?:int, alt?:string, class?:string, url?:string, size?:string, sizes?:array} $media
  * @param bool $async render media async or sync
  * @param bool $dont_print print (render) result HTML, or just echo it for debugging purposes
  * @param bool $path_only if true, it doesn't render, but returns the media full path
@@ -98,34 +98,30 @@ function tr_get_media(
 
     $value_type = gettype($media);
 
-    if ($value_type === 'string') {
+    if (gettype($media) === 'string') {
         $media_src = $media;
     } else {
-        if (array_key_exists('src', $media) || array_key_exists('url', $media)) {
-            if (array_key_exists('src', $media)) {
-                $media_src = $media['src'];
-            } else {
-                $media_src = $media['url'];
-            }
-            if (
-                array_key_exists('size', $media) &&
-                array_key_exists($media['size'], $media['sizes'])
-            ) {
-                $media_src = $media['sizes'][$media['size']];
-            }
+        if (isset($media['url'])) {
+            $media_src = $media['url'];
+        } else {
+            $media_src = $media['src'];
         }
 
-        if (array_key_exists('id', $media)) {
+        if (array_key_exists('size', $media) && array_key_exists($media['size'], $media['sizes'])) {
+            $media_src = $media['sizes'][$media['size']];
+        }
+
+        if (isset($media['id'])) {
             $media_id = $media['id'];
         }
     }
 
     // checks if image is from uploads or from theme assets
-    $from_uploads = strpos($media_src, "/wp-content/uploads/")
+    $from_uploads = gettype($media_src) === 'string' && strpos($media_src, "/wp-content/uploads/") !== false
         ? true
         : false;
 
-    if (tr_str_ends_with($media_src, '.svg')) {
+    if (gettype($media_src) === 'string' && tr_str_ends_with($media_src, '.svg')) {
         if ($dont_print) {
             return tr_get_svg($media_src, $from_uploads, $async, $path_only);
         } else {
@@ -184,7 +180,7 @@ function tr_get_svg(
     bool $from_media = false,
     bool $async = false,
     bool $path_only = false
-) {
+): string {
 
     $correct_svg_file_path = $from_media
     ? $file_name_or_uploads_path
@@ -205,6 +201,8 @@ function tr_get_svg(
         echo file_get_contents($correct_svg_file_path);
     }
 
+    return '';
+
 }
 
 // Get img from assets (Previously used on its own, now it gets called from tr_get_media fn)
@@ -216,11 +214,11 @@ function tr_get_img_path(string $img_path): string
 
 // (Previously used on its own, now it gets called from tr_get_media fn)
 function tr_get_img_sync(
-    $img_path,
+    string $img_path,
     $image_size,
-    $img_alt = "",
-    $img_class = "",
-    $path_only = false
+    string $img_alt = "",
+    string $img_class = "",
+    bool $path_only = false
 ) {
 
     // Only print the media path and don't add the img element
@@ -241,13 +239,16 @@ function tr_get_img_sync(
     return $img_html;
 }
 
+/**
+ * @param array{w: int, h: int} $image_size
+ */
 function tr_get_img_async(
-    $img_path,
-    $image_size,
-    $img_alt = "",
-    $img_class = "",
-    $path_only = false
-) {
+    string $img_path,
+    array $image_size,
+    string $img_alt = "",
+    string $img_class = "",
+    bool $path_only = false
+): string {
     $img_html = '<div class="tr-img-wrap-outer jsLoading"';
     $img_html .= ' style="--size-w-original:' . $image_size['w'] . ';--size-h-original: ' . $image_size['h'] . ';"';
     $img_html .= '>';
