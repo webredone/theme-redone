@@ -1,5 +1,5 @@
-<?php // Template Name: Generic Page Template ?>
+<?php // Template Name: Generic Page Template?>
 
-<?php  
+<?php
   $latte->render(tr_view_path('templates/template-generic'));
 ?>

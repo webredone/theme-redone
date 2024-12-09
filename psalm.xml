@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psalm
+    xmlns="https://getpsalm.org/schema/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorLevel="6"
+    inferTypesFromUsage="true"
+    findUnusedCode="true"
+    reportMixedIssues="true"
+    resolveFromConfigFile="true"
+	findUnusedBaselineEntry="true"
+>
+    <projectFiles>
+        <!-- Scan all PHP files in the current directory -->
+        <directory name="." />
+
+        <!-- Ignore directories we don't want to analyze -->
+        <ignoreFiles>
+            <directory name="vendor" />
+            <!-- <directory name="node_modules" /> -->
+            <directory name="views/temp" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <!-- Load WordPress stubs so Psalm understands WP functions -->
+    <stubs>
+        <file name="vendor/php-stubs/wordpress-stubs/wordpress-stubs.php"/>
+    </stubs>
+
+    <!-- Load the WordPress Psalm plugin -->
+    <plugins>
+        <pluginClass class="PsalmWordPress\Plugin" />
+    </plugins>
+</psalm>

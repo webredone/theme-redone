@@ -1,0 +1,42 @@
+{
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,
+    "editor.renderWhitespace": "all",
+    "[scss]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": false
+    },
+    "[php]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "junstyle.php-cs-fixer",
+        "editor.formatOnSave": true
+    },
+    "peacock.color": "#dd0531",
+    "workbench.colorCustomizations": {
+		"editorWhitespace.foreground": "#404040",
+		"activityBar.activeBackground": "#fa1b49",
+		"activityBar.background": "#fa1b49",
+		"activityBar.foreground": "#e7e7e7",
+		"activityBar.inactiveForeground": "#e7e7e799",
+		"activityBarBadge.background": "#155e02",
+		"activityBarBadge.foreground": "#e7e7e7",
+		"commandCenter.border": "#e7e7e799",
+		"sash.hoverBorder": "#fa1b49",
+		"statusBar.background": "#dd0531",
+		"statusBar.foreground": "#e7e7e7",
+		"statusBarItem.hoverBackground": "#fa1b49",
+		"statusBarItem.remoteBackground": "#dd0531",
+		"statusBarItem.remoteForeground": "#e7e7e7",
+		"titleBar.activeBackground": "#dd0531",
+		"titleBar.activeForeground": "#e7e7e7",
+		"titleBar.inactiveBackground": "#dd053199",
+		"titleBar.inactiveForeground": "#e7e7e799"
+	},
+    "sonarlint.connectedMode.project": {
+        "connectionId": "http-localhost-9001",
+        "projectKey": "dh_blog_theme"
+    }
+}

@@ -1,0 +1,17 @@
+parameters:
+    parallel:
+        jobSize: 18
+        maximumNumberOfProcesses: 1
+        minimumNumberOfJobsPerProcess: 1
+    level: 7
+    paths:
+        # Scan entire theme directory
+        - %currentWorkingDirectory%
+    excludePaths:
+        # Exclude vendor if needed
+        - %currentWorkingDirectory%/vendor/*
+        - %currentWorkingDirectory%/views/temp/*
+    bootstrapFiles:
+        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+    # ignoreErrors:
+    #   - '#Some specific ignore pattern#'

@@ -1,19 +1,19 @@
 <header class="header">
 	<div class="container">
     <nav class="navbar">
-      <a 
-      	class="navbar-brand" 
+      <a
+      	class="navbar-brand"
       	href="{esc_url( home_url( '/' ) )}"
-      	itemprop="url" 
+      	itemprop="url"
         aria-label="{get_bloginfo('name')} Logo - Go to homepage"
       >
         {tr_get_media('logo.svg')}
       </a>
-      <button 
-        class="navbar-toggler collapsed" 
-        type="button" 
-        data-toggle="collapse" 
-        aria-expanded="false" 
+      <button
+        class="navbar-toggler collapsed"
+        type="button"
+        data-toggle="collapse"
+        aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="span-icon"></span>
@@ -30,8 +30,8 @@
         'menu_class'      => 'navbar-nav',
         'depth'           => 2,
         'fallback_cb'     => 'ThemeRedoneWalker::fallback',
-        'walker'          => new ThemeRedoneWalker()
+        'walker'          => new \ThemeRedone\Features\ThemeRedoneWalker()
       ])}
-    </nav> 
+    </nav>
   </div>{* cont *}
 </header>

@@ -1,2 +1,3 @@
-<?php  
-  $latte->render(tr_view_path('templates/404'));
+<?php
+
+$latte->render(tr_view_path('templates/404'));

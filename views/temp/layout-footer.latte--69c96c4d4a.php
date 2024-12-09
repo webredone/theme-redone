@@ -3,14 +3,13 @@
 use Latte\Runtime as LR;
 
 /** source: /Users/nikolaivanov/Local Sites/themeredone/app/public/wp-content/themes/theme-redone/views//layout/footer.latte */
-final class Template69c96c4d4a extends Latte\Runtime\Template
+final class Template69c96c4d4a extends LR\Template
 {
-	public const Source = '/Users/nikolaivanov/Local Sites/themeredone/app/public/wp-content/themes/theme-redone/views//layout/footer.latte';
+    public const Source = '/Users/nikolaivanov/Local Sites/themeredone/app/public/wp-content/themes/theme-redone/views//layout/footer.latte';
 
-
-	public function main(array $ʟ_args): void
-	{
-		echo '  </main>
+    public function main(array $ʟ_args): void
+    {
+        echo '  </main>
   <div class="backdrop"></div>
   <footer class="footer">
     <div class="container">
@@ -18,23 +17,23 @@ final class Template69c96c4d4a extends Latte\Runtime\Template
 
       <h4>Footer Menu 1</h4>
       ';
-		echo LR\Filters::escapeHtmlText(wp_nav_menu(['theme_location' => 'menu-footer', 'depth' => 1])) /* line 8 */;
-		echo '
+        echo LR\Filters::escapeHtmlText(wp_nav_menu(['theme_location' => 'menu-footer', 'depth' => 1])) /* line 8 */;
+        echo '
 
       <p class="copyright">
         <small>Copyright &copy; ';
-		echo LR\Filters::escapeHtmlText(date('Y')) /* line 14 */;
-		echo '</small>
+        echo LR\Filters::escapeHtmlText(date('Y')) /* line 14 */;
+        echo '</small>
       </p>
     </div>
   </footer>
 
 
   ';
-		echo LR\Filters::escapeHtmlText(wp_footer()) /* line 20 */;
-		echo '
+        echo LR\Filters::escapeHtmlText(wp_footer()) /* line 20 */;
+        echo '
   </body>
 
   </html>';
-	}
+    }
 }

@@ -1,33 +1,30 @@
 <?php
 
-define('TR_THEME_DIR', get_template_directory());
-define('TR_GUTENBERG_DIR', TR_THEME_DIR . '/gutenberg');
-define('TR_BLOCKS_DIR', TR_GUTENBERG_DIR . '/blocks');
+// functions.php
 
-require get_template_directory() . '/php-inc/theme-support.php';
-require get_template_directory() . '/php-inc/latte.php';
+/**
+ * Theme Redone
+ * //XXX: This file is the entry point of the theme.
+ * It should be used to include all the necessary files
+ * and initialize the theme.
+ * Should you want to add more logic, use classes and methods
+ * This file should be kept as clean as possible.
+ *
+ * @package ThemeRedone
+ */
 
-// Check if ACF or ACF Pro is installed and activated
-if (class_exists('acf')) {
-  require get_template_directory() . '/php-inc/sync-acf.php';
-  require get_template_directory() . '/php-inc/acf-options-pages.php';
-}
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/ThemeRedone/bootstrap.php';
 
-require get_template_directory() . '/php-inc/sync-cptui.php';
+// define('TR_THEME_DIR', get_template_directory());
+// define('TR_GUTENBERG_DIR', TR_THEME_DIR . '/gutenberg');
+// define('TR_BLOCKS_DIR', TR_GUTENBERG_DIR . '/blocks');
 
-require get_template_directory() . '/php-inc/custom-post-types.php';
-require get_template_directory() . '/php-inc/ThemeRedoneWalker.php';
+ThemeRedone\Bootstrap::init();
 
-// XXX: This file removes some common WP enqueues such as jQuery, emojis etc.
-// We are disabling those to get better performance. But if you need to support those,
-// just remove or comment the line 
-require get_template_directory() . '/php-inc/dequeues.php';
+// $tr_logger->info('Theme initialized');
 
-require get_template_directory() . '/php-inc/enqueues.php';
-require get_template_directory() . '/php-inc/remove-css-js-version.php';
-require get_template_directory() . '/php-inc/theme-functions.php';
-// require get_template_directory() . '/php-inc/sidebars.php';
-
-// INIT THE BLOCKS FRAMEWORK
-require get_template_directory() . '/php-inc/enqueue-block-specific-css-and-js.php';
-require get_template_directory() . '/gutenberg/init.php';
+// error_log('This is a test error log');
+// trigger_error('This is a test error log', E_USER_NOTICE);
+// errors will be intercepted and logged wp-content/theme_redone_logs/theme.log
+// as well as the default PHP error log

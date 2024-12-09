@@ -1,7 +1,49 @@
 {
-  "require": {
-    "latte/latte": "^3.0.3",
-    "tracy/tracy": "^2.9.4",
-    "vlucas/phpdotenv": "^5.5"
-  }
+    "name": "webredone/theme-redone",
+    "description": "Modern WordPress theme",
+    "type": "wordpress-theme",
+    "version": "1.2.0",
+    "require": {
+        "php": ">=8.2",
+        "latte/latte": "^3.0.3",
+        "tracy/tracy": "^2.9.4",
+        "vlucas/phpdotenv": "^5.5",
+        "monolog/monolog": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThemeRedone\\": "src/ThemeRedone/"
+        }
+    },
+    "files": [
+        "src/ThemeRedone/Functions/global.php"
+    ],
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.34",
+        "phpstan/extension-installer": "^1.4",
+        "php-stubs/wordpress-stubs": "^6.7",
+        "phpstan/phpstan": "1.11.0",
+        "szepeviktor/phpstan-wordpress": "^1.3",
+        "phpmd/phpmd": "^2.15",
+        "vimeo/psalm": "^5.0",
+        "humanmade/psalm-plugin-wordpress": "^3.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "format": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+        "format:check": "php-cs-fixer fix --dry-run --config=.php-cs-fixer.dist.php",
+        "analyse:phpstan": "phpstan analyse -c phpstan.neon --memory-limit=2G",
+        "analyse:phpmd": "phpmd . ansi phpmd.xml --exclude vendor,node_modules,views/temp",
+        "analyse:psalm": "psalm --memory-limit=2G",
+        "analyse": [
+            "composer run format:check",
+            "composer run analyse:phpstan",
+            "composer run analyse:phpmd",
+            "composer run analyse:psalm"
+        ]
+    }
 }
