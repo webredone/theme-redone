@@ -12,6 +12,7 @@ parameters:
         - %currentWorkingDirectory%/vendor/*
         - %currentWorkingDirectory%/views/temp/*
     bootstrapFiles:
+        - %currentWorkingDirectory%/src/ThemeRedone/constants.php
         - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
     # ignoreErrors:
     #   - '#Some specific ignore pattern#'

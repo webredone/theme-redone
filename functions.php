@@ -13,12 +13,10 @@
  * @package ThemeRedone
  */
 
+require_once __DIR__ . '/src/ThemeRedone/constants.php';
+
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/src/ThemeRedone/bootstrap.php';
-
-// define('TR_THEME_DIR', get_template_directory());
-// define('TR_GUTENBERG_DIR', TR_THEME_DIR . '/gutenberg');
-// define('TR_BLOCKS_DIR', TR_GUTENBERG_DIR . '/blocks');
 
 ThemeRedone\Bootstrap::init();
 

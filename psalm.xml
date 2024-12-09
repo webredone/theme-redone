@@ -11,23 +11,17 @@
 	findUnusedBaselineEntry="true"
 >
     <projectFiles>
-        <!-- Scan all PHP files in the current directory -->
         <directory name="." />
-
-        <!-- Ignore directories we don't want to analyze -->
         <ignoreFiles>
             <directory name="vendor" />
-            <!-- <directory name="node_modules" /> -->
             <directory name="views/temp" />
         </ignoreFiles>
     </projectFiles>
 
-    <!-- Load WordPress stubs so Psalm understands WP functions -->
     <stubs>
         <file name="vendor/php-stubs/wordpress-stubs/wordpress-stubs.php"/>
     </stubs>
 
-    <!-- Load the WordPress Psalm plugin -->
     <plugins>
         <pluginClass class="PsalmWordPress\Plugin" />
     </plugins>

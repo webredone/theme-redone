@@ -406,7 +406,8 @@ function tr_posted_by($author_id = false)
     $byline = '<i>By:</i> ';
     $byline .= '<a ';
     if ($author_id === false) {
-        $byline .= 'href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '"';
+        $fetched_author_id = (int) get_the_author_meta('ID');
+        $byline .= 'href="' . esc_url(get_author_posts_url($fetched_author_id)) . '"';
     } else {
         $byline .= 'href="' . esc_url(get_author_posts_url($author_id)) . '"';
     }

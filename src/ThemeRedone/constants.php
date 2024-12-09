@@ -1,0 +1,5 @@
+<?php
+
+define('TR_THEME_DIR', get_template_directory());
+define('TR_GUTENBERG_DIR', TR_THEME_DIR . '/gutenberg');
+define('TR_BLOCKS_DIR', TR_GUTENBERG_DIR . '/blocks');

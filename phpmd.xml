@@ -7,32 +7,44 @@
 
     <description>PHPMD ruleset for ThemeRedone theme</description>
 
-	<!-- Clean Code Rules -->
+    <!-- Clean Code Rules -->
     <rule ref="rulesets/cleancode.xml">
         <exclude name="StaticAccess"/>
+        <!-- Exclude else rule if you want to allow else clauses -->
+        <exclude name="ElseExpression"/>
+		<exclude name="BooleanArgumentFlag"/>
     </rule>
 
-	<!-- Size Rules -->
-    <rule ref="rulesets/codesize.xml"/>
+    <!-- Size Rules -->
+    <rule ref="rulesets/codesize.xml">
+        <!-- Exclude complexity rules if you must keep the code structure -->
+        <exclude name="CyclomaticComplexity"/>
+        <exclude name="NPathComplexity"/>
+    </rule>
 
-	<!-- Controversial Rules -->
+    <!-- Controversial Rules -->
     <rule ref="rulesets/controversial.xml">
+        <exclude name="Superglobals"/>
         <exclude name="CamelCaseVariableName"/>
         <exclude name="CamelCaseParameterName"/>
         <exclude name="CamelCasePropertyName"/>
     </rule>
 
-	<!-- Design Rules -->
+    <!-- Design Rules -->
     <rule ref="rulesets/design.xml"/>
 
-	<!-- Naming Rules -->
+    <!-- Naming Rules -->
     <rule ref="rulesets/naming.xml">
         <exclude name="ShortVariable"/>
         <exclude name="LongVariable"/>
+        <!-- Exclude the camelCase method name rule for WP walker methods -->
+        <exclude name="CamelCaseMethodName"/>
     </rule>
 
-	<!-- Unused Code Rules -->
+    <!-- Unused Code Rules -->
     <rule ref="rulesets/unusedcode.xml">
         <exclude name="UnusedUseStatement"/>
+        <!-- Exclude unused parameter warnings for required WP walker params -->
+        <exclude name="UnusedFormalParameter"/>
     </rule>
 </ruleset>

@@ -486,22 +486,6 @@ function tr_get_nav_menu_items_by_location($location, $args = [])
 }
 
 // HELPERS ---------------------------------------
-// var_dump wrapper
-function tr_log($toPrint, $isSmall = false, $left = false)
-{
-    echo '<pre style="position: fixed; line-height: 1.4 !important; bottom: 0; left: 0; font-family: monospace; width: 100vw; height: 70vh;' . ($isSmall ? "max-height: 300px;" : "") . 'overflow-y: scroll; ' . ($left ? "width: 23vw; height: calc(100vh - 32px); max-height: calc(100vh - 32px);" : "") . 'background: #222; color: #cecece; padding: 30px; z-index: 9999; border: 5px solid crimson; font-size: 14px !important;">';
-    var_dump($toPrint);
-    echo '</pre>';
-}
-
-// To be used in loops for example
-function tr_log_i($toPrint, $long = false)
-{
-    $has_max_height = !$long ? ' max-height: 1500px !important; ' : ' max-height: 730px; ';
-    echo '<pre style="line-height: 1.4 !important; ' . $has_max_height . 'overflow-y: auto !important; font-family: monospace; overflow-y: scroll; background: #222; color: #cecece; padding: 8px; border: 2px solid crimson; font-size: 12px !important;">';
-    var_dump($toPrint);
-    echo '</pre>';
-}
 
 // detect if IE
 function tr_is_ie()

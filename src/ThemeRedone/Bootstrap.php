@@ -29,11 +29,6 @@ final class Bootstrap
 
         self::$initialized = true;
 
-        // Define constants BEFORE we instantiate the theme
-        define('TR_THEME_DIR', get_template_directory());
-        define('TR_GUTENBERG_DIR', TR_THEME_DIR . '/gutenberg');
-        define('TR_BLOCKS_DIR', TR_GUTENBERG_DIR . '/blocks');
-
         // Load environment variables
         $dotenv = Dotenv::createImmutable(TR_THEME_DIR);
         $dotenv->load();
@@ -50,6 +45,8 @@ final class Bootstrap
         $theme->boot();
 
         // Make latte globally available
+
+        /** @var \Latte\Engine $latte */
         global $latte;
         $latte = $theme->getTemplateEngine()->getLatte();
 
