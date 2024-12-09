@@ -500,7 +500,7 @@ function tr_hex_to_rgb($hex)
     echo $rgb;
 }
 
-function tr_str_ends_with($haystack, $needle)
+function tr_str_ends_with(string $haystack, string $needle): bool
 {
     $length = strlen($needle);
     if (!$length) {
@@ -511,7 +511,10 @@ function tr_str_ends_with($haystack, $needle)
 }
 
 // Can be used with dynamically created modal to add the correct HTML for either YT, Vimeo or self hosted videos
-function tr_get_video_type_and_id($url)
+/**
+ * @return array{video_id: 0|string, video_type: 'none'|'vimeo'|'youtube'}
+ */
+function tr_get_video_type_and_id(string $url): array
 {
     $yt_rx = '/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/';
     $has_match_youtube = preg_match($yt_rx, $url, $yt_matches);
@@ -531,6 +534,8 @@ function tr_get_video_type_and_id($url)
         $type = 'none';
     }
 
+    $data = [];
+
     $data['video_id'] = $video_id;
     $data['video_type'] = $type;
 
@@ -538,7 +543,7 @@ function tr_get_video_type_and_id($url)
 }
 
 // Can be used with either menus or acf fields to add the correct svg icon
-function tr_get_soc_name($soc_media_link)
+function tr_get_soc_name(string $soc_media_link): string
 {
     $soc_medias = [
         "//facebook",
@@ -548,10 +553,10 @@ function tr_get_soc_name($soc_media_link)
         "//linkedin",
         "//pinterest",
     ];
-    $soc_media_name = false;
+    $soc_media_name = '';
 
     foreach ($soc_medias as $sm_name) {
-        if (strpos($soc_media_link, $sm_name)) {
+        if (strpos($soc_media_link, $sm_name) !== false) {
             $soc_media_name = substr($sm_name, 2);
         }
     }
@@ -560,13 +565,13 @@ function tr_get_soc_name($soc_media_link)
 }
 
 // Modal 'slot"
-function tr_modal_start($id, $title = false, $class = '')
+function tr_modal_start(string $id, ?string $title = null, string $class = ''): void
 {
     $modal_start = "<div class='modal--custom $class' id='$id'>";
     $modal_start .= "<div class='modal--custom__backdrop modal-close'></div>";
     $modal_start .= "<div class='modal--custom__content'>";
 
-    if ($title) {
+    if (isset($title)) {
         $modal_start .= "<h2 class='modal--custom__title'>$title</h2>";
     }
     $modal_start .= "<i class='modal-close modal--custom-close-x'>";
@@ -581,7 +586,7 @@ function tr_modal_start($id, $title = false, $class = '')
 
     echo $modal_start;
 }
-function tr_modal_end()
+function tr_modal_end(): void
 {
     echo '</div></div></div>';
 }
