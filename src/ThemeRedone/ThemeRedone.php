@@ -1,7 +1,6 @@
 <?php
 
 // src/ThemeRedone/ThemeRedone.php
-
 declare(strict_types=1);
 
 namespace ThemeRedone;
@@ -16,7 +15,7 @@ use ThemeRedone\Core\{
 };
 use ThemeRedone\Plugins\{
     AcfSyncManager,
-    CptuiSyncManager,
+    CptuiSyncManager
 };
 
 final class ThemeRedone

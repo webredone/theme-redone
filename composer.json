@@ -8,7 +8,8 @@
         "latte/latte": "^3.0.3",
         "tracy/tracy": "^2.9.4",
         "vlucas/phpdotenv": "^5.5",
-        "monolog/monolog": "^3.0"
+        "monolog/monolog": "^3.0",
+        "league/container": "^4.2"
     },
     "autoload": {
         "psr-4": {
