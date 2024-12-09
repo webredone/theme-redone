@@ -9,6 +9,7 @@ namespace ThemeRedone;
 use Dotenv\Dotenv;
 use ThemeRedone\Core\{
     Blocks,
+    BlocksRegister,
     Dequeues,
     Enqueues,
     LoggerService,
@@ -33,12 +34,15 @@ final class Bootstrap
         $dotenv = Dotenv::createImmutable(TR_THEME_DIR);
         $dotenv->load();
 
+        $blocksRegister = new BlocksRegister();
+        $blocks = new Blocks($blocksRegister);
+
         // Instantiate and boot the theme
         $theme = new Theme(
             new ThemeSupport(),
             new Enqueues(),
             new Dequeues(),
-            new Blocks(),
+            $blocks,
             new TemplateEngine(),
             new AcfIntegration()
         );

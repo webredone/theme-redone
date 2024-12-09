@@ -6,16 +6,20 @@ declare(strict_types=1);
 
 namespace ThemeRedone\Core;
 
+use ThemeRedone\Core\BlocksRegister;
+
 /** @package ThemeRedone\Core */
 final readonly class Blocks
 {
+    public function __construct(private readonly BlocksRegister $blocksRegister)
+    {
+    }
+
     public function initialize(): void
     {
         add_action('wp_enqueue_scripts', [$this, 'enqueueBlockAssets'], 10, 0);
-        // Add Gutenberg initialization
+        $this->blocksRegister->register();
 
-        // TODO: Move init.php into src/ThemeRedone/Gutenberg/init.php maybe
-        require_once TR_GUTENBERG_DIR . '/init.php';
     }
 
     public function enqueueBlockAssets(): void
