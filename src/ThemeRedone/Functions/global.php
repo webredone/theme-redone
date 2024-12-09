@@ -18,7 +18,7 @@ function tr_pingback_header()
         echo $pingback_link;
     }
 }
-add_action('wp_head', 'tr_pingback_header');
+add_action('wp_head', 'tr_pingback_header', 10, 0);
 
 /**
  * Used for page controllers.
@@ -180,16 +180,15 @@ function tr_get_media(
 
 // Import SVG code from theme assets or media. (Previously used on its own, now it gets called from tr_get_media fn)
 function tr_get_svg(
-    $file_name_or_uploads_path,
-    $from_media = false,
-    $async = false,
-    $path_only = false
+    string $file_name_or_uploads_path,
+    bool $from_media = false,
+    bool $async = false,
+    bool $path_only = false
 ) {
-    $html = '';
 
     $correct_svg_file_path = $from_media
-        ? $file_name_or_uploads_path
-        : get_template_directory_uri() . '/assets/svg/' . $file_name_or_uploads_path;
+    ? $file_name_or_uploads_path
+    : get_template_directory_uri() . '/assets/svg/' . $file_name_or_uploads_path;
 
     // Only print the svg path and don't output its code
     if ($path_only) {
@@ -200,19 +199,19 @@ function tr_get_svg(
         $html = '<img class="js-async-svg" src="';
         $html .= tr_get_img_path('lazy-loading-transparent.png');
         $html .= '" data-src="' . $correct_svg_file_path . '" alt="will be replaced with SVG code" />';
+
+        echo $html;
     } else {
-        $html = file_get_contents($correct_svg_file_path);
+        echo file_get_contents($correct_svg_file_path);
     }
 
-    echo $html;
 }
 
 // Get img from assets (Previously used on its own, now it gets called from tr_get_media fn)
-function tr_get_img_path($img_path)
+function tr_get_img_path(string $img_path): string
 {
-    $img_full_path = get_template_directory_uri() . "/assets/img/$img_path";
+    return get_template_directory_uri() . "/assets/img/$img_path";
 
-    return $img_full_path;
 }
 
 // (Previously used on its own, now it gets called from tr_get_media fn)
@@ -324,22 +323,32 @@ function tr_a(
 /**
  * @param string $soc_name
  *
- * @return void
- *
  * @see(https://webredone.com/theme-redone/theme-functions/tr_social_share/)
  * 	<a href="{tr_social_share('twitter')}"></a>
  */
-function tr_social_share($soc_name)
+function tr_social_share($soc_name): void
 {
-    $share_options = [
-        'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=' . get_the_permalink(),
-        'twitter' => 'https://twitter.com/intent/tweet?text=' . get_the_title() . '&url=' . get_the_permalink(),
-        'linkedin' => 'https://www.linkedin.com/cws/share?url=' . get_the_permalink(),
-        'pinterest' => 'http://pinterest.com/pin/create/link/?url=' . get_the_permalink(),
-        'email' => 'mailto:?subject=I wanted you to see this: ' . get_the_title() . '&amp;body=' . get_the_permalink(),
-    ];
 
-    echo $share_options[$soc_name];
+    $current_post_permalink = get_the_permalink();
+
+    if (gettype($current_post_permalink) !== 'string') {
+        echo '';
+
+        return;
+    }
+
+    $current_post_title = get_the_title();
+
+    $soc_medial_link = match ($soc_name) {
+        'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=' . $current_post_permalink,
+        'twitter' => 'https://twitter.com/intent/tweet?text=' . $current_post_title . '&url=' . $current_post_permalink,
+        'linkedin' => 'https://www.linkedin.com/cws/share?url=' . $current_post_permalink,
+        'pinterest' => 'http://pinterest.com/pin/create/link/?url=' . $current_post_permalink,
+        'email' => 'mailto:?subject=I wanted you to see this: ' . $current_post_title . '&amp;body=' . $current_post_permalink,
+        default => '',
+    };
+
+    echo $soc_medial_link;
 }
 
 /**
@@ -485,15 +494,8 @@ function tr_get_nav_menu_items_by_location($location, $args = [])
 }
 
 // HELPERS ---------------------------------------
-// detect if IE
-function tr_is_ie()
-{
-    if (preg_match('~MSIE|Internet Explorer~i', $_SERVER['HTTP_USER_AGENT']) || (strpos($_SERVER['HTTP_USER_AGENT'], 'Trident/7.0; rv:11.0') !== false)) {
-        return true;
-    }
-}
 
-function tr_hex_to_rgb($hex)
+function tr_hex_to_rgb(string $hex): void
 {
     list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
     $rgb = "$r, $g, $b";
@@ -522,22 +524,20 @@ function tr_get_video_type_and_id(string $url): array
     $vm_rx = '/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([‌​0-9]{6,11})[?]?.*/';
     $has_match_vimeo = preg_match($vm_rx, $url, $vm_matches);
 
-    //Then we want the video id which is:
-    if ($has_match_youtube) {
-        $video_id = $yt_matches[5];
-        $type = 'youtube';
-    } elseif ($has_match_vimeo) {
-        $video_id = $vm_matches[5];
-        $type = 'vimeo';
-    } else {
-        $video_id = 0;
-        $type = 'none';
-    }
-
-    $data = [];
-
-    $data['video_id'] = $video_id;
-    $data['video_type'] = $type;
+    $data = match (true) {
+        !!$has_match_youtube => [
+            'video_id' => $yt_matches[5],
+            'video_type' => 'youtube',
+        ],
+        !!$has_match_vimeo => [
+            'video_id' => $vm_matches[5],
+            'video_type' => 'vimeo',
+        ],
+        default => [
+            'video_id' => 0,
+            'video_type' => 'none',
+        ]
+    };
 
     return $data;
 }

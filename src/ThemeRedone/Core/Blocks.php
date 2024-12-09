@@ -11,8 +11,10 @@ final readonly class Blocks
 {
     public function initialize(): void
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueueBlockAssets']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueBlockAssets'], 10, 0);
         // Add Gutenberg initialization
+
+        // TODO: Move init.php into src/ThemeRedone/Gutenberg/init.php maybe
         require_once TR_GUTENBERG_DIR . '/init.php';
     }
 
