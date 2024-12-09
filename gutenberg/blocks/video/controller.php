@@ -3,10 +3,10 @@
 $block_name = basename(__DIR__);
 // $block_prefix is defined inside init.php
 
-register_block_type("$block_prefix/$block_name", [
+register_block_type(TR_BLOCK_NAME_PREFIX . '/' . $block_name, [
   'render_callback' => function ($attrs, $content) {
-      global $latte;
-      $html_str = $latte->renderToString(dirname(__FILE__) . '/view.latte', $attrs);
+      global $tr_renderer;
+      $html_str = $tr_renderer->renderToString(dirname(__FILE__) . '/view.latte', $attrs);
 
       return $html_str;
   },

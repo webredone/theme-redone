@@ -1,7 +1,6 @@
 <?php
 
 // REGISTER THE DYNAMIC BLOCKS ------------------------------
-$block_prefix = json_decode(file_get_contents(get_template_directory() . "/theme_redone_global_config.json"), true)['BLOCK_NAME_PREFIX'];
 $all_blocks_dir_names = array_diff(scandir(TR_BLOCKS_DIR), ['..', '.', 'new-block-setup']);
 foreach ($all_blocks_dir_names as $key => $block_dir_name) {
     $block_model = json_decode(file_get_contents(TR_BLOCKS_DIR . "/$block_dir_name/model.json"), true);

@@ -10,7 +10,8 @@ parameters:
     excludePaths:
         # Exclude vendor if needed
         - %currentWorkingDirectory%/vendor/*
-        - %currentWorkingDirectory%/views/temp/*
+        - %currentWorkingDirectory%/node_modules/*
+        - %currentWorkingDirectory%/views/cache/*
     bootstrapFiles:
         - %currentWorkingDirectory%/src/ThemeRedone/constants.php
         - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php

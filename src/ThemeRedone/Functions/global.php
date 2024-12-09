@@ -25,7 +25,7 @@ add_action('wp_head', 'tr_pingback_header', 10, 0);
  *
  * @example: For example in 404.php, it would be:
  * ```php
- * $latte->render(tr_view_path('templates/404'));
+ * $tr_renderer->render(tr_view_path('templates/404'));
  * ```
  *
  * @param string $template_name Name of the latte template living inside the /views/ dir
@@ -78,7 +78,7 @@ function tr_get_media_path($media)
  * @param bool $dont_print print (render) result HTML, or just echo it for debugging purposes
  * @param bool $path_only if true, it doesn't render, but returns the media full path
  *
- * @return void|string Prints result HTML or returns it, or returns the full path to the media
+ * @return void|string|false Prints result HTML or returns it, or returns the full path to the media
  *
  * @see(https://webredone.com/theme-redone/theme-functions/tr_get_media/)
  */
@@ -96,24 +96,17 @@ function tr_get_media(
     $media_src = false;
     $media_id = false;
 
-    $value_type = gettype($media);
-
     if (gettype($media) === 'string') {
         $media_src = $media;
     } else {
-        if (isset($media['url'])) {
-            $media_src = $media['url'];
-        } else {
-            $media_src = $media['src'];
-        }
 
-        if (array_key_exists('size', $media) && array_key_exists($media['size'], $media['sizes'])) {
+        $media_src = $media['url'] ?? $media['src'];
+
+        if (isset($media['sizes']) && isset($media['size']) && isset($media['sizes'][$media['size']])) {
             $media_src = $media['sizes'][$media['size']];
         }
 
-        if (isset($media['id'])) {
-            $media_id = $media['id'];
-        }
+        $media_id = $media['id'] ?? false;
     }
 
     // checks if image is from uploads or from theme assets
@@ -144,20 +137,20 @@ function tr_get_media(
 
         $image_size_obj = wp_getimagesize($img_path);
         $image_size = [
-            'w' => $image_size_obj[0],
-            'h' => $image_size_obj[1],
+            'w' => $image_size_obj[0] ?? 0,
+            'h' => $image_size_obj[1] ?? 0,
         ];
 
-        $alt_txt = false;
-        $class = false;
+        $alt_txt = '';
+        $class = '';
 
-        if ($from_uploads) {
-            $alt_txt = get_post_meta($media_id, '_wp_attachment_image_alt', true);
+        if ($from_uploads && $media_id) {
+            $alt_txt = get_post_meta($media_id, '_wp_attachment_image_alt', true) ?? '';
         }
 
-        if ("array" === $value_type) {
-            (array_key_exists('alt', $media)) && $alt_txt = $media['alt'];
-            (array_key_exists('class', $media)) && $class = $media['class'];
+        if ("array" === gettype($media)) {
+            $alt_txt = $media['alt'] ?? $alt_txt;
+            $class = $media['class'] ?? $class;
         }
 
         // dynamic function name
@@ -191,18 +184,17 @@ function tr_get_svg(
         return $correct_svg_file_path;
     }
 
+    $html = '';
+
     if ($async) {
         $html = '<img class="js-async-svg" src="';
         $html .= tr_get_img_path('lazy-loading-transparent.png');
         $html .= '" data-src="' . $correct_svg_file_path . '" alt="will be replaced with SVG code" />';
-
-        echo $html;
     } else {
-        echo file_get_contents($correct_svg_file_path);
+        $html = file_get_contents($correct_svg_file_path);
     }
 
-    return '';
-
+    return $html;
 }
 
 // Get img from assets (Previously used on its own, now it gets called from tr_get_media fn)

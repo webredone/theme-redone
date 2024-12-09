@@ -1,3 +1,4 @@
 <?php
 
-$latte->render(tr_view_path('templates/page'));
+global $tr_renderer;
+$tr_renderer->render(tr_view_path('templates/page'));

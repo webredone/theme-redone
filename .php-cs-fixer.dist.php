@@ -8,7 +8,7 @@ $finder = PhpCsFixer\Finder::create()
     ])
     ->exclude('vendor')
     ->exclude('node_modules')
-    ->exclude('views/temp')
+    ->exclude('views/cache')
     ->name('*.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);

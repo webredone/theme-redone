@@ -21,14 +21,14 @@ final readonly class TemplateEngine
 
     public function initialize(): void
     {
-        $this->latte->setTempDirectory(get_template_directory() . '/views/temp');
+        $this->latte->setTempDirectory(get_template_directory() . '/views/cache');
 
         if (isset($_ENV['TRACY_DEBUGGER']) && $_ENV['TRACY_DEBUGGER'] === 'true') {
             Debugger::enable();
         }
     }
 
-    public function getLatte(): Engine
+    public function getRenderer(): Engine
     {
         return $this->latte;
     }

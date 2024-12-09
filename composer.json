@@ -35,7 +35,7 @@
         "format": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
         "format:check": "php-cs-fixer fix --dry-run --config=.php-cs-fixer.dist.php",
         "analyse:phpstan": "phpstan analyse -c phpstan.neon --memory-limit=2G",
-        "analyse:phpmd": "phpmd . ansi phpmd.xml --exclude vendor,node_modules,views/temp",
+        "analyse:phpmd": "phpmd . ansi phpmd.xml --exclude vendor,node_modules,views/cache",
         "analyse": [
             "composer run format:check",
             "composer run analyse:phpstan",

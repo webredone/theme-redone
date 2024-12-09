@@ -46,9 +46,9 @@ final class Bootstrap
 
         // Make latte globally available
 
-        /** @var \Latte\Engine $latte */
-        global $latte;
-        $latte = $theme->getTemplateEngine()->getLatte();
+        /** @var \Latte\Engine $tr_renderer */
+        global $tr_renderer;
+        $tr_renderer = $theme->getTemplateEngine()->getRenderer();
 
         // Initialize the logger and make it globally available
         global $tr_logger;
