@@ -1,22 +1,23 @@
 <?php
 
-// src/ThemeRedone/Features/CustomPostTypes.php
+// src/ThemeRedone/Core/CustomPostTypesRegistrar.php
 
 declare(strict_types=1);
 
-namespace ThemeRedone\Features;
+namespace ThemeRedone\Core;
 
-final readonly class CustomPostTypes
+/**
+ * This class is now responsible solely for registering CPTs via code,
+ * independent of CPTUI. If you have code-based CPTs, define methods here and call them in `register()`.
+ */
+final readonly class CustomPostTypesRegistrar
 {
     public function register(): void
     {
-        if (!function_exists('cptui_init')) {
-            require get_template_directory() . '/cptui/post_types.php';
-            require get_template_directory() . '/cptui/taxonomies.php';
-        }
+        // Call your code-based CPT registration methods here
+        // e.g. $this->registerNewsPostType();
     }
 
-    // Uncomment and modify if you want to register CPTs directly in code
     /*
     private function registerNewsPostType(): void
     {

@@ -6,12 +6,12 @@ declare(strict_types=1);
 
 namespace ThemeRedone\Core;
 
-use ThemeRedone\Core\BlocksRegister;
+use ThemeRedone\Core\BlockTypesRegistrar;
 
 /** @package ThemeRedone\Core */
 final readonly class Blocks
 {
-    public function __construct(private readonly BlocksRegister $blocksRegister)
+    public function __construct(private readonly BlockTypesRegistrar $blocksRegister)
     {
     }
 

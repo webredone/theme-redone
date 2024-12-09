@@ -1,12 +1,12 @@
 <?php
 
-// src/ThemeRedone/Features/AcfIntegration.php
+// src/ThemeRedone/Plugins/AcfSyncManager.php
 
 declare(strict_types=1);
 
-namespace ThemeRedone\Features;
+namespace ThemeRedone\Plugins;
 
-final readonly class AcfIntegration
+final readonly class AcfSyncManager
 {
     public function initialize(): void
     {

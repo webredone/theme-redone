@@ -1,12 +1,12 @@
 <?php
 
-// src/ThemeRedone/Features/ThemeRedoneWalker.php
+// src/ThemeRedone/Core/ThemeRedoneMenuWalker.php
 
 //Cannot use strict types here, until we figure out how to use properly
 
-namespace ThemeRedone\Features;
+namespace ThemeRedone\Core;
 
-final class ThemeRedoneWalker extends \Walker_Nav_Menu
+final class ThemeRedoneMenuWalker extends \Walker_Nav_Menu
 {
     public function register(): void
     {
@@ -140,5 +140,5 @@ final class ThemeRedoneWalker extends \Walker_Nav_Menu
 
 // wp_nav_menu([
 //     'theme_location' => 'menu-1',
-//     'walker' => new \ThemeRedone\Features\ThemeRedoneWalker()
+//     'walker' => new \ThemeRedone\Core\ThemeRedoneMenuWalker()
 // ]);
