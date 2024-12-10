@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ThemeRedone\Plugins;
 
+use ThemeRedone\Core\Config;
+
 final readonly class CptuiSyncManager
 {
     public function initialize(): void
@@ -16,8 +18,8 @@ final readonly class CptuiSyncManager
         // Load CPTUI definitions from local files if the plugin isn't already loaded
         // TODO: Check if this is correct
         if (!function_exists('cptui_init')) {
-            $cptui_post_types_path = get_template_directory() . '/cptui/post_types.php';
-            $cptui_taxonomies_path = get_template_directory() . '/cptui/taxonomies.php';
+            $cptui_post_types_path = Config::getThemeDir() . '/cptui/post_types.php';
+            $cptui_taxonomies_path = Config::getThemeDir() . '/cptui/taxonomies.php';
 
             if (file_exists($cptui_post_types_path)) {
                 require $cptui_post_types_path;

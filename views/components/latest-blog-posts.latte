@@ -1,5 +1,5 @@
-<section 
-  class="more-blog-posts" 
+<section
+  class="more-blog-posts"
   aria-label="Latest Blog Posts Section"
 >
   <div class="container">
@@ -16,13 +16,13 @@
       )}
       {while $customPosts->have_posts()}
         {$customPosts->the_post()}
-        {include tr_part('post-card')}
+        {include tr_component('post-card')}
       {/while}
       {wp_reset_postdata()}
     </div><!-- end row -->
     <div class="text-center">
-      <a 
-        href="{esc_url( home_url( '/' ) )}blog" 
+      <a
+        href="{esc_url( home_url( '/' ) )}blog"
         class="btn btn--brand"
       >
         <span>Go to Blog</span>

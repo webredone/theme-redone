@@ -63,7 +63,7 @@
 				]
 		]}
 
-			{include tr_part('_collapsibles'), test_acc_items: $test_acc_items}
+			{include tr_component('_collapsibles'), test_acc_items: $test_acc_items}
 
 
 			<h2 class="mb40">Typography</h2>
@@ -141,7 +141,7 @@
 
 			<div class="f-row" style="--i-cols: 2; --i-gap: 30">
 				<div class="col">
-	
+
 						<h4>Tabs (with nested accordion)</h4>
 						{var $test_tabs = [
 							[
@@ -166,7 +166,7 @@
 							]
 						]}
 
-					{embed tr_part('_tabs'), tabs: $test_tabs, class: 'optional-test-class-2'}
+					{embed tr_component('_tabs'), tabs: $test_tabs, class: 'optional-test-class-2'}
 						{block tab_anchor}
 							<span>
 								<strong>{$ta_content['anchor']}</strong> ✅
@@ -175,9 +175,9 @@
 
 						{block tab_panel}
 							{if $tp_key === 0}
-								{embed 
-									tr_part('_accordion'), 
-									items: $test_acc_items, 
+								{embed
+									tr_component('_accordion'),
+									items: $test_acc_items,
 									initially_open_item: 0,
 									collapse_siblings: true
 								}
@@ -210,9 +210,9 @@
 
 				<div class="col">
 					<h4>Accordion (with nested tabs)</h4>
-					{embed 
-						tr_part('_accordion'), 
-						items: $test_acc_items, 
+					{embed
+						tr_component('_accordion'),
+						items: $test_acc_items,
 						initially_open_item: 0,
 						collapse_siblings: true
 					}
@@ -224,7 +224,7 @@
 
 						{block acc_content}
 							{if $index === 0}
-								{embed tr_part('_tabs'), tabs: $test_tabs, class: 'optional-test-class'}
+								{embed tr_component('_tabs'), tabs: $test_tabs, class: 'optional-test-class'}
 									{block tab_anchor}
 										<span>
 											<strong>{$ta_content['anchor']}</strong> ✅
@@ -308,15 +308,15 @@
 		]}
 
 
-		{embed 
-			tr_part('_slider'), 
-			class: 'slider--test', 
+		{embed
+			tr_component('_slider'),
+			class: 'slider--test',
 			slides: $test_slides
 		}
 			{block slide}
 				<div style="box-shadow: 0 0 0 1px blue">
 					<h5 n:ifcontent>{$s_key} - {$s_content['alt']}</h5>
-					<img 
+					<img
 						src="{$s_content['src']}"
 						alt="{$s_content['alt']}"
 					/>
@@ -336,9 +336,9 @@
 			)
 		))}
 
-		{embed 
-			tr_part('_slider'), 
-			class: 'slider--test', 
+		{embed
+			tr_component('_slider'),
+			class: 'slider--test',
 			slides: $posts_query
 		}
 			{block slide_q}
@@ -359,15 +359,15 @@
 
   <div class="container"><h3>LOOPED SLIDER</h3></div>
 	<div>
-		{embed 
-			tr_part('_slider'), 
-			class: 'slider--test2', 
+		{embed
+			tr_component('_slider'),
+			class: 'slider--test2',
 			slides: $test_slides
 		}
 			{block slide}
 				<div style="box-shadow: 0 0 0 1px blue">
 					<h5 n:ifcontent>{$s_key} - {$s_content['alt']}</h5>
-					<img 
+					<img
 						src="{$s_content['src']}"
 						alt="{$s_content['alt']}"
 					/>
@@ -614,7 +614,7 @@
 <code>
 {tr_get_media($img_1_data_string, dont_print: true)}
 </code>
-</pre>		
+</pre>
 
 					{tr_get_media($img_1_data_string, dont_print: true)}
 
@@ -627,7 +627,7 @@
 </code>
 </pre>
           {var $img_2_data_array = ['src' => 'people/photo-1517299151253-d0449b733f57.jpg', 'alt' => 'manually added alt text']}
-					
+
 					{tr_get_media($img_2_data_array)}
 
 					<br /><br />
@@ -656,7 +656,7 @@
 <code>
 {tr_get_media($img_1_data_string, async: true)}
 </code>
-</pre>		
+</pre>
 					{tr_get_media($img_1_data_string, async: true)}
 
 					<h5>No ALT Array</h5>
@@ -664,7 +664,7 @@
 <code>
 {tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)}
 </code>
-</pre>		
+</pre>
 					{tr_get_media(['src' => 'people/photo-1517299151253-d0449b733f57.jpg'], true)}
 
 					<h5>With manually wrritten ALT Array</h5>
@@ -672,7 +672,7 @@
 <code>
 {tr_get_media($img_2_data_array, true)}
 </code>
-</pre>		
+</pre>
 					{tr_get_media($img_2_data_array, true)}
 
 					<br /><br />
@@ -682,7 +682,7 @@
 
 {tr_get_media($img_2_data_array_with_class, true)}
 </code>
-</pre>			
+</pre>
 {* TODO: Fix this not rendering *}
 
 					{tr_get_media($img_2_data_array_with_class, true)}
@@ -712,7 +712,7 @@
 <code>
 &lt;img src="{tr_get_media_path($img_1_data_string)}" /&gt;
 </code>
-</pre>	
+</pre>
 					<img src="{tr_get_media_path($img_1_data_string)}" />
 				</div>
 			</div>

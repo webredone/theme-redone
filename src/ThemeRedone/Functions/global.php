@@ -1,5 +1,8 @@
 <?php
 
+use ThemeRedone\Core\Config;
+use ThemeRedone\Enums\Flavor;
+
 /********************************************
  * Theme Redone functions and definitions
  ********************************************/
@@ -20,25 +23,31 @@ function tr_pingback_header()
 }
 add_action('wp_head', 'tr_pingback_header', 10, 0);
 
-/**
- * Used for page controllers.
- *
- * @example: For example in 404.php, it would be:
- * ```php
- * $tr_renderer->render(tr_view_path('templates/404'));
- * ```
- *
- * @param string $template_name Name of the latte template living inside the /views/ dir
- *
- * @return string Full path to the view file
- */
-function tr_view_path($template_name)
+function tr_view_path(string $template_name): string
 {
-    return get_template_directory() . "/views/$template_name.latte";
+    $flavor = Config::getFlavor();
+    $extension = $flavor->getTemplateExtension();
+
+    if ($flavor === Flavor::Blade) {
+        // Return a dot-notation template name for files inside views/
+        $dotName = str_replace('/', '.', $template_name);
+
+        return $dotName; // e.g. 'layout.header'
+    }
+
+    // For Latte and PHP just return full path
+    return get_template_directory() . "/views/$template_name$extension";
+}
+
+// used to render tempaltes in the theme ourside of blocks
+function tr_render($template_file, array $data = []): void
+{
+    global $tr_renderer;
+    echo $tr_renderer->renderToString($template_file, Nette\Utils\ArrayHash::from($data));
 }
 
 /**
- * Shorthand fn for getting parts/partials from /views/parts
+ * Shorthand fn for getting partials from /views/components
  *
  * @example:
  * ```latte
@@ -46,16 +55,17 @@ function tr_view_path($template_name)
  * {tr_view_path('hero')}
  *
  * instead of:
- * {include tr_view_path('parts/hero')}
+ * {include tr_view_path('components/hero')}
  * ```
  *
- * @param string $part_name Name of the latte partial living inside the /views/parts/ dir
+ * @param string $part_name Name of the latte partial living inside the /views/components/ dir
  *
  * @return string Full path to the partial file
  */
-function tr_part($part_name)
+
+function tr_component(string $part_name): string
 {
-    return tr_view_path("parts/$part_name");
+    return tr_view_path("components/$part_name");
 }
 
 /**
@@ -264,7 +274,7 @@ function tr_get_img_async(
 // Speeds up buttons or other links html creation
 
 /**
- * @param array{title:string, url:string, target:bool} $a
+ * @param object{title:string, url:string, target:bool} $a
  * @param string $class Optional class name
  * @param bool $attrs_only If true, will print only <a> attrs instead of the whole <a> element
  *
@@ -277,14 +287,16 @@ function tr_a(
     $class = "",
     $attrs_only = false
 ) {
-    if (!$a['url']) {
+    if (!$a->url) {
         return;
     }
 
-    $new_tab = array_key_exists('target', $a) && $a['target'];
+    $new_tab = $a?->target ?? false;
+
+    // $new_tab = array_key_exists('target', $a) && $a['target'];
 
     if ($attrs_only) {
-        $attrs_html = "href='{$a['url']}'";
+        $attrs_html = "href='{$a->url}'";
         if ($class) {
             $attrs_html .= " class='{$class}'";
         }
@@ -294,7 +306,7 @@ function tr_a(
         echo $attrs_html;
     } else { ?>
         <a
-            href="<?php echo $a['url']; ?>"
+            href="<?php echo $a->url; ?>"
             <?php if ($class) { ?>
             class="<?php echo $class; ?>"
             <?php } ?>
@@ -302,7 +314,7 @@ function tr_a(
             target="_blank"
             rel="noopener noreferrer"
             <?php } ?>>
-            <?php echo $a['title']; ?>
+            <?php echo $a->title; ?>
         </a>
 <?php
     }

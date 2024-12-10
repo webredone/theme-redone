@@ -38,11 +38,26 @@ final readonly class Dequeues
         add_filter('wp_resource_hints', [$this, 'disableEmojisDnsPrefetch'], 10, 2);
     }
 
+    /**
+     * Removes the wpemoji plugin from TinyMCE.
+     *
+     * @param array<string> $plugins List of TinyMCE plugins.
+     *
+     * @return array<string> Modified list of TinyMCE plugins.
+     */
     public function disableEmojisTinymce(array $plugins): array
     {
         return array_diff($plugins, ['wpemoji']);
     }
 
+    /**
+     * Removes emoji-related DNS prefetch URLs.
+     *
+     * @param array<string> $urls List of URLs for resource hints.
+     * @param string $relationType The type of relation (e.g., 'dns-prefetch').
+     *
+     * @return array<string> Modified list of URLs.
+     */
     public function disableEmojisDnsPrefetch(array $urls, string $relationType): array
     {
         if ($relationType === 'dns-prefetch') {
@@ -62,10 +77,19 @@ final readonly class Dequeues
         wp_deregister_script('bodhi_svg_inline');
     }
 
-    public function removeScripts(&$scripts): void
+    /**
+     * Removes the jQuery script from non-admin pages.
+     *
+     * @param \WP_Scripts $scripts WordPress scripts object.
+     *
+     * @return \WP_Scripts The modified WordPress scripts object.
+     */
+    public function removeScripts(\WP_Scripts &$scripts): \WP_Scripts
     {
         if (!is_admin()) {
             $scripts->remove('jquery');
         }
+
+        return $scripts;
     }
 }

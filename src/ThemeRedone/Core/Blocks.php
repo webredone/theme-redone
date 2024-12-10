@@ -29,11 +29,13 @@ final readonly class Blocks
         }
 
         global $post;
-        if (empty($post->post_content) || !has_blocks($post->post_content)) {
+
+        if (!($post instanceof \WP_Post) || empty($post->post_content) || !has_blocks($post->post_content)) {
             return;
         }
 
         $this->processBlockAssets($post);
+
     }
 
     private function processBlockAssets(\WP_Post $post): void
@@ -45,6 +47,7 @@ final readonly class Blocks
             return;
         }
 
+        /** @var string[] $customBlockNames */
         $customBlockNames = $this->getCustomBlockNames($blocks, $block_prefix);
         if (empty($customBlockNames)) {
             return;
@@ -56,21 +59,35 @@ final readonly class Blocks
 
     private function getBlockPrefix(): string
     {
-        $config = json_decode(
-            file_get_contents(get_template_directory() . "/theme_redone_global_config.json")
-        );
+        $filePath = Config::getThemeDir() . "/theme_redone_global_config.json";
+        $configContent = (string) file_get_contents($filePath); // Cast to ensure string
+        $config = json_decode($configContent);
 
-        return $config->BLOCK_NAME_PREFIX;
+        return $config->BLOCK_NAME_PREFIX ?? 'tr';
     }
 
+    /**
+     * Recursively retrieves custom block names from a list of parsed blocks.
+     *
+     * @param array<int|string, array<string, mixed>> $blocks Array of parsed block data.
+     * @param string $prefix Block prefix.
+     *
+     * @return string[] List of unique custom block names.
+     */
     private function getCustomBlockNames(array $blocks, string $prefix): array
     {
         $names = [];
+
         foreach ($blocks as $block) {
-            if (!is_null($block['blockName']) && str_starts_with($block['blockName'], "$prefix/")) {
-                if (!in_array($block['blockName'], $names)) {
-                    $names[] = $block['blockName'];
-                    if (!empty($block['innerBlocks'])) {
+            if (!is_array($block) || !isset($block['blockName'])) {
+                continue;
+            }
+
+            $blockName = $block['blockName'];
+            if (is_string($blockName) && str_starts_with($blockName, "$prefix/")) {
+                if (!in_array($blockName, $names, true)) {
+                    $names[] = $blockName;
+                    if (!empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
                         $names = array_merge(
                             $names,
                             $this->getCustomBlockNames($block['innerBlocks'], $prefix)
@@ -80,9 +97,17 @@ final readonly class Blocks
             }
         }
 
+        $names = array_filter($names, 'is_string'); // Ensure all names are strings
+
         return array_unique($names);
     }
 
+    /**
+     * Enqueues shared assets for the specified custom blocks.
+     *
+     * @param string[] $blockNames List of custom block names.
+     * @param string $prefix Block prefix.
+     */
     private function enqueueSharedAssets(array $blockNames, string $prefix): void
     {
         $sharedCss = [];
@@ -118,11 +143,19 @@ final readonly class Blocks
         $this->enqueueSharedFiles($sharedCss, $sharedJs);
     }
 
+    /**
+     * Enqueues block-specific assets for the specified custom blocks.
+     *
+     * @param string[] $blockNames List of custom block names.
+     * @param string $prefix Block prefix.
+     */
     private function enqueueBlockSpecificAssets(array $blockNames, string $prefix): void
     {
         foreach ($blockNames as $blockName) {
             $nameWithoutPrefix = substr($blockName, strlen($prefix) + 1);
-            $dirPath = TR_THEME_DIR . "/dist/block-specific/$nameWithoutPrefix";
+
+            $dirPath = Config::getThemeDir() . "/dist/block-specific/$nameWithoutPrefix";
+
             $urlPath = get_stylesheet_directory_uri() . "/dist/block-specific/$nameWithoutPrefix";
 
             $cssPath = "$dirPath/frontend.min.css";
@@ -147,14 +180,29 @@ final readonly class Blocks
         }
     }
 
+    /**
+     * Retrieves block model data from a JSON file.
+     *
+     * @param string $blockName The block name.
+     *
+     * @return array<string, mixed> The block model data.
+     */
     private function getBlockModel(string $blockName): array
     {
-        return json_decode(
-            file_get_contents(TR_BLOCKS_DIR . "/$blockName/model.json"),
-            true
-        );
+        $filePath = Config::getBlocksDir() . "/$blockName/model.json";
+        $configContent = (string) file_get_contents($filePath); // Cast to ensure string
+
+        return json_decode($configContent, true) ?? [];
     }
 
+    /**
+     * Determines whether the specified dependency type should be considered.
+     *
+     * @param string $type The dependency type ('css' or 'js').
+     * @param array<string, mixed> $deps List of dependencies.
+     *
+     * @return bool True if the dependency type should be considered, false otherwise.
+     */
     private function shouldConsiderDep(string $type, array $deps): bool
     {
         return isset($deps[$type]) && is_array($deps[$type]) && !empty($deps[$type]);
@@ -165,9 +213,15 @@ final readonly class Blocks
         return file_exists($path) && filesize($path) > 0;
     }
 
+    /**
+     * @param string[] $cssFiles
+     * @param string[] $jsFiles
+     */
     private function enqueueSharedFiles(array $cssFiles, array $jsFiles): void
     {
-        $systemPath = TR_THEME_DIR . "/dist/blocks-shared";
+
+        $systemPath = Config::getThemeDir() . "/dist/blocks-shared";
+
         $urlPath = get_stylesheet_directory_uri() . "/dist/blocks-shared";
 
         foreach ($cssFiles as $css) {

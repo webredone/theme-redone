@@ -1,26 +1,26 @@
-<ol 
+<ol
   n:if="!empty($breadcrumbs)"
   class="breadcrumbs"
   itemscope itemtype="https://schema.org/BreadcrumbList"
 >
 {foreach $breadcrumbs as $breadcrumb}
-  <li 
-    itemprop="itemListElement" 
+  <li
+    itemprop="itemListElement"
     itemscope
     itemtype="https://schema.org/ListItem"
   >
-    <a 
-      itemprop="item" 
-      href="{$breadcrumb['link']['url']}" 
+    <a
+      itemprop="item"
+      href="{$breadcrumb->link->url}"
     >
       <span itemprop="name">
-        {$breadcrumb['link']['title']|noescape}
+        {$breadcrumb->link->title|noescape}
       </span>
     </a>
     <meta itemprop="position" content="{$iterator->counter}" />
   </li>
 
-  <li 
+  <li
     n:if="!$iterator->last"
     class="separator"
   >/</li>

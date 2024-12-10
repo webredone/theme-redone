@@ -1,9 +1,11 @@
 parameters:
+    level: 7
+    # disables issues about ArrayHash from Nette Utils
+    checkGenericClassInNonGenericObjectType: false
     parallel:
         jobSize: 18
         maximumNumberOfProcesses: 1
         minimumNumberOfJobsPerProcess: 1
-    level: 7
     paths:
         # Scan entire theme directory
         - %currentWorkingDirectory%
@@ -12,8 +14,10 @@ parameters:
         - %currentWorkingDirectory%/vendor/*
         - %currentWorkingDirectory%/node_modules/*
         - %currentWorkingDirectory%/views/cache/*
+        - %currentWorkingDirectory%/**/*.blade.php
     bootstrapFiles:
         - %currentWorkingDirectory%/src/ThemeRedone/constants.php
         - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+        - vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
     # ignoreErrors:
     #   - '#Some specific ignore pattern#'

@@ -1,18 +1,13 @@
 <?php
 
-$block_name = basename(__DIR__);
-// $block_prefix is defined inside init.php
+use ThemeRedone\Core\BlockTypesRegistrar;
 
-register_block_type(TR_BLOCK_NAME_PREFIX . '/' . $block_name, [
-  'render_callback' => function ($attrs, $content) {
-      global $tr_renderer;
+BlockTypesRegistrar::registerBlock(__DIR__);
 
-      // START:Add or modify $attrs[] params here
-      // ...
-      // END:Add or modify $attrs[] params here
-      $html_str = $tr_renderer->renderToString(dirname(__FILE__) . '/view.latte', $attrs);
+// Or if you want to modifu $attrs
 
-      return $html_str;
-  },
-  'attributes' => json_decode(file_get_contents(dirname(__FILE__) . "/model.json"), true)['attributes'],
-]);
+// BlockTypesRegistrar::registerBlock(__DIR__, function ($attrs) {
+//     // Add or modify attributes here
+//     // $attrs['example'] = 'value';
+//     return $attrs;
+// });

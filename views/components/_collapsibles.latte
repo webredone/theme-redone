@@ -17,15 +17,15 @@
 
 
 
-<div 
-  class="f-row" 
+<div
+  class="f-row"
   style="--i-cols: 3; --i-gap: 15;margin-bottom: 100px;"
 >
   <div class="col">
     <h4>1 Level - collapse siblings</h4>
-    {embed 
-      tr_part('_accordion'), 
-      items: $test_acc_items, 
+    {embed
+      tr_component('_accordion'),
+      items: $test_acc_items,
       initially_open_item: 0,
       collapse_siblings: true
     }
@@ -47,9 +47,9 @@
   </div>{* col *}
   <div class="col">
     <h4>1 Level - custom easing</h4>
-    {embed 
-      tr_part('_accordion'), 
-      items: $test_acc_items, 
+    {embed
+      tr_component('_accordion'),
+      items: $test_acc_items,
       initially_open_item: 0,
       duration: 700,
       collapse_siblings: true,
@@ -73,9 +73,9 @@
   </div>{* col *}
   <div class="col">
     <h4>1 Level - independent</h4>
-    {embed 
-      tr_part('_accordion'), 
-      items: $test_acc_items, 
+    {embed
+      tr_component('_accordion'),
+      items: $test_acc_items,
       initially_open_item: 2
     }
       {block acc_trigger}
@@ -108,9 +108,9 @@
 
 <h2>Nested Accordions</h2>
 <div class="nested-accordions">
-  {embed 
-    tr_part('_accordion'), 
-    items: $test_acc_items, 
+  {embed
+    tr_component('_accordion'),
+    items: $test_acc_items,
     initially_open_item: 0,
     collapse_siblings: true
   }
@@ -121,8 +121,8 @@
     {/block}
 
     {block acc_content}
-      {embed 
-        tr_part('_accordion'), 
+      {embed
+        tr_component('_accordion'),
         items: $test_acc_items
       }
         {block acc_trigger}
@@ -133,8 +133,8 @@
 
         {block acc_content}
           {if $index === 0}
-            {embed 
-              tr_part('_accordion'), 
+            {embed
+              tr_component('_accordion'),
               items: $test_acc_items,
               collapse_siblings: true,
               easing: 'cubic-bezier(1,-0.06, 0, 1.56)'
@@ -202,13 +202,13 @@
 
 
 <h3>Dropdowns</h3>
-<div 
+<div
   class="f-row"
   style="--i-cols: 4; --i-gap: 15; margin-bottom: 200px;"
 >
   <div class="col">
     <h5>Click</h5>
-    {embed tr_part('_collapsible')}
+    {embed tr_component('_collapsible')}
       {block collapsible_trigger}
         Regular Click Dropdown
       {/block}
@@ -222,8 +222,8 @@
   </div>{* col *}
   <div class="col">
     <h5>Click (close on click outside)</h5>
-    {embed 
-      tr_part('_collapsible'), 
+    {embed
+      tr_component('_collapsible'),
       close_outside: true
     }
       {block collapsible_trigger}
@@ -239,8 +239,8 @@
   </div>{* col *}
   <div class="col">
     <h5>Hover</h5>
-    {embed 
-      tr_part('_collapsible'), 
+    {embed
+      tr_component('_collapsible'),
       on_hover: true
     }
       {block collapsible_trigger}
@@ -256,8 +256,8 @@
   </div>{* col *}
   <div class="col">
     <h5>Hover absolute</h5>
-    {embed 
-      tr_part('_collapsible'), 
+    {embed
+      tr_component('_collapsible'),
       on_hover: true,
       is_absolute: true
     }
@@ -278,21 +278,21 @@
 <hr />
 
 <h3>Dropdown Selects</h3>
-<div 
+<div
   class="f-row"
   style="--i-cols: 4; --i-gap: 15; margin-bottom: 200px;"
 >
   <div class="col">
     <h5>Click</h5>
-    {include 
-      tr_part('dropdown-select'), 
+    {include
+      tr_component('dropdown-select'),
       options: $dummy_dd_options
     }
   </div>{* col *}
   <div class="col">
     <h5>Close on click outside</h5>
-    {include 
-      tr_part('dropdown-select'), 
+    {include
+      tr_component('dropdown-select'),
       options: $dummy_dd_options,
       class: 'custom-class',
       duration: 200,
@@ -303,8 +303,8 @@
   </div>{* col *}
   <div class="col">
     <h5>Hover</h5>
-    {include 
-      tr_part('dropdown-select'), 
+    {include
+      tr_component('dropdown-select'),
       options: $dummy_dd_options,
       on_hover: true,
       default_selected_key: 0
@@ -312,8 +312,8 @@
   </div>{* col *}
   <div class="col">
     <h5>Hover - absolute</h5>
-    {include 
-      tr_part('dropdown-select'), 
+    {include
+      tr_component('dropdown-select'),
       options: $dummy_dd_options,
       is_absolute: true,
       on_hover: true,
@@ -333,41 +333,41 @@
 
 {var $custom_keyframes = [
   [
-    "opacity" => 0, 
-    "transform" => "translateY(-10px)", 
+    "opacity" => 0,
+    "transform" => "translateY(-10px)",
     "pointer-events" => "none"
-  ], 
-  [ 
+  ],
+  [
     "transform" => "translateY(10px)",
     "offset" => 0.9
   ],
   [
-    "opacity" => "1", 
-    "transform" => "translateY(0)", 
+    "opacity" => "1",
+    "transform" => "translateY(0)",
     "pointer-events" => "all"
   ]
 ]}
 
 
-<div 
+<div
   class="f-row"
   style="--i-cols: 3; --i-gap: 15; margin-bottom: 200px;"
 >
   <div class="col">
     <h5>Custom Easing</h5>
-    {embed 
-      tr_part('_collapsible'), 
+    {embed
+      tr_component('_collapsible'),
       on_hover: true,
       is_absolute: true,
       duration: 500,
       easing: 'cubic-bezier(1,-0.06, 0, 1.56)'
     }
       {block collapsible_trigger}
-        <img 
-          alt="test" 
-          src="https://source.unsplash.com/40x40" 
-          width="40" 
-          height="40" 
+        <img
+          alt="test"
+          src="https://source.unsplash.com/40x40"
+          width="40"
+          height="40"
         />
         <h5 style="margin-left: 10px;">Hover, custom keyframes</h5>
       {/block}
@@ -381,19 +381,19 @@
   </div>{* col *}
   <div class="col">
     <h5>Custom Keyframes</h5>
-    {embed 
-      tr_part('_collapsible'), 
+    {embed
+      tr_component('_collapsible'),
       on_hover: true,
       is_absolute: true,
       aria_label: "Toggle Hover Dropdown",
       custom_keyframes: $custom_keyframes
     }
       {block collapsible_trigger}
-        <img 
-          alt="test" 
-          src="https://source.unsplash.com/40x40" 
-          width="40" 
-          height="40" 
+        <img
+          alt="test"
+          src="https://source.unsplash.com/40x40"
+          width="40"
+          height="40"
         />
         <h5 style="margin-left: 10px;">Hover, custom keyframes</h5>
       {/block}
@@ -407,8 +407,8 @@
   </div>{* col *}
   <div class="col">
     <h5>Custom Keyframes - custom easing</h5>
-    {embed 
-      tr_part('_collapsible'), 
+    {embed
+      tr_component('_collapsible'),
       on_hover: true,
       is_absolute: true,
       aria_label: "Toggle Hover Dropdown",
@@ -417,11 +417,11 @@
       easing: 'cubic-bezier(1,-0.06, 0, 1.56)'
     }
       {block collapsible_trigger}
-        <img 
-          alt="test" 
-          src="https://source.unsplash.com/40x40" 
-          width="40" 
-          height="40" 
+        <img
+          alt="test"
+          src="https://source.unsplash.com/40x40"
+          width="40"
+          height="40"
         />
         <h5 style="margin-left: 10px;">Hover, custom keyframes</h5>
       {/block}

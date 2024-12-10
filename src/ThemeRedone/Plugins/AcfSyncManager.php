@@ -23,6 +23,13 @@ final readonly class AcfSyncManager
         return get_stylesheet_directory() . '/acf-data';
     }
 
+    /**
+     * Filters the JSON load paths for ACF.
+     *
+     * @param array<int, string> $paths List of JSON load paths.
+     *
+     * @return array<int, string> Modified list of JSON load paths.
+     */
     public function setJsonLoadPath(array $paths): array
     {
         unset($paths[0]);

@@ -20,7 +20,7 @@ final readonly class ThemeSupport
 
     public function setupTheme(): void
     {
-        load_theme_textdomain('tr', get_template_directory() . '/languages');
+        load_theme_textdomain('tr', Config::getThemeDir() . '/languages');
 
         add_theme_support('automatic-feed-links');
         add_theme_support('title-tag');
@@ -55,13 +55,28 @@ final readonly class ThemeSupport
         return preg_replace('/<p>(\s*)(<img .* \/>)(\s*)<\/p>/iU', '\2', $content);
     }
 
+    /**
+     * Modifies the TinyMCE editor settings to remove the H1 option.
+     *
+     * @param array<string, mixed> $settings An associative array of TinyMCE settings.
+     *
+     * @return array<string, mixed> The modified TinyMCE settings.
+     */
     public function removeH1FromEditor(array $settings): array
     {
         $settings['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Preformatted=pre;';
 
         return $settings;
+
     }
 
+    /**
+     * Removes the "Read More" button from the TinyMCE editor toolbar.
+     *
+     * @param array<string> $buttons An array of button names.
+     *
+     * @return array<string> The modified array of button names.
+     */
     public function removeReadMore(array $buttons): array
     {
         return array_diff($buttons, ['wp_more']);

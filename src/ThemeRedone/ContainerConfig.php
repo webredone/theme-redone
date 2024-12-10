@@ -12,7 +12,6 @@ use ThemeRedone\Core\{
     Dequeues,
     Enqueues,
     LoggerService,
-    TemplateEngine,
     ThemeSupport
 };
 use ThemeRedone\Plugins\{
@@ -32,7 +31,6 @@ final class ContainerConfig
             Enqueues::class,
             Dequeues::class,
             BlockTypesRegistrar::class,
-            TemplateEngine::class,
             AcfSyncManager::class,
             CptuiSyncManager::class,
             CustomPostTypesRegistrar::class,
@@ -63,7 +61,6 @@ final class ContainerConfig
             Enqueues::class,
             Dequeues::class,
             Blocks::class,
-            TemplateEngine::class,
             CustomPostTypesRegistrar::class,
             AcfSyncManager::class,
             CptuiSyncManager::class,

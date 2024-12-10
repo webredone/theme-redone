@@ -7,10 +7,10 @@ namespace ThemeRedone;
 
 use ThemeRedone\Core\{
     Blocks,
+    Config,
     CustomPostTypesRegistrar,
     Dequeues,
     Enqueues,
-    TemplateEngine,
     ThemeSupport
 };
 use ThemeRedone\Plugins\{
@@ -25,13 +25,12 @@ final class ThemeRedone
         private readonly Enqueues $enqueues,
         private readonly Dequeues $dequeues,
         private readonly Blocks $blocks,
-        private readonly TemplateEngine $templateEngine,
         private readonly ?CustomPostTypesRegistrar $customPostTypesRegistrar = null,
         private readonly ?AcfSyncManager $acfSyncManager = null,
         private readonly ?CptuiSyncManager $cptuiSyncManager = null,
     ) {
         // expose globally available theme redone functions
-        require_once TR_THEME_DIR . '/src/ThemeRedone/Functions/global.php';
+        require_once Config::getThemeDir() . '/src/ThemeRedone/Functions/global.php';
     }
 
     public function boot(): void
@@ -42,7 +41,6 @@ final class ThemeRedone
         $this->enqueues->register();
         $this->dequeues->register();
         $this->blocks->initialize();
-        $this->templateEngine->initialize();
 
         // Delay ACF initialization
         add_action('plugins_loaded', function () {
@@ -76,10 +74,5 @@ final class ThemeRedone
     public function registerFeatures(): void
     {
         $this->customPostTypesRegistrar?->register();
-    }
-
-    public function getTemplateEngine(): TemplateEngine
-    {
-        return $this->templateEngine;
     }
 }

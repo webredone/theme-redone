@@ -1,0 +1,44 @@
+@php
+// $video_type is expected to be something like:
+// ['video_type' => 'youtube', 'video_id' => 'XYZ123']
+// or ['video_type' => 'vimeo', 'video_id' => 'ABC456']
+// or ['video_type' => 'self-hosted']
+// $video_src would be the URL to a self-hosted video if video_type is self-hosted.
+@endphp
+
+@if($video_type['video_type'] === 'youtube')
+    <div class="video-wrapper-width" data-source="self-youtube">
+        <div class="video-wrapper">
+            <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/{{ $video_type['video_id'] }}?autoplay=0"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+            ></iframe>
+        </div>
+    </div>
+@elseif($video_type['video_type'] === 'vimeo')
+    <div class="video-wrapper-width" data-source="self-vimeo">
+        <div class="video-wrapper">
+            <iframe
+                src="https://player.vimeo.com/video/{{ $video_type['video_id'] }}"
+                width="640"
+                height="360"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                frameborder="0"
+                allow="fullscreen; picture-in-picture"
+                allowfullscreen
+            ></iframe>
+        </div>
+    </div>
+@else
+    {{-- Fallback: self-hosted video (not vimeo or youtube) --}}
+    <div class="video-wrapper-width" data-source="self-hosted">
+        <div class="video-wrapper">
+            <video controls preload="metadata" src="{{ $video_src }}#t=0.001"></video>
+        </div>
+    </div>
+@endif
