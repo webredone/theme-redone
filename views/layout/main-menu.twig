@@ -1,0 +1,45 @@
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <a
+                class="navbar-brand"
+                href="{{ function('home_url', '/') }}"
+                itemprop="url"
+                aria-label="{{ function('bloginfo', 'name') }} Logo - Go to homepage"
+            >
+                {{ function('tr_get_media', 'logo.svg')|raw }}
+            </a>
+            <button
+                class="navbar-toggler collapsed"
+                type="button"
+                data-toggle="collapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="span-icon"></span>
+                <span class="span-icon"></span>
+                <span class="span-icon"></span>
+            </button>
+
+			{{ function('wp_nav_menu', {
+				'menu'            : 'top',
+				'theme_location': 'menu-1',
+				'container'       : 'div',
+				'container_id'    : 'tr-main-menu',
+				'container_class' : 'navbar-collapse',
+				'menu_id'         : 'primary-menu',
+				'menu_class'      : 'navbar-nav',
+				'depth': 2,
+				'walker'          : tr_nav_walker
+			})|raw }}
+
+
+            {% if primary_menu and primary_menu.items %}
+                {% include 'components/_menu.twig' with {'items': primary_menu.items, 'depth': 2} %}
+            {% else %}
+                {# Optionally handle no menu found #}
+                <p>No menu assigned.</p>
+            {% endif %}
+        </nav>
+    </div>
+</header>

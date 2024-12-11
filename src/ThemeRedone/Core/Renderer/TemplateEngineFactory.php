@@ -1,5 +1,7 @@
 <?php
 
+// src/ThemeRedone/Core/Renderer/TemplateEngineFactory.php
+
 namespace ThemeRedone\Core\Renderer;
 
 use ThemeRedone\Enums\Flavor;
@@ -13,6 +15,7 @@ final class TemplateEngineFactory
             Flavor::Latte => new LatteRenderer(),
             Flavor::Blade => new BladeRenderer(),
             Flavor::Php => new PlatesRenderer(),
+            Flavor::Twig => new TimberRenderer(),
         };
     }
 }

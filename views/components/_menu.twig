@@ -1,0 +1,75 @@
+{# _menu.twig #}
+{# Variables:
+   items: the list of menu items (array of Timber\MenuItem)
+   depth: current depth level (0 for top, increases for children)
+#}
+
+{% set depth = depth is defined ? depth : 0 %}
+
+{% if items %}
+    {# For depth=0, we start with a <ul>, for deeper levels, we use the collapsible divs #}
+    {% if depth == 0 %}
+        <ul class="navbar-nav">
+    {% else %}
+        <div class="collapsible__content"><div class="collapsible__content__inner">
+    {% endif %}
+
+    {% for item in items %}
+        {% if depth < 2 %}  {# Only process items up to depth 2 #}
+            {# Determine the classes for the <li> #}
+            {% set item_classes = item.classes|default([]) %}
+            {% set item_classes = item_classes|merge(['menu-item-' ~ item.id]) %}
+
+            {% if item.children %}
+                {% set item_classes = item_classes|merge(['collapsible']) %}
+            {% endif %}
+            {% if item.current or item.current_item_parent or item.current_item_ancestor %}
+                {% set item_classes = item_classes|merge(['active']) %}
+            {% endif %}
+
+            {% set class_attr = item_classes|join(' ') %}
+
+            {# Print the <li> similarly to the walker #}
+            <li class="{{ class_attr }}" {% if item.children and depth == 0 %}data-hover-trigger{% endif %}>
+                {# Handle the link classes #}
+                {% set link_classes = [] %}
+                {% if depth == 0 %}
+                    {% set link_classes = link_classes|merge(['nav-link']) %}
+                {% else %}
+                    {% set link_classes = link_classes|merge([item_classes[0], 'nav-link']) %}
+                {% endif %}
+                {% if item.current %}
+                    {% set link_classes = link_classes|merge(['active']) %}
+                {% endif %}
+                {% set link_class_str = link_classes|join(' ') %}
+
+                {# If item has children at top-level, add the button and chevron #}
+                {% if item.children and depth == 0 %}
+                    <button class="collapsible__trigger" aria-label="Toggle Dropdown">
+                {% endif %}
+
+                <a href="{{ item.link }}"
+                   class="{{ link_class_str }}"
+                   {% if item.target %}target="{{ item.target }}"{% endif %}
+                   {% if item.xfn %}rel="{{ item.xfn }}"{% endif %}
+                >{{ item.title }}</a>
+
+                {% if item.children and depth == 0 %}
+                    <span class="chevron"></span>
+                    </button>
+                {% endif %}
+
+                {# If item has children and we haven't reached max depth, recurse for the sub-menu #}
+                {% if item.children and depth < 1 %}
+                    {% include '_menu.twig' with {'items': item.children, 'depth': depth + 1} %}
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+
+    {% if depth == 0 %}
+        </ul>
+    {% else %}
+        </div></div>
+    {% endif %}
+{% endif %}

@@ -12,7 +12,8 @@
         "league/container": "^4.2",
         "nette/utils": "^4.0",
         "league/plates": "^3.6",
-        "eftec/bladeone": "^4.16"
+        "eftec/bladeone": "^4.16",
+        "timber/timber": "^2.3"
     },
     "autoload": {
         "psr-4": {

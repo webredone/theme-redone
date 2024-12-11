@@ -298,7 +298,7 @@ function blade_limit_content($content) {
             'easing' => 'cubic-bezier(1,-0.06,0,1.56)'
         ])
             @slot('collapsible_trigger')
-                <img alt="test" src="https://source.unsplash.com/40x40" width="40" height="40" />
+                <img alt="test" src="https://images.unsplash.com/photo-1657788913352-1ce366729324?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTY1Ng&ixlib=rb-1.2.1&q=80&w=40&h=40" width="40" height="40" />
                 <h5 style="margin-left: 10px;">Hover, custom keyframes</h5>
             @endslot
             @slot('collapsible_content')
@@ -316,7 +316,7 @@ function blade_limit_content($content) {
             'custom_keyframes' => $custom_keyframes
         ])
             @slot('collapsible_trigger')
-                <img alt="test" src="https://source.unsplash.com/40x40" width="40" height="40" />
+                <img alt="test" src="https://images.unsplash.com/photo-1657788913352-1ce366729324?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTY1Ng&ixlib=rb-1.2.1&q=80&w=40&h=40" width="40" height="40" />
                 <h5 style="margin-left:10px;">Hover, custom keyframes</h5>
             @endslot
             @slot('collapsible_content')
@@ -336,7 +336,7 @@ function blade_limit_content($content) {
             'easing' => 'cubic-bezier(1,-0.06,0,1.56)'
         ])
             @slot('collapsible_trigger')
-                <img alt="test" src="https://source.unsplash.com/40x40" width="40" height="40" />
+                <img alt="test" src="https://images.unsplash.com/photo-1657788913352-1ce366729324?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTY1Ng&ixlib=rb-1.2.1&q=80&w=40&h=40" width="40" height="40" />
                 <h5 style="margin-left:10px;">Hover, custom keyframes</h5>
             @endslot
             @slot('collapsible_content')
