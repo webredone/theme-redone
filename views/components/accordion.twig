@@ -1,0 +1,60 @@
+{# _accordion.twig #}
+{#
+  Variables:
+  - class (string, optional): Additional CSS classes for the accordion wrapper.
+  - aria_label (string, optional): ARIA label for each accordion item.
+  - duration (string, optional): Animation duration (default: 300).
+  - easing (string, optional): Animation easing (default: 'ease-in-out').
+  - items (array, required): Accordion items. Example:
+      [
+          {'anchor': 'Tab 1', 'content': {'text': 'This is content of Tab 1'}},
+          {'anchor': 'Tab 2', 'content': {'text': 'This is content of Tab 2'}}
+      ]
+  - collapse_siblings (bool, optional): Whether opening one item should close others (default: false).
+  - initially_open_item (int, optional): Index of the item to be initially open (default: none).
+#}
+
+{% set panels_ids = [] %}
+{% set random_string = function('uniqid') %}
+{% for acc_index, tab_content in items %}
+    {% set index = acc_index + 1 %}
+    {% set _ignore = panels_ids.append(random_string ~ '_' ~ index) %}
+{% endfor %}
+
+<div
+    class="accordion {{ class|default('') }}"
+    {% if collapse_siblings %} data-collapse-siblings{% endif %}
+    data-duration="{{ duration|default('300') }}"
+    {% if easing is defined and easing is not empty %} data-easing="{{ easing }}"{% endif %}
+>
+    {% for index, item in items %}
+        {% set is_initially_open = initially_open_item is defined and index == initially_open_item %}
+        {% set aria_label_text = aria_label|default('Toggle Accordion Item') %}
+
+        <div class="collapsible" {% if is_initially_open %} data-initially-open{% endif %}>
+            <button
+                class="collapsible__trigger"
+                type="button"
+                id="acc_panel_{{ panels_ids[index] }}"
+                aria-label="{{ aria_label_text }}"
+            >
+                {% block acc_trigger %}
+                    {{ item.anchor|default('Accordion Item') }}
+                {% endblock %}
+                <span class="chevron"></span>
+            </button>
+
+            <div
+                class="collapsible__content"
+                role="region"
+                aria-labelledby="acc_panel_{{ panels_ids[index] }}"
+            >
+                <div class="collapsible__content__inner">
+                    {% block acc_content %}
+                        {{ item.content.text|default('No content available.')|raw }}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

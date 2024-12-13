@@ -72,6 +72,46 @@
 } %}
 
 
+<h1>Accordion</h1>
+
+{% set items = [
+    {'anchor': 'Item 1', 'content': {'text': 'Content for Item 1'}},
+    {'anchor': 'Item 2', 'content': {'text': 'Content for Item 2'}},
+    {'anchor': 'Item 3', 'content': {'text': 'Content for Item 3'}}
+] %}
+
+{% include 'components/accordion.twig' with {
+    'class': 'custom-accordion-class',
+    'items': items,
+    'collapse_siblings': true,
+    'initially_open_item': 1,
+    'duration': 500,
+    'easing': 'ease-in-out',
+    'aria_label': 'Toggle section'
+} %}
+
+
+<hr />
+
+<h2>Customized with blocks</h2>
+
+{% embed 'components/accordion.twig' with {
+    'class': 'custom-accordion',
+    'items': items,
+    'collapse_siblings': true,
+    'initially_open_item': 0
+} %}
+    {% block acc_trigger %}
+        <strong>{{ item.anchor|default('Custom Trigger') }}</strong>
+    {% endblock %}
+
+    {% block acc_content %}
+        <p>{{ item.content.text|default('Custom Content') }}</p>
+    {% endblock %}
+{% endembed %}
+
+
+
 	</div>
 </section>
 {% endblock %}
