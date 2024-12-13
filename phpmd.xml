@@ -44,7 +44,5 @@
     <!-- Unused Code Rules -->
     <rule ref="rulesets/unusedcode.xml">
         <exclude name="UnusedUseStatement"/>
-        <!-- Exclude unused parameter warnings for required WP walker params -->
-        <exclude name="UnusedFormalParameter"/>
     </rule>
 </ruleset>

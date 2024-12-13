@@ -1,8 +1,3 @@
-@include(tr_view_path('layout/header'))
+@extends('layout.layout')
 
-
-<div class="content">
-    {!! the_content() !!}
-</div>
-
-@include(tr_view_path('layout/footer'))
+{!! the_content() !!}

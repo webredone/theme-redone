@@ -1,0 +1,35 @@
+{% if video.video_type == 'youtube' %}
+    <div class="video-wrapper-width" data-source="self-youtube">
+        <div class="video-wrapper">
+            <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/{{ video.video_id }}?autoplay=0"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+            ></iframe>
+        </div>
+    </div>
+{% elseif video.video_type == 'vimeo' %}
+    <div class="video-wrapper-width" data-source="self-vimeo">
+        <div class="video-wrapper">
+            <iframe
+                src="https://player.vimeo.com/video/{{ video.video_id }}"
+                width="640"
+                height="360"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                frameborder="0"
+                allow="fullscreen; picture-in-picture"
+                allowfullscreen
+            ></iframe>
+        </div>
+    </div>
+{% else %}
+    <div class="video-wrapper-width" data-source="self-hosted">
+        <div class="video-wrapper">
+            <video controls preload="metadata" src="{{ video_src }}#t=0.001"></video>
+        </div>
+    </div>
+{% endif %}

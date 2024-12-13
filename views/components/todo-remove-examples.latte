@@ -63,7 +63,7 @@
 				]
 		]}
 
-			{include tr_component('_collapsibles'), test_acc_items: $test_acc_items}
+			{include tr_component('collapsibles'), test_acc_items: $test_acc_items}
 
 
 			<h2 class="mb40">Typography</h2>
@@ -166,7 +166,7 @@
 							]
 						]}
 
-					{embed tr_component('_tabs'), tabs: $test_tabs, class: 'optional-test-class-2'}
+					{embed tr_component('tabs'), tabs: $test_tabs, class: 'optional-test-class-2'}
 						{block tab_anchor}
 							<span>
 								<strong>{$ta_content['anchor']}</strong> ✅
@@ -176,7 +176,7 @@
 						{block tab_panel}
 							{if $tp_key === 0}
 								{embed
-									tr_component('_accordion'),
+									tr_component('accordion'),
 									items: $test_acc_items,
 									initially_open_item: 0,
 									collapse_siblings: true
@@ -211,7 +211,7 @@
 				<div class="col">
 					<h4>Accordion (with nested tabs)</h4>
 					{embed
-						tr_component('_accordion'),
+						tr_component('accordion'),
 						items: $test_acc_items,
 						initially_open_item: 0,
 						collapse_siblings: true
@@ -224,7 +224,7 @@
 
 						{block acc_content}
 							{if $index === 0}
-								{embed tr_component('_tabs'), tabs: $test_tabs, class: 'optional-test-class'}
+								{embed tr_component('tabs'), tabs: $test_tabs, class: 'optional-test-class'}
 									{block tab_anchor}
 										<span>
 											<strong>{$ta_content['anchor']}</strong> ✅
@@ -309,7 +309,7 @@
 
 
 		{embed
-			tr_component('_slider'),
+			tr_component('slider'),
 			class: 'slider--test',
 			slides: $test_slides
 		}
@@ -337,7 +337,7 @@
 		))}
 
 		{embed
-			tr_component('_slider'),
+			tr_component('slider'),
 			class: 'slider--test',
 			slides: $posts_query
 		}
@@ -360,7 +360,7 @@
   <div class="container"><h3>LOOPED SLIDER</h3></div>
 	<div>
 		{embed
-			tr_component('_slider'),
+			tr_component('slider'),
 			class: 'slider--test2',
 			slides: $test_slides
 		}

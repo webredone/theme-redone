@@ -8,14 +8,23 @@ use Nette\Utils\ArrayHash;
 use ThemeRedone\Core\Config;
 use ThemeRedone\Enums\Flavor;
 use ThemeRedone\Interfaces\TemplateRendererInterface;
+use Timber\Loader;
 use Timber\Timber;
 
 class TimberRenderer implements TemplateRendererInterface
 {
     public function __construct()
     {
-        // We assume templates live in /views directory
+        // Set the directory for Twig templates
         Timber::$dirname = ['views'];
+
+        // Enable Twig file-based caching
+        add_filter('timber/twig/environment/options', function ($options) {
+            $options['cache'] = Config::getCacheDirectoryForFlavor(Flavor::Twig); // Enable file cache
+            $options['auto_reload'] = true; // Always reload templates in development
+
+            return $options;
+        });
     }
 
     /**
@@ -26,7 +35,13 @@ class TimberRenderer implements TemplateRendererInterface
         $themeDir = Config::getThemeDir();
         $viewsDir = $themeDir . '/views/';
 
-        // If it's an absolute path (like a block template), make it relative
+        // Prepare the Timber context
+        $timberContext = Timber::context();
+
+        // Merge additional data into the context
+        $data = array_merge($timberContext, (array)$data);
+
+        // Check if the template is an absolute path
         if (file_exists($templateFile)) {
             // Convert absolute path to relative (relative to viewsDir)
             $relativePath = str_replace($viewsDir, '', $templateFile);
@@ -36,9 +51,8 @@ class TimberRenderer implements TemplateRendererInterface
                 $relativePath .= '.twig';
             }
 
-            $data = Timber::context();
-
-            return Timber::compile($relativePath, (array)$data);
+            // Render and cache the compiled Twig file
+            return Timber::compile($relativePath, $data);
         } else {
             // Assume $templateFile is something like "layout.header" or "layout/header"
             // Convert dot notation to slash and append .twig
@@ -48,7 +62,8 @@ class TimberRenderer implements TemplateRendererInterface
                 $templatePath .= '.twig';
             }
 
-            return Timber::compile($templatePath, (array)$data);
+            // Render and cache the compiled Twig file
+            return Timber::compile($templatePath, $data);
         }
     }
 }

@@ -1,0 +1,22 @@
+<section
+    class="more-blog-posts"
+    aria-label="Latest Blog Posts Section"
+>
+    <div class="container">
+        <h2 class="text-center mb40">
+            Latest Blog Posts
+        </h2>
+        <div class="f-row row--3 mb40">
+            {% set custom_posts = function('get_posts', args|default({'post_type': 'post', 'posts_per_page': 3, 'orderby': 'DESC'})) %}
+
+
+			{% if custom_posts is not empty %}
+				{% for post in custom_posts %}
+					{% include 'components/post-card.twig' with { post_id: post.ID } %}
+				{% endfor %}
+			{% else %}
+				<p>No blog posts available.</p>
+			{% endif %}
+        </div><!-- end row -->
+    </div>
+</section>

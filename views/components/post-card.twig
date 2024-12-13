@@ -1,0 +1,26 @@
+{# components/post-card.twig #}
+
+<div class="col">
+    <article class="post-card">
+        <a href="{{ function('get_permalink', post_id) }}" class="post-card__thumb h-bg-zoom">
+
+            {% set post_card_img = function('get_the_post_thumbnail_url', post_id) %}
+			{{ function('tr_get_media', post_card_img) }}
+        </a>
+        <div class="post-card__txt">
+            <h4 class="post-card__title">
+                <a href="{{ function('get_permalink', post_id) }}">
+                    {{ function('get_the_title', post_id) }}
+                </a>
+            </h4>
+            <p class="entry-meta">
+                {{ function('tr_posted_on', post_id)|raw }}
+                {{ function('tr_posted_by', post_id)|raw }}
+            </p>
+            <p class="post-card__excerpt">
+                {{ function('get_the_excerpt', post_id)|raw }}
+            </p>
+            {{ function('get_the_category_list', '', '', post_id)|raw }}
+        </div>
+    </article>
+</div>

@@ -3,7 +3,7 @@
 {% block content %}
 <section class="content">
 	<div class="container">
-    {{ post.content }}
+    {# {{ post.content }} #}
 
 	<hr />
 
@@ -111,6 +111,92 @@
 {% endembed %}
 
 
+<h1>Video</h1>
+{% include 'components/video.twig' with {
+	'video_type': 'youtube',
+	'video_id': 'co1r5krHsl4'
+} %}
+
+<h2>Latest blog posts</h2>
+{% include 'components/latest-blog-posts.twig' with {
+    args: {
+        'post_type': 'post',
+        'posts_per_page': 5,
+        'orderby': 'date',
+        'order': 'DESC'
+    }
+} %}
+
+<hr />
+
+<h2>Sliders</h2>
+
+{% set test_slides = [
+	{
+		'src': 'https://images.unsplash.com/photo-1657788913352-1ce366729324?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTY1Ng&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 1'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1655930119888-d3cd121fa5e6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTc2Mw&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 2'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1657047408480-5c53b418b394?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTc4Mw&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 3'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1656693391610-7f16ca839254?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTc5NQ&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 4'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1657879005206-3a27c0b782f2?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTgwOA&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 5'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1657047408480-5c53b418b394?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTc4Mw&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 3'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1656693391610-7f16ca839254?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTc5NQ&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 4'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1657879005206-3a27c0b782f2?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTgwOA&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 5'
+	},
+	{
+		'src': 'https://images.unsplash.com/photo-1655552360649-9871415760b6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=250&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1ODA4OTgyMA&ixlib=rb-1.2.1&q=80&w=353',
+		'alt': 'Slide Image 6'
+	}
+] %}
+
+
+<section class="sliders">
+<div class="container">
+{% include 'components/slider.twig' with {
+    class: 'slider--test2',
+    slides: test_slides,
+} %}
+
+        {% set posts_query = wp_query({
+            'post_type': 'post',
+            'posts_per_page': 6,
+            'orderby': 'date',
+            'order': 'DESC'
+        }) %}
+
+        {% include 'components/slider.twig' with {
+            'class': 'slider--test',
+            'slides': posts_query,
+        } %}
+
+
+        {% include 'components/slider.twig' with {
+            'class': 'slider--test2',
+            'slides': posts_query,
+        } %}
+</div>
+</section>
 
 	</div>
 </section>

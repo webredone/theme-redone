@@ -1,0 +1,60 @@
+{# First check if required variables exist #}
+{% if slides is defined %}
+    {# Determine type safely #}
+    {% set mode = 'array' %}
+    {% if slides is object and have_posts(slides) %}
+        {% set mode = 'query' %}
+    {% endif %}
+
+    {# Check conditions for rendering #}
+    {% if class is defined and (
+        (mode == 'array' and slides is array and slides|length > 0) or
+        (mode == 'query' and have_posts(slides))
+    ) %}
+        <div class="slider-wrap">
+            <div class="embla {{ class }}">
+                <div class="embla__container">
+                    {% if mode == 'query' %}
+                        {# Try accessing posts directly instead of using while loop #}
+                        {% for post in slides.posts %}
+                            <div class="embla__slide">
+                                <div class="embla__slide__inner">
+                                    {% block slide_q %}
+                                       {% include 'components/post-card.twig' with { post_id: post.ID } %}
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% do wp_reset_postdata() %}
+                    {% else %}
+                        {% for s_key, s_content in slides %}
+                            <div class="embla__slide">
+                                <div class="embla__slide__inner">
+                                    {% block slide %}
+                                        <div>
+                                            <img src="{{ s_content.src }}" alt="{{ s_content.alt|default('') }}" />
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="embla__buttons">
+                <button
+                    class="embla__btn embla__btn-prev"
+                    type="button"
+                    aria-label="Go to previous slide"
+                ></button>
+                <div class="embla__dots"></div>
+                <button
+                    class="embla__btn embla__btn-next"
+                    type="button"
+                    aria-label="Go to next slide"
+                ></button>
+            </div>
+            {% block after_loop %}{% endblock %}
+        </div>
+    {% endif %}
+{% endif %}
