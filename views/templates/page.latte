@@ -1,15 +1,11 @@
+{extends tr_view_path('/layout/layout')}
 
-{include tr_view_path('/layout/header')}
+{block content}
+	{while have_posts()}
+		{the_post()}
 
-<div class="content">
-{while have_posts()}
-  {the_post()}
-  
-  <h1>{the_title()}</h1>
-  <hr />
-  {the_content()}
-
-{/while}
-</div>
-
-{include tr_view_path('/layout/footer')}
+		<h1>{the_title()}</h1>
+		<hr />
+		{the_content()}
+	{/while}
+{/block}

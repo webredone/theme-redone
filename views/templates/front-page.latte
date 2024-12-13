@@ -1,11 +1,6 @@
-{include tr_view_path('/layout/header')}
+{extends tr_view_path('/layout/layout')}
 
-{include tr_component('todo-remove-examples')}
-
-
-<div class="content">
+{block content}
+	{include tr_component('todo-remove-examples')}
 	{the_content()}
-</div>
-
-
-{include tr_view_path('/layout/footer')}
+{/block}

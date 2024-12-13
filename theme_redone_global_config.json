@@ -1,5 +1,5 @@
 {
     "BLOCK_NAME_PREFIX": "custom",
     "LOCALHOST_PROJECT_URL": "localhost/theme_redone",
-    "FLAVOR": "twig"
+    "FLAVOR": "latte"
 }

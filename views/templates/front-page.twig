@@ -178,25 +178,25 @@
     slides: test_slides,
 } %}
 
-        {% set posts_query = wp_query({
-            'post_type': 'post',
-            'posts_per_page': 6,
-            'orderby': 'date',
-            'order': 'DESC'
-        }) %}
+{% set posts_query = wp_query({
+	'post_type': 'post',
+	'posts_per_page': 6,
+	'orderby': 'date',
+	'order': 'DESC'
+}) %}
 
-        {% include 'components/slider.twig' with {
-            'class': 'slider--test',
-            'slides': posts_query,
-        } %}
+{% include 'components/slider.twig' with {
+	'class': 'slider--test',
+	'slides': posts_query,
+} %}
 
 
-        {% include 'components/slider.twig' with {
-            'class': 'slider--test2',
-            'slides': posts_query,
-        } %}
+{% include 'components/slider.twig' with {
+	'class': 'slider--test2',
+	'slides': posts_query,
+} %}
 
-		<hr />
+<hr />
 
 {# Using get_posts #}
 {% set fetched_posts = function('get_posts', {

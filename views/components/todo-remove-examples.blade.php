@@ -1,4 +1,4 @@
-<div class="container" id="smooth-start">
+<div id="smooth-start">
     <h2>SMOOTH SCROLL EXAMPLE</h2>
     <a class="btn btn--brand" href="#smooth-end">Scroll down</a>
 </div>
@@ -55,8 +55,7 @@ $tabs = [
 ];
 @endphp
 
-@component('components.collapsibles')
-@endcomponent
+@include('components.collapsibles')
 
 
 
@@ -103,17 +102,10 @@ $tabs = [
 						</ol>
 					</div>
 				</div>
-			</div>{* row *}
-
-		</div><!-- cont -->
-	</section>
-
+			</div>
 
 	<hr />
 
-
-		<section>
-		<div class="container">
 			<h2>Spinners / Loaders</h2>
 
 			<div class="spinner-wrap" style="width: 100px; height: 100px;">
@@ -122,13 +114,9 @@ $tabs = [
 					<div></div>
 				</div>
 			</div>
-		</div>
-	</section>
 
 
 
-<section>
-	<div class="container">
 		@component('components.tabs', ['tabs' => $tabs, 'class' => 'my-class'])
 			@slot('tab_anchor_0')
 				<strong>Tab 1 Custom Anchor</strong>
@@ -316,13 +304,11 @@ $tabs = [
 			@endslot
 		@endcomponent
 
-	</div>
-</section>
+
 
 <hr />
 
 
-<section class="sliders">
     <style>
         .sliders {
             max-width: 100%;
@@ -331,7 +317,6 @@ $tabs = [
     </style>
 
     <div
-        class="container"
         style="margin-bottom: 100px;"
     >
         <h2>SLIDERS (init in InitSliders class)</h2>
@@ -412,7 +397,7 @@ $tabs = [
 
     </div>
 
-    <div class="container"><h3>LOOPED SLIDER</h3></div>
+    <div><h3>LOOPED SLIDER</h3></div>
     <div>
         @component('components.slider', [
             'class' => 'slider--test2',
@@ -426,16 +411,10 @@ $tabs = [
             @endslot
         @endcomponent
     </div>
-</section>
 
 
 
-<div class="container">
     <h2>Flex Grid</h2>
-</div>
-
-<section>
-    <div class="container">
         <div class="f-row" style="--i-cols: 4; --i-gap: 35;">
             @for($i = 0; $i < 12; $i++)
                 <div class="col" style="box-shadow: inset 0 0 0 1px red;">
@@ -443,11 +422,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <div class="f-row" style="--i-cols: 3; --i-gap: 15; --i-mb: 10;">
             @for($i = 0; $i < 4; $i++)
                 <div class="col" style="box-shadow: inset 0 0 0 1px red;">
@@ -455,11 +430,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <div class="f-row" style="--i-cols: 4; --i-gap: 30; --i-mb: 10;">
             @for($i = 0; $i < 6; $i++)
                 <div class="col" style="box-shadow: inset 0 0 0 1px red;">
@@ -467,11 +438,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <div class="f-row" style="--i-cols: 5; --i-gap: 15; --i-mb: 10;">
             @for($i = 0; $i < 10; $i++)
                 <div class="col" style="box-shadow: inset 0 0 0 1px red;">
@@ -479,11 +446,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <div class="f-row" style="--i-cols: 6; --i-gap: 15; --i-mb: 10;">
             @for($i = 0; $i < 8; $i++)
                 <div class="col" style="box-shadow: inset 0 0 0 1px red;">
@@ -491,11 +454,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <div class="f-row" style="--i-cols: 7; --i-gap: 15; --i-mb: 10;">
             @for($i = 0; $i < 9; $i++)
                 <div class="col" style="box-shadow: inset 0 0 0 1px red;">
@@ -503,11 +462,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <h2>Flex Grid - two-cols-custom</h2>
         <div class="f-row two-cols-custom" style="--i-gap: 40; --i-mb: 0; --i-first-col-w: 70%;">
             @for($i = 0; $i < 2; $i++)
@@ -516,11 +471,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <h2>Flex Grid - two-cols-custom</h2>
         <div class="f-row two-cols-custom" style="--i-cols: 2; --i-gap: 90; --i-mb: 0; --i-first-col-w: 390px;">
             @for($i = 0; $i < 2; $i++)
@@ -529,11 +480,7 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
         <h2>Flex Grid - no-gutter</h2>
         <div class="f-row" style="--i-cols: 5;">
             @for($i = 0; $i < 10; $i++)
@@ -542,12 +489,10 @@ $tabs = [
                 </div>
             @endfor
         </div>
-    </div>
-</section>
 
 
 
-<div class="container" id="smooth-end">
+<div id="smooth-end">
   <h2>SMOOTH SCROLL EXAMPLE END</h2>
   <a class="btn btn--brand" href="#smooth-start">Scroll up</a>
 </div>
@@ -556,9 +501,6 @@ $tabs = [
 
 
 
-
-<section>
-	<div class="container">
 		<h2>SVG IMPORTING</h2>
 
 		<div class="f-row" style="--i-cols: 4; --i-gap: 15">
@@ -587,7 +529,7 @@ $tabs = [
 					<br /><br />
 					<pre n:syntax="off" style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
 						<code>
-{!! tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg') !!}
+							{!! tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg') !!}
 						</code>
 					</pre>
 				</div>
@@ -599,20 +541,15 @@ $tabs = [
 					<br /><br />
 					<pre n:syntax="off" style="background: #222; color: #fff; font-family: monospace; border: 2px solid #1d81cc">
 						<code>
-{!! tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg', true) !!}
+							{!! tr_get_media('http://localhost/theme_redone/wp-content/uploads/2022/03/svg-1.svg', true) !!}
 						</code>
 					</pre>
 				</div>
 			</div>
 		</div>
 
-	</div>
-</section>
 
 
-
-<section>
-    <div class="container">
         <h2>BUTTONS</h2>
         @php
             $btn_vars = ['brand', 'brand-outline', 'sec', 'sec-outline', 'ghost', 'ghost--brand', 'ghost--sec'];
@@ -621,11 +558,7 @@ $tabs = [
         @foreach($btn_vars as $btn_var)
             <a href="#" class="btn btn--{{ $btn_var }}">Btn {{ $btn_var }}</a>
         @endforeach
-    </div>
-</section>
 
-<section>
-	<div class="container">
 		<h2>Modal</h2>
 
 		<a href="#modal-example" class="btn btn--brand modalTrigger">Open Modal</a>
@@ -641,6 +574,3 @@ $tabs = [
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
 		{!! tr_modal_end() !!}
-
-	</div>
-</section>
