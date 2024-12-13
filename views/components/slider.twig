@@ -2,31 +2,49 @@
 {% if slides is defined %}
     {# Determine type safely #}
     {% set mode = 'array' %}
+
+    {# Check for WP_Query object #}
     {% if slides is object and have_posts(slides) %}
-        {% set mode = 'query' %}
+        {% set mode = 'wp_query' %}
+    {# Check for get_posts array (array of post objects) #}
+    {% elseif slides is array and slides|length > 0 and attribute(slides[0], 'post_type') is defined %}
+        {% set mode = 'posts_array' %}
     {% endif %}
 
     {# Check conditions for rendering #}
     {% if class is defined and (
         (mode == 'array' and slides is array and slides|length > 0) or
-        (mode == 'query' and have_posts(slides))
+        (mode == 'wp_query' and have_posts(slides)) or
+        (mode == 'posts_array' and slides|length > 0)
     ) %}
         <div class="slider-wrap">
             <div class="embla {{ class }}">
                 <div class="embla__container">
-                    {% if mode == 'query' %}
-                        {# Try accessing posts directly instead of using while loop #}
+                    {% if mode == 'wp_query' %}
+                        {# WP_Query mode #}
                         {% for post in slides.posts %}
                             <div class="embla__slide">
                                 <div class="embla__slide__inner">
                                     {% block slide_q %}
-                                       {% include 'components/post-card.twig' with { post_id: post.ID } %}
+                                        {% include 'components/post-card.twig' with { post_id: post.ID } %}
                                     {% endblock %}
                                 </div>
                             </div>
                         {% endfor %}
                         {% do wp_reset_postdata() %}
+                    {% elseif mode == 'posts_array' %}
+                        {# get_posts array mode #}
+                        {% for post in slides %}
+                            <div class="embla__slide">
+                                <div class="embla__slide__inner">
+                                    {% block slide_posts %}
+                                        {% include 'components/post-card.twig' with { post_id: post.ID } %}
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endfor %}
                     {% else %}
+                        {# Regular image array mode #}
                         {% for s_key, s_content in slides %}
                             <div class="embla__slide">
                                 <div class="embla__slide__inner">
