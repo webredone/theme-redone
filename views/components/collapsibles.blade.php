@@ -253,11 +253,11 @@ function blade_limit_content($content) {
 <div class="f-row" style="--i-cols:4; --i-gap:15; margin-bottom:200px;">
     <div class="col">
         <h5>Click</h5>
-        @include('components.dropdown-select', ['options' => $dummy_dd_options])
+        @component('components.dropdown-select', ['options' => $dummy_dd_options])
     </div>
     <div class="col">
         <h5>Close on click outside</h5>
-        @include('components.dropdown-select', [
+        @component('components.dropdown-select', [
             'options' => $dummy_dd_options,
             'class' => 'custom-class',
             'duration' => 200,
@@ -267,7 +267,7 @@ function blade_limit_content($content) {
     </div>
     <div class="col">
         <h5>Hover</h5>
-        @include('components.dropdown-select', [
+        @component('components.dropdown-select', [
             'options' => $dummy_dd_options,
             'on_hover' => true,
             'default_selected_key' => 0
@@ -275,7 +275,7 @@ function blade_limit_content($content) {
     </div>
     <div class="col">
         <h5>Hover - absolute</h5>
-        @include('components.dropdown-select', [
+        @component('components.dropdown-select', [
             'options' => $dummy_dd_options,
             'is_absolute' => true,
             'on_hover' => true,

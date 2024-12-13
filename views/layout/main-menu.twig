@@ -35,7 +35,7 @@
 
 
             {% if primary_menu and primary_menu.items %}
-                {% include 'components/_menu.twig' with {'items': primary_menu.items, 'depth': 2} %}
+                {% include 'components/menu.twig' with {'items': primary_menu.items, 'depth': 2} %}
             {% else %}
                 {# Optionally handle no menu found #}
                 <p>No menu assigned.</p>

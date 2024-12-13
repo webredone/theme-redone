@@ -1,0 +1,65 @@
+{# dropdown-select.twig #}
+{#
+  Variables:
+  - class (string, optional)
+  - aria_label (string, optional)
+  - duration (string, optional, default '300')
+  - close_outside (bool, optional)
+  - is_absolute (bool, optional)
+  - on_hover (bool, optional)
+  - easing (string, optional, default 'ease-in-out')
+  - options (array, required): format:
+    [
+      {
+        'value': 'value_here',
+        'label': 'Label Here'
+      },
+      ...
+    ]
+  - default_selected_key (int, optional): index of the initially selected item.
+    If not provided, the first item (index 0) is selected by default.
+#}
+
+{% if options is defined and options|length > 0 %}
+<div
+    class="collapsible {{ class|default('') }} {{ is_absolute ? 'collapsible--absolute' : '' }}"
+    data-select
+    data-duration="{{ duration|default('300') }}"
+    {% if close_outside %} data-close-on-outside-click{% endif %}
+    {% if on_hover %} data-hover-trigger{% endif %}
+    {% if easing is defined and easing is not empty %}
+        data-easing="{{ easing }}"
+    {% endif %}
+>
+    <button
+        class="collapsible__trigger"
+        type="button"
+        aria-label="{{ aria_label|default('Toggle Options') }}"
+    >
+        <span class="collapsible__select-current"></span>
+        <span class="chevron"></span>
+    </button>
+
+    <div class="collapsible__content">
+        <div class="collapsible__content__inner">
+            {% for idx, option in options %}
+                {# Determine if this option should be picked #}
+                {% set is_picked = false %}
+                {% if default_selected_key is defined %}
+                    {% set is_picked = (default_selected_key == idx) %}
+                {% else %}
+                    {% set is_picked = (idx == 0) %}
+                {% endif %}
+
+                <button
+                    type="button"
+                    class="collapsible__option {{ is_picked ? 'picked' : '' }}"
+                    data-value="{{ option.value }}"
+                >
+                    {{ option.label }}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

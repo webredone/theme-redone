@@ -1,0 +1,74 @@
+{# _tabs.twig #}
+{#
+  Variables:
+  - class (optional string): Additional CSS classes for the wrapper.
+  - tabs (required array): An array of tabs. Each tab should be something like:
+    [
+      'anchor' => 'Tab Label',
+      'content' => [
+          'text' => 'Tab content text',
+          # you can have more keys if needed, e.g. 'title' => 'some title'
+      ]
+    ]
+
+  Blocks:
+  - tab_anchor: for customizing each tab anchor label (optional)
+  - tab_panel: for customizing each panel content (optional)
+
+  Note: If you want to dynamically override anchors/panels on a per-tab basis, you can pass
+  variables like tab_anchor_0, tab_anchor_1, tab_panel_0, tab_panel_1 etc.
+  This is similar to how you did it in Blade. In Twig, you'd do something similar by passing
+  context variables with those keys and checking them.
+#}
+
+{% set tabs_ids = [] %}
+{% set random_string = function('uniqid') %}
+{% for tab_index, tab_content in tabs %}
+  {% set index = tab_index + 1 %}
+  {% set _ignore = tabs_ids.push(random_string ~ '_' ~ index) %}
+{% endfor %}
+
+<div class="tabs {{ class|default('') }}" {% if tabs is not empty %}data-tabs{% endif %}>
+    <div class="tabs__nav" role="tablist">
+        {% for ta_key, ta_content in tabs %}
+            {# If you passed something like tab_anchor_X in context, use it, otherwise use ta_content['anchor'] #}
+            {% set anchor_html = attribute(_context, 'tab_anchor_' ~ ta_key) is defined
+                ? attribute(_context, 'tab_anchor_' ~ ta_key)
+                : (ta_content.anchor is defined ? ta_content.anchor : '')
+            %}
+            <button
+                type="button"
+                data-href="panel-{{ ta_key }}"
+                class="tab-anchor {{ ta_key == 0 ? 'activeTab' : '' }}"
+                id="tab_{{ tabs_ids[ta_key] }}"
+                aria-selected="{{ ta_key == 0 ? 'true' : 'false' }}"
+                aria-controls="panel-{{ tabs_ids[ta_key] }}"
+                role="tab"
+            >
+                {{ anchor_html|raw }}
+            </button>
+        {% endfor %}
+    </div>
+
+    <div class="tabs__content">
+        {% for tp_key, tp_content in tabs %}
+            {# If you passed something like tab_panel_X in context, use it. Otherwise use tp_content['content']['text'] #}
+            {% set panel_html = attribute(_context, 'tab_panel_' ~ tp_key) is defined
+                ? attribute(_context, 'tab_panel_' ~ tp_key)
+                : (tp_content.content.text is defined ? tp_content.content.text : '')
+            %}
+            <div
+                class="tab-panel {{ tp_key == 0 ? 'activeTab enter' : '' }}"
+                data-id="panel-{{ tp_key }}"
+                id="panel-{{ tabs_ids[tp_key] }}"
+                aria-labelledby="tab_{{ tabs_ids[tp_key] }}"
+                role="tabpanel"
+                aria-hidden="{{ tp_key == 0 ? 'false' : 'true' }}"
+            >
+                <div class="tab-panel__content">
+                    {{ panel_html|raw }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

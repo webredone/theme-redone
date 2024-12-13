@@ -20,7 +20,6 @@
         {!! $collapsible_trigger !!}
         <span class="chevron"></span>
     </button>
-
     <div class="collapsible__content">
         <div class="collapsible__content__inner">
             {!! $collapsible_content !!}

@@ -1,0 +1,43 @@
+{# collapsible.twig #}
+{#
+  Variables:
+  - class (string, optional)
+  - aria_label (string, optional)
+  - duration (string, optional, default 300)
+  - close_outside (bool, optional)
+  - is_absolute (bool, optional)
+  - on_hover (bool, optional)
+  - custom_keyframes (array, optional)
+  - easing (string, optional, default 'ease-in-out')
+
+  Blocks:
+  - collapsible_trigger: content of the trigger
+  - collapsible_content: content of the collapsible area
+#}
+
+<div
+    class="collapsible {{ class|default('') }} {{ is_absolute ? 'collapsible--absolute' : '' }}"
+    data-duration="{{ duration|default('300') }}"
+    {% if close_outside %} data-close-on-outside-click{% endif %}
+    {% if on_hover %} data-hover-trigger{% endif %}
+    {% if custom_keyframes is defined and custom_keyframes is not empty %}
+        data-keyframes='{{ custom_keyframes|json_encode|raw }}'
+    {% endif %}
+    {% if easing is defined and easing is not empty %}
+        data-easing="{{ easing }}"
+    {% endif %}
+>
+    <button
+        class="collapsible__trigger"
+        type="button"
+        aria-label="{{ aria_label|default('Toggle Dropdown') }}"
+    >
+        {% block collapsible_trigger %}{% endblock collapsible_trigger %}
+        <span class="chevron"></span>
+    </button>
+    <div class="collapsible__content">
+        <div class="collapsible__content__inner">
+            {% block collapsible_content %}{% endblock collapsible_content %}
+        </div>
+    </div>
+</div>

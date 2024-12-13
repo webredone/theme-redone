@@ -13,7 +13,8 @@
         "nette/utils": "^4.0",
         "league/plates": "^3.6",
         "eftec/bladeone": "^4.16",
-        "timber/timber": "^2.3"
+        "timber/timber": "^2.3",
+        "spatie/ignition": "^1.15"
     },
     "autoload": {
         "psr-4": {

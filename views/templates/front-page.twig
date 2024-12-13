@@ -1,7 +1,77 @@
 {% extends "layout/layout.twig" %}
 
 {% block content %}
-<div class="content">
+<section class="content">
+	<div class="container">
     {{ post.content }}
-</div>
+
+	<hr />
+
+	{% set tabs_data = [
+		{'anchor': 'Tab 1', 'content': {'text': 'This is content of Tab 1'}},
+		{'anchor': 'Tab 2', 'content': {'text': 'This is content of Tab 2'}},
+		{'anchor': 'Tab 3', 'content': {'text': 'This is content of Tab 3'}}
+	] %}
+
+	{% include 'components/tabs.twig' with {
+		'class': 'my-custom-tabs',
+		'tabs': tabs_data
+	} %}
+
+	{% include 'components/tabs.twig' with {
+		'class': 'my-tabs',
+		'tabs': tabs_data,
+		'tab_anchor_0': '<strong>Custom Anchor for Tab 1</strong>',
+		'tab_panel_1': '<h3>Custom Panel for Tab 2</h3><p>More detailed content here...</p>'
+	} %}
+
+	<hr />
+
+{% embed 'components/collapsible.twig' with {
+    'class': 'my-collapsible-class',
+    'aria_label': 'Toggle Additional Info',
+    'duration': 700,
+    'close_outside': true,
+    'on_hover': false,
+    'custom_keyframes': [
+        {'opacity':0,'transform':'translateY(-10px)','pointer-events':'none'},
+        {'transform':'translateY(10px)','offset':0.9},
+        {'opacity':1,'transform':'translateY(0)','pointer-events':'all'}
+    ],
+    'easing': 'cubic-bezier(1,-0.06, 0, 1.56)'
+} %}
+    {% block collapsible_trigger %}
+        <strong>Click to Toggle</strong>
+    {% endblock %}
+
+    {% block collapsible_content %}
+        <h4>Additional Information</h4>
+        <p>This content is revealed when the collapsible is opened.</p>
+    {% endblock %}
+{% endembed %}
+
+<ht />
+
+
+{% set dd_options = [
+    {'value': 'none', 'label': 'Select Option'},
+    {'value': 'option-1', 'label': 'Option 1'},
+    {'value': 'option-2', 'label': 'Option 2'},
+] %}
+
+{% include 'components/dropdown-select.twig' with {
+    class: 'my-dropdown',
+    aria_label: 'Select an option',
+    duration: '500',
+    close_outside: true,
+    is_absolute: true,
+    on_hover: false,
+    easing: 'cubic-bezier(1,-0.06, 0, 1.56)',
+    options: dd_options,
+    default_selected_key: 1
+} %}
+
+
+	</div>
+</section>
 {% endblock %}

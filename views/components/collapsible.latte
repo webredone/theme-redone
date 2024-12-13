@@ -7,23 +7,14 @@
 {varType array $custom_keyframes} {* by default only height is animated. This makes it possible to animate more properties *}
 {varType string $easing} {* default easing is 'ease-in-out'. This can be used to overwrite it *}
 
-<div 
-  class="collapsible {$class ?? ''} {if !empty($is_absolute)}collapsible--absolute{/if}" 
+<div
+  class="collapsible {$class ?? ''} {if !empty($is_absolute)}collapsible--absolute{/if}"
   data-duration="{!empty($duration) ? $duration : '300'}"
-  {if $close_outside ?? false}
-    data-close-on-outside-click
-  {/if}
-  {if $on_hover ?? false}
-    data-hover-trigger
-  {/if}
-  {if !empty($custom_keyframes)}
-    data-keyframes="{json_encode($custom_keyframes)}"
-  {/if}
-  {if !empty($easing)}
-    data-easing="{$easing}"
-  {/if}
+  {if $close_outside ?? false}data-close-on-outside-click{/if}
+  {if $on_hover ?? false}data-hover-trigger{/if}
+  {if !empty($custom_keyframes)}data-keyframes="{json_encode($custom_keyframes)}"{/if}
+  {if !empty($easing)}data-easing="{$easing}"{/if}
 >
-
   <button
     class="collapsible__trigger"
     type="button"
@@ -32,11 +23,9 @@
     {block collapsible_trigger}{/block}
     <span class="chevron"></span>
   </button>
-
   <div class="collapsible__content">
     <div class="collapsible__content__inner">
       {block collapsible_content}{/block}
     </div>{* inner *}
   </div>{* content *}
-
 </div>{* collapsible *}

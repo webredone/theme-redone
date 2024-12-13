@@ -7,8 +7,10 @@ $template = $resolver->resolveTemplate();
 
 if ($template !== null) {
     include_once $template;
-} else {
+}
+/* else {
     // fallback to WordPress default
     // TODO: Maybe throw error here?
     include_once ABSPATH . WPINC . '/template-loader.php';
 }
+ */
