@@ -14,29 +14,55 @@ class PlatesRenderer implements TemplateRendererInterface
     public function __construct()
     {
         // Set the base directory for templates to the theme directory.
-        // You can adjust this if you want a different structure.
         $themeDir = Config::getThemeDir();
         $this->plates = new Engine($themeDir);
-        $this->plates->setFileExtension('php');
+
+        // Define folders with namespaces
+        $this->plates->addFolder('layout', $themeDir . '/views/layout');
+        $this->plates->addFolder('templates', $themeDir . '/views/templates');
+        $this->plates->addFolder('components', $themeDir . '/views/components');
+        $this->plates->setFileExtension('tpl');
     }
 
     public function renderToString(string $templateFile, ArrayHash $data): string
     {
         // Convert the absolute template path to a relative path
-        // relative to the $themeDir we defined above.
-
         $themeDir = Config::getThemeDir();
         $relativePath = str_replace($themeDir . '/', '', $templateFile);
 
-        // Remove the ".php" extension because we already setFileExtension('php')
-        $relativePath = preg_replace('/\.php$/', '', $relativePath);
+        // Remove the ".tpl" extension
+        $relativePath = preg_replace('/\.tpl$/', '', $relativePath);
 
-        // Plates automatically looks for templates in the base directory.
-        // The template name should not include the extension now.
-        // For example, if $templateFile was /path/to/theme/gutenberg/blocks/hero/view.php,
-        // $relativePath might be "gutenberg/blocks/hero/view" after stripping themeDir and extension.
+        // Convert 'views/templates/front-page' to 'templates::front-page'
+        if (strpos($relativePath, 'views/') === 0) {
+            $relativePath = substr($relativePath, strlen('views/')); // Remove 'views/'
+        }
 
-        return $this->plates->render($relativePath, (array) $data);
+        // Split the path to extract namespace and template name
+        $parts = explode('/', $relativePath);
+        if (count($parts) >= 2) {
+            $namespace = array_shift($parts);
+            $templateName = implode('/', $parts);
+            $relativePath = "$namespace::$templateName";
+        } else {
+            // Handle cases where the template is directly under 'views/'
+            $relativePath = $parts[0];
+        }
+
+        // Debugging: Uncomment the following line to verify the relativePath
+        error_log("Rendering template: $relativePath");
+
+        // Check if the template exists before rendering
+        if (!$this->plates->exists($relativePath)) {
+            error_log("Plates Error: Template '$relativePath' does not exist.");
+
+            return ''; // Return empty string or a default message
+        }
+
+        $output = $this->plates->render($relativePath, (array) $data);
+        error_log("Rendered template: $relativePath");
+
+        return $output;
 
     }
 }

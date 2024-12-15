@@ -15,7 +15,7 @@ enum Flavor: string
             self::Latte => '.latte',
             self::Blade => '.blade.php',
             self::Twig => '.twig',
-            self::Php => '.php'
+            self::Php => '.tpl'
         };
     }
 }
