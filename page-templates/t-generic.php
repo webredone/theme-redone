@@ -1,7 +1,3 @@
-<?php // Template Name: Generic Page Template?>
-
 <?php
 
-global $tr_renderer;
-$tr_renderer->render(tr_view_path('templates/template-generic'));
-?>
+tr_render(tr_view_path('templates/template-generic'));
