@@ -15,7 +15,7 @@ class BladeRenderer implements TemplateRendererInterface
     public function __construct()
     {
         $viewsDir = Config::getThemeDir() . '/views';
-        $cacheDir = Config::getCacheDirectoryForFlavor(Flavor::Blade);
+        $cacheDir = Config::getCacheDirectoryForFlavor(Flavor::BladeOne);
 
         $this->blade = new BladeOne($viewsDir, $cacheDir, BladeOne::MODE_AUTO);
     }

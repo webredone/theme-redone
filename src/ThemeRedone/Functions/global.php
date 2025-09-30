@@ -28,7 +28,7 @@ function tr_view_path(string $template_name): string
     $flavor = Config::getFlavor();
     $extension = $flavor->getTemplateExtension();
 
-    if ($flavor === Flavor::Blade) {
+    if ($flavor === Flavor::BladeOne || $flavor === Flavor::BladeLaravel) {
         // Return a dot-notation template name for files inside views/
         $dotName = str_replace('/', '.', $template_name);
 

@@ -13,7 +13,8 @@ final class TemplateEngineFactory
     {
         return match ($flavor) {
             Flavor::Latte => new LatteRenderer(),
-            Flavor::Blade => new BladeRenderer(),
+            Flavor::BladeOne => new BladeRenderer(),
+            Flavor::BladeLaravel => new LaravelBladeRenderer(),
             Flavor::Php => new PlatesRenderer(),
             Flavor::Twig => new TimberRenderer(),
         };

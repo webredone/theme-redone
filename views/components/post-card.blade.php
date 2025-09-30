@@ -22,7 +22,7 @@ $post_card_img = get_the_post_thumbnail_url(get_the_ID(), 'card-thumb');
                 {!! tr_posted_by() !!}
             </p>
             <p class="post-card__excerpt">
-                {!! get_excerpt(140) !!}
+                {!! tr_get_excerpt(140) !!}
             </p>
             {!! get_the_category_list() !!}
         </div> <!-- .post-card__txt -->

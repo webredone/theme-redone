@@ -5,7 +5,8 @@ namespace ThemeRedone\Enums;
 enum Flavor: string
 {
     case Latte = 'latte';
-    case Blade = 'blade';
+    case BladeOne = 'bladeone';
+    case BladeLaravel = 'bladelaravel';
     case Twig = 'twig';
     case Php = 'php';
 
@@ -13,7 +14,8 @@ enum Flavor: string
     {
         return match ($this) {
             self::Latte => '.latte',
-            self::Blade => '.blade.php',
+            self::BladeOne => '.blade.php',
+            self::BladeLaravel => '.blade.php',
             self::Twig => '.twig',
             self::Php => '.tpl'
         };
